@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>課題の進み具合｜rokuma</title>
+<title>課題の進み具合｜ZNENSO</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Poppins:wght@500;600&display=swap">
@@ -29,7 +29,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--jp);font-s
 
 /* 頭 */
 .brand{display:flex;align-items:center;gap:12px;color:var(--sub);font-size:13px}
-.brand svg{height:15px;width:auto;fill:var(--ink)}
+.brand b{font-family:var(--num);font-weight:600;font-size:14px;letter-spacing:.06em;color:var(--ink)}
 .brand span{padding-left:12px;border-left:1px solid var(--line)}
 h1{font-size:28px;line-height:1.4;margin:20px 0 10px;font-weight:700;text-wrap:balance}
 .meta{display:flex;flex-wrap:wrap;gap:4px 24px;color:var(--sub);font-size:13.5px}
@@ -126,7 +126,6 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-s
   <p class="empty">読み込んでいます…</p>
 </div>
 <script>
-const LOGO = `<svg viewBox="13 11 632 123" role="img" aria-label="rokuma"><path d="M13 134V91A40 40 0 0 1 53 51H85V77H53A14 14 0 0 0 39 91V134Z"/><path d="M123.5 51H157.5A41.5 41.5 0 0 1 157.5 134H123.5A41.5 41.5 0 0 1 123.5 51ZM124.5 77A16.5 16.5 0 0 0 124.5 110H156.5A16.5 16.5 0 0 0 156.5 77Z"/><path d="M203 11H229V85.7L268 51H307L260.2 90L313 134H276L229 97V134H203Z"/><path d="M306 51H332V91A19 19 0 0 0 370 91V51H396V89A45 45 0 0 1 306 89Z"/><path d="M401 134V87.5A39.5 39.5 0 0 1 467 58.2A39.5 39.5 0 0 1 533 87.5V134H507V87.5A13.5 13.5 0 0 0 480 87.5V134H454V87.5A13.5 13.5 0 0 0 427 87.5V134Z"/><path d="M577.5 51H603.5A41.5 41.5 0 0 1 645 92.5V134H577.5A41.5 41.5 0 0 1 577.5 51ZM577.5 77A16.5 16.5 0 0 0 577.5 110H602.5A16.5 16.5 0 0 0 602.5 77Z"/></svg>`;
 const esc = t => String(t ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const pct = s => s.length ? Math.round(s.filter(x => x[1]).length / s.length * 100) : 0;
 const jst = iso => new Date(new Date(iso).getTime() + 9 * 3600e3);
@@ -157,7 +156,7 @@ function render(d) {
 
   document.getElementById("app").innerHTML = `
   <header>
-    <div class="brand">${LOGO}<span>ZNENSO 課題の進み具合</span></div>
+    <div class="brand"><b>ZNENSO</b><span>課題の進み具合</span></div>
     <h1>${esc(cur.description.replace(/^課題：/, "") || cur.title)}</h1>
     <div class="meta">
       <span>次の面談 <b>${due.getUTCMonth()+1}/${due.getUTCDate()}（${WD[due.getUTCDay()]}）</b>${days >= 0 ? `　あと <b class="num">${days}</b> 日` : ""}</span>
@@ -214,7 +213,7 @@ function render(d) {
     ${d.log.length ? `<ul class="log">${d.log.slice(0,12).map(l => `<li><time class="num">${md(l.at)}</time><span><span class="card">${esc(l.card)}</span>${esc(l.text)}</span></li>`).join("")}</ul>` : `<p class="empty">まだありません。</p>`}
   </section>
 
-  <footer><span>作業の区切りごとに自動で更新しています。</span><span>rokuma</span></footer>`;
+  <footer><span>作業の区切りごとに自動で更新しています。</span></footer>`;
 }
 
 fetch("data.json", {cache: "no-store"})
