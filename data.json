@@ -1,0 +1,343 @@
+{
+ "updated": "2026-11-11T20:23+09:00",
+ "milestones": [
+  {
+   "title": "11/06 面談の指摘",
+   "description": "nagi の発表でいただいた指摘 ①〜⑤",
+   "due": null,
+   "open": 0,
+   "closed": 5
+  },
+  {
+   "title": "11/24 面談",
+   "description": "課題：1つの作品から LP 版と HP 版（題材 Madobe）",
+   "due": "2026-11-24T00:00:00Z",
+   "open": 3,
+   "closed": 3
+  }
+ ],
+ "cards": [
+  {
+   "number": 12,
+   "title": "次の面談で見てほしいこと",
+   "labels": [
+    "見てほしい"
+   ],
+   "milestone": null,
+   "status": "見てほしい",
+   "steps": [],
+   "bullets": [
+    "LP 版と HP 版で、そろえる物と変える物の分け方が伝わるか",
+    "HP 版の写真と空気感が LP 版と一体に見えるか",
+    "この進み具合の見せ方に、ほかに要る物"
+   ],
+   "desc": "",
+   "closedAt": null
+  },
+  {
+   "number": 11,
+   "title": "進み具合の共有の仕組み",
+   "labels": [
+    "課題"
+   ],
+   "milestone": "11/24 面談",
+   "status": "進行中",
+   "steps": [
+    [
+     "何を見せるか決める（課題・指摘・％）",
+     true
+    ],
+    [
+     "GitHub の Issue と Milestone で作る",
+     true
+    ],
+    [
+     "かんばん（Projects）を作る",
+     false
+    ],
+    [
+     "井澤さん・フミヤさんを招待",
+     false
+    ],
+    [
+     "面談で見てもらい、足りない物を聞く",
+     false
+    ]
+   ],
+   "bullets": [],
+   "desc": "",
+   "closedAt": null
+  },
+  {
+   "number": 10,
+   "title": "Madobe の公開と作品登録",
+   "labels": [
+    "課題",
+    "待ち"
+   ],
+   "milestone": "11/24 面談",
+   "status": "未着手",
+   "steps": [
+    [
+     "公開するか決める",
+     false
+    ],
+    [
+     "公開",
+     false
+    ],
+    [
+     "作品として登録",
+     false
+    ]
+   ],
+   "bullets": [],
+   "desc": "",
+   "closedAt": null
+  },
+  {
+   "number": 9,
+   "title": "11/24 の発表資料",
+   "labels": [
+    "課題"
+   ],
+   "milestone": "11/24 面談",
+   "status": "未着手",
+   "steps": [
+    [
+     "話す順番を決める",
+     false
+    ],
+    [
+     "スライドを作る",
+     false
+    ],
+    [
+     "通しで確認",
+     false
+    ]
+   ],
+   "bullets": [],
+   "desc": "",
+   "closedAt": null
+  },
+  {
+   "number": 8,
+   "title": "Madobe HP 版（7ページ）",
+   "labels": [
+    "課題"
+   ],
+   "milestone": "11/24 面談",
+   "status": "完了",
+   "steps": [
+    [
+     "ページ構成",
+     true
+    ],
+    [
+     "トップ",
+     true
+    ],
+    [
+     "下のページ6つ",
+     true
+    ],
+    [
+     "全ページ ◎",
+     true
+    ]
+   ],
+   "bullets": [],
+   "desc": "",
+   "closedAt": "2026-11-11T11:06:01Z"
+  },
+  {
+   "number": 7,
+   "title": "Madobe LP 版",
+   "labels": [
+    "課題"
+   ],
+   "milestone": "11/24 面談",
+   "status": "完了",
+   "steps": [
+    [
+     "理想を決める",
+     true
+    ],
+    [
+     "見本を実測",
+     true
+    ],
+    [
+     "構成とコピー",
+     true
+    ],
+    [
+     "写真をそろえる",
+     true
+    ],
+    [
+     "全章を実装",
+     true
+    ],
+    [
+     "全章 ◎",
+     true
+    ],
+    [
+     "HP の水準へ直す",
+     true
+    ]
+   ],
+   "bullets": [],
+   "desc": "架空・福岡 平尾のリノベーション会社。見本 SANU 2nd Home Weekday",
+   "closedAt": "2026-11-11T11:05:57Z"
+  },
+  {
+   "number": 6,
+   "title": "そろえる物の一覧（LP と HP で共通にする物）",
+   "labels": [
+    "課題"
+   ],
+   "milestone": "11/24 面談",
+   "status": "完了",
+   "steps": [
+    [
+     "一覧のひな形を作る",
+     true
+    ],
+    [
+     "Madobe の値を決めて固定",
+     true
+    ]
+   ],
+   "bullets": [],
+   "desc": "色・書体・写真の光と色味・飾り・余白の感じを先に固定し、LP と HP で変えるのは役割だけにする",
+   "closedAt": "2026-11-11T11:05:54Z"
+  },
+  {
+   "number": 5,
+   "title": "⑤ 作った部品を財産にする",
+   "labels": [
+    "指摘"
+   ],
+   "milestone": "11/06 面談の指摘",
+   "status": "完了",
+   "steps": [
+    [
+     "作った部品を型の棚に登録する流れにした",
+     true
+    ]
+   ],
+   "bullets": [],
+   "desc": "対応（11/08）",
+   "closedAt": "2026-11-11T11:05:50Z"
+  },
+  {
+   "number": 4,
+   "title": "④ モデルの使い分け",
+   "labels": [
+    "指摘"
+   ],
+   "milestone": "11/06 面談の指摘",
+   "status": "完了",
+   "steps": [
+    [
+     "方向を決める判断は Fable、作業は Opus に分けた",
+     true
+    ]
+   ],
+   "bullets": [],
+   "desc": "対応（11/07）",
+   "closedAt": "2026-11-11T11:05:47Z"
+  },
+  {
+   "number": 3,
+   "title": "③ Codex 連携",
+   "labels": [
+    "指摘"
+   ],
+   "milestone": "11/06 面談の指摘",
+   "status": "完了",
+   "steps": [
+    [
+     "第三者レビューを Codex に見てもらう流れにした",
+     true
+    ],
+    [
+     "画像の生成も Codex（定額の枠）へ",
+     true
+    ]
+   ],
+   "bullets": [],
+   "desc": "対応（11/07）",
+   "closedAt": "2026-11-11T11:05:43Z"
+  },
+  {
+   "number": 2,
+   "title": "② LP と HP の定義",
+   "labels": [
+    "指摘"
+   ],
+   "milestone": "11/06 面談の指摘",
+   "status": "完了",
+   "steps": [
+    [
+     "LP と HP の定義を言葉にした",
+     true
+    ],
+    [
+     "作る前・作った後に使う点検表を作った",
+     true
+    ]
+   ],
+   "bullets": [],
+   "desc": "対応（11/07〜08）",
+   "closedAt": "2026-11-11T11:05:40Z"
+  },
+  {
+   "number": 1,
+   "title": "① 中身が HP の書き方になっている",
+   "labels": [
+    "指摘"
+   ],
+   "milestone": "11/06 面談の指摘",
+   "status": "完了",
+   "steps": [
+    [
+     "nagi を参考 LP の7段階と並べて点検",
+     true
+    ],
+    [
+     "FV・解決のコピーが雰囲気の言葉になっていた所を特定",
+     true
+    ]
+   ],
+   "bullets": [],
+   "desc": "指摘：WF で構成は写せても、各パーツに何を書くかで働きは変わる。nagi は器は LP、中身は HP の書き方だった",
+   "closedAt": "2026-11-11T11:05:36Z"
+  }
+ ],
+ "log": [
+  {
+   "at": "2026-11-11T11:19:19Z",
+   "card": "進み具合の共有の仕組み",
+   "text": "かんばん「課題の進み具合」を作り、12枚を4列（未着手・進行中・見てほしい・完了）に並べました。招待はまだです。"
+  },
+  {
+   "at": "2026-11-11T11:06:01Z",
+   "card": "Madobe HP 版（7ページ）",
+   "text": "完了"
+  },
+  {
+   "at": "2026-11-11T11:05:57Z",
+   "card": "Madobe LP 版",
+   "text": "完了"
+  },
+  {
+   "at": "2026-11-11T11:05:54Z",
+   "card": "そろえる物の一覧（LP と HP で共通にする物）",
+   "text": "完了"
+  }
+ ]
+}
