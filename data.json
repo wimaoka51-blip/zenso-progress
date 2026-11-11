@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-12T08:48+09:00",
+ "updated": "2026-11-12T08:55+09:00",
  "milestones": [
   {
    "title": "11/06 面談の指摘",
@@ -12,7 +12,7 @@
    "title": "11/24 面談",
    "description": "課題：1つの作品から LP 版と HP 版（題材 Madobe）",
    "due": "2026-11-24T00:00:00Z",
-   "open": 3,
+   "open": 2,
    "closed": 3
   }
  ],
@@ -75,32 +75,6 @@
     ],
     [
      "作品として登録",
-     false
-    ]
-   ],
-   "bullets": [],
-   "desc": "",
-   "closedAt": null
-  },
-  {
-   "number": 9,
-   "title": "11/24 の発表資料",
-   "labels": [
-    "課題"
-   ],
-   "milestone": "11/24 面談",
-   "status": "未着手",
-   "steps": [
-    [
-     "話す順番を決める",
-     false
-    ],
-    [
-     "スライドを作る",
-     false
-    ],
-    [
-     "通しで確認",
      false
     ]
    ],
