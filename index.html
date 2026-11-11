@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>課題の進み具合｜ZNENSO</title>
+<title>課題の進み具合｜ZENSO</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Poppins:wght@500;600&display=swap">
@@ -156,7 +156,7 @@ function render(d) {
 
   document.getElementById("app").innerHTML = `
   <header>
-    <div class="brand"><b>ZNENSO</b><span>課題の進み具合</span></div>
+    <div class="brand"><b>ZENSO</b><span>課題の進み具合</span></div>
     <h1>${esc(cur.description.replace(/^課題：/, "") || cur.title)}</h1>
     <div class="meta">
       <span>次の面談 <b>${due.getUTCMonth()+1}/${due.getUTCDate()}（${WD[due.getUTCDay()]}）</b>${days >= 0 ? `　あと <b class="num">${days}</b> 日` : ""}</span>
