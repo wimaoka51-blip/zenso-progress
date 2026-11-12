@@ -1,0 +1,339 @@
+/* Madobe HP 版の章の形（2026-11-11）。構造の元は un norm（型の棚 _sources/unnorm の実測）。
+   色・書体・ヘッダー・ボタンの土台は LP 版の style.css と共通（そろえる物）。LP の章の部品は使わない */
+:root {
+  --hp-frame: 51px;      /* un norm：写真の白い縁 */
+  --hp-gap: 0px;         /* 並べた写真の隙間（2026-11-11 レビュー3回目 今岡さん「つなぎ目の白いスペースはいらない。詰めて」：11→0） */
+  --hp-poem: 20px;       /* un norm：詩 20px */
+  --hp-poem-sp: 19px;
+  --hp-poem-ls: .32em;   /* HP の詩だけ字間を広く（LP の見出しは .06em） */
+  --hp-poem-lh: 2.5;     /* 詩の行の間 50px */
+  --hp-ink: #2E2B26;
+  --hp-gray: #B4B0A8;    /* もっと見るの細い線（un norm の灰 #b4b4b4 を暖かく） */
+}
+
+.hp { background: var(--color-white); }
+
+/* 共通：詩と章名と「もっと見る」 */
+html { scroll-padding-top: 108px; } /* 固定のヘッダーの下に飛び先の頭が入らないように（2026-11-11 AI レビュー） */
+.hp-poem { display: block; font-size: var(--hp-poem); font-weight: 500; line-height: var(--hp-poem-lh); letter-spacing: var(--hp-poem-ls); }
+.hp-poem--white { color: var(--color-white); }
+.hp-label { display: block; margin-top: var(--space-4); font-size: var(--fs-s); font-weight: 600; letter-spacing: .24em; }
+.hp-label--white { color: var(--color-white); }
+.hp-more { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--fs-s); letter-spacing: .2em; color: var(--hp-ink); }
+.hp-more--white { color: var(--color-white); }
+.hp-more__arrow { display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 40px; border: 1px solid var(--hp-gray); border-radius: var(--radius-bar); font-family: var(--font-serif); font-size: 22px; line-height: 1; color: var(--hp-gray); }
+.hp-more-wrap { margin: var(--space-5) 0 var(--space-6); text-align: center; }
+
+/* 01 FV：全面の写真の中央にロゴだけ */
+.hp-fv { position: relative; height: 100vh; min-height: 640px; overflow: hidden; color: var(--color-white); }
+.hp-fv__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hp-fv::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(20, 17, 13, .38) 0%, rgba(20, 17, 13, .12) 55%, rgba(20, 17, 13, .2) 100%); }
+.hp-fv__mark { position: absolute; z-index: 1; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; line-height: 1; font-weight: 400; }
+.hp-fv__name { display: block; font-family: var(--font-serif); font-size: 64px; letter-spacing: .06em; }
+.hp-fv__place { display: block; margin-top: var(--space-2); font-family: var(--font-en); font-size: 12px; letter-spacing: .32em; }
+.hp-fv__line { display: block; margin-top: var(--space-3); font-family: var(--font-jp); font-size: var(--fs-s); font-weight: 600; letter-spacing: .24em; }
+/* ヘッダー：un norm のように全部の画面に固定。FV の上は透明でロゴを隠し、FV を過ぎたら墨の地にしてロゴを出す */
+.hp .header { position: fixed; transition: background-color var(--dur) var(--ease); }
+.hp .header .logo { opacity: 0; pointer-events: none; transition: opacity var(--dur) var(--ease); }
+.hp .header.is-solid { background: var(--hp-ink); }
+.hp .header.is-solid .logo { opacity: 1; pointer-events: auto; }
+.hp-menu { position: fixed; inset: 0; z-index: 9; display: grid; place-items: center; background: rgba(46, 43, 38, .96); color: var(--color-white); }
+.hp-menu[hidden] { display: none; }
+.hp-menu__list { display: grid; gap: var(--space-3); text-align: center; font-size: var(--hp-poem); letter-spacing: var(--hp-poem-ls); }
+.hp-menu__list a { display: inline-block; padding: 6px 12px; }
+body.is-menu { overflow: hidden; }
+
+/* 02 はじめの言葉：左に詩（x206）、右に小さな段落（x987・幅 300）、下に横長の帯 */
+.hp-words { padding: 160px var(--hp-frame) 0; }
+.hp-words__body { display: grid; grid-template-columns: 1fr 300px; gap: var(--space-5); padding: 0 160px 0 109px; align-items: start; }
+.hp-words__text { margin-top: 160px; font-size: var(--fs-s); line-height: 2.1; }
+.hp-band { width: 100%; height: 420px; object-fit: cover; object-position: center 62%; margin-top: 140px; }
+
+/* 03 私たちの考え：縁 51px の写真の右に詩、下に写真2枚（隙間 11px） */
+.hp-statement { padding: var(--hp-gap) var(--hp-frame) 0; }
+.hp-statement__frame { position: relative; }
+.hp-statement__photo { width: 100%; height: 633px; object-fit: cover; }
+.hp-statement__frame::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to left, rgba(20, 17, 13, .5) 0%, rgba(20, 17, 13, 0) 45%); }
+.hp-statement__copy { position: absolute; z-index: 1; right: 8%; top: 54%; transform: translateY(-50%); }
+.hp-pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--hp-gap); margin-top: var(--hp-gap); }
+.hp-pair img { width: 100%; height: 256px; object-fit: cover; }
+.hp-pair img:first-child { object-position: center 70%; }
+
+/* 04 2つの扉：写真2枚の左上に詩と章名。右下に事例への前置き */
+.hp-doors { padding: var(--hp-gap) var(--hp-frame) 0; }
+.hp-doors__row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--hp-gap); }
+.hp-door { position: relative; display: block; height: 520px; overflow: hidden; } /* 2026-11-11 AB1 で B：420→520。上の写真2枚の段（256）との違いを出す */
+.hp-door__photo { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.hp-door::after { content: ""; position: absolute; inset: 0; background: rgba(20, 17, 13, .45); }
+@media (prefers-reduced-motion: reduce) { .hp .header, .hp-door__photo { transition: none; } }
+.hp-door:hover .hp-door__photo { transform: scale(1.03); }
+.hp-door__copy { position: absolute; z-index: 1; left: 52px; top: 150px; }
+.hp-doors__lead { display: flex; flex-direction: column; align-items: flex-end; padding: 140px 100px 140px 0; text-align: left; }
+.hp-doors__lead > * { width: 300px; }
+
+/* 05〜07 手がけた家：全面の写真に、左下に小さく種類と家の名前。高さを変えて続ける */
+.hp-work { position: relative; display: block; overflow: hidden; color: var(--color-white); }
+.hp-work + .hp-work { margin-top: var(--hp-gap); }
+.hp-work__photo { width: 100%; height: 100%; object-fit: cover; }
+.hp-work::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(20, 17, 13, .6) 0%, rgba(20, 17, 13, 0) 50%); }
+.hp-work--tall { height: 741px; }
+.hp-work--mid { height: 629px; }
+.hp-work--low { height: 469px; }
+.hp-work__name { position: absolute; z-index: 1; left: 64px; bottom: 56px; }
+.hp-work__name .hp-kind { margin-bottom: 22px; }
+
+/* 08 日々のこと：暗い全面の写真の右上に詩、下に写真3枚 */
+.hp-journal { position: relative; padding: 160px 0 0; color: var(--color-white); overflow: hidden; background: var(--hp-ink); }
+.hp-journal__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .38; }
+.hp-journal__head { position: relative; z-index: 1; margin-left: auto; width: 325px; margin-right: 0; padding-bottom: 120px; }
+.hp-journal__head .hp-more { margin-top: var(--space-4); }
+.hp-journal__list { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; }
+.hp-note { position: relative; height: 413px; overflow: hidden; }
+.hp-note img { width: 100%; height: 100%; object-fit: cover; }
+.hp-note::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(20, 17, 13, .6) 0%, rgba(20, 17, 13, 0) 45%); }
+.hp-note__text { position: absolute; z-index: 1; left: 24px; right: 24px; bottom: 22px; font-size: var(--fs-s); line-height: 1.8; }
+.hp-note__text time { display: block; font-family: var(--font-en); letter-spacing: .14em; }
+
+/* 09 お知らせ：左に章名（x165）ともっと見る、右に一覧（x494〜） */
+.hp-news { display: grid; grid-template-columns: 330px 1fr; gap: 0; padding: 200px 120px 160px 160px; }
+.hp-news__title { font-size: var(--hp-poem); font-weight: 500; letter-spacing: var(--hp-poem-ls); }
+.hp-news__head .hp-more { margin-top: var(--space-4); }
+.hp-news__list { border-top: 1px solid var(--color-line); }
+.hp-news__item { border-bottom: 1px solid var(--color-line); }
+.hp-news__item a { display: block; padding: 26px 40px 26px 0; position: relative; }
+.hp-news__item a::after { content: "›"; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-family: var(--font-serif); font-size: 22px; color: var(--hp-gray); }
+.hp-news__meta { display: flex; gap: 40px; font-size: var(--fs-s); }
+.hp-news__meta time { font-family: var(--font-en); letter-spacing: .14em; }
+.hp-news__text { display: block; margin-top: var(--space-1); font-size: var(--fs-m); }
+
+/* 会社のこと（2026-11-11 A）：左に事務所の写真（縁 51・幅 735・高さ 460）、右に章名・詩・3行・リンク */
+.hp-company { display: grid; grid-template-columns: calc(735px / 1440px * 100%) 1fr; align-items: center; gap: 100px; padding: 0 120px 160px 51px; }
+.hp-company__photo { display: block; width: 100%; height: 460px; object-fit: cover; }
+.hp-company__label { font-size: var(--fs-s); font-weight: 600; letter-spacing: .24em; color: var(--color-note); }
+.hp-company__poem { margin-top: var(--space-4); }
+.hp-company__list { margin-top: var(--space-5); border-top: 1px solid var(--color-line); }
+.hp-company__row { display: grid; grid-template-columns: 96px 1fr; gap: var(--space-3); padding: 16px 0; border-bottom: 1px solid var(--color-line); font-size: var(--fs-s); line-height: 2; }
+.hp-company__row dt { color: var(--color-note); }
+.hp-company__more { margin-top: var(--space-4); }
+/* 10 話を聞いてみる（2026-11-11 A）：下のページの墨の帯（sub.css .sub-cta）と同じ形。フッターとは細い線で分ける */
+.hp-cta { padding: 140px 160px 120px; background: var(--hp-ink); color: var(--color-white); border-bottom: 1px solid rgba(255, 255, 255, .15); }
+.hp-cta__text { margin-top: var(--space-3); font-size: var(--fs-s); line-height: 2.2; opacity: .85; }
+.hp-cta__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-5); }
+.hp-cta__button { width: 280px; height: 56px; }
+body:has(.hp-cta) .hp-footer, .hp-sub .hp-footer { padding-top: 80px; }
+.hp-more__arrow--box { color: var(--hp-ink); border-color: var(--hp-gray); }
+
+/* 11 フッター：墨の地にサイトマップ */
+.hp-footer { background: var(--hp-ink); color: var(--color-white); padding: 100px 160px 44px; }
+.hp-footer__map { display: grid; grid-template-columns: repeat(3, 160px); gap: 26px 40px; font-size: var(--fs-s); letter-spacing: .1em; }
+.hp-footer__foot { margin-top: 100px; } /* 2026-11-11 レビュー4回目「一番最後のセクションが長い。余白を減らして短く」：220→100 */
+.hp-footer__logo { font-family: var(--font-serif); font-size: 30px; line-height: 1; }
+.hp-footer__logo span { display: block; margin-top: 6px; font-size: 10px; letter-spacing: .24em; }
+.hp-footer__info { margin-top: var(--space-3); font-size: var(--fs-s); opacity: .8; }
+.hp-footer__note { margin-top: var(--space-1); font-size: var(--fs-xs); opacity: .6; }
+
+@media (max-width: 1023px) {
+  .hp-words__body { grid-template-columns: 1fr; padding: 0 40px; }
+  .hp-words__text { margin-top: 0; max-width: 420px; }
+  .hp-statement__copy { left: auto; right: 48px; }
+  .hp-news { grid-template-columns: 1fr; padding: 140px 40px; gap: var(--space-4); }
+  .hp-company { grid-template-columns: 1fr; padding: 0 0 120px; gap: 50px; }
+  .hp-company__photo { height: 420px; }
+  .hp-company__body { padding: 0 40px; }
+  .hp-cta { padding: 120px 40px 100px; }
+}
+
+@media (max-width: 767px) {
+  :root { --hp-frame: 0px; }
+  .hp-poem { font-size: var(--hp-poem-sp); line-height: 2.2; letter-spacing: .26em; }
+  .hp-fv { height: 100svh; }
+  .hp-fv__name { font-size: 48px; }
+  .hp-words { padding: 110px 0 0; }
+  .hp-words__body { padding: 0 39px; gap: var(--space-5); }
+  .hp-words__text { padding-left: 45px; font-size: var(--fs-s); }
+  .hp-band { height: 262px; margin-top: 80px; }
+  .hp-statement__photo { height: 520px; }
+  .hp-statement__frame::after { background: rgba(20, 17, 13, .38); }
+  .hp-statement__copy { left: auto; right: 28px; top: 50%; }
+  .hp-pair { grid-template-columns: 1fr; }
+  .hp-pair img { height: 204px; }
+  .hp-doors__row { grid-template-columns: 1fr; }
+  .hp-door { height: 460px; }
+  .hp-door__copy { left: 40px; top: 70px; }
+  .hp-doors__lead { align-items: flex-start; padding: 100px 28px 100px 160px; }
+  .hp-doors__lead > * { width: auto; }
+  .hp-work--tall, .hp-work--mid { height: 420px; }
+  .hp-work--low { height: 300px; }
+  .hp-work__name { left: 28px; bottom: 32px; }
+  .hp-work__name .hp-kind { margin-bottom: 12px; }
+  .hp-journal { padding-top: 95px; }
+  .hp-journal__head { width: auto; margin: 0; padding: 0 28px 80px 56px; }
+  .hp-journal__list { grid-template-columns: 1fr; }
+  .hp-note { height: 254px; }
+  .hp-news { padding: 110px 28px; }
+  .hp-company { padding: 0 0 100px; gap: 40px; }
+  .hp-company__photo { height: 262px; }
+  .hp-company__body { padding: 0 28px; }
+  .hp-company__row { grid-template-columns: 80px 1fr; }
+  .hp-fv__line { font-size: 13px; letter-spacing: .14em; }
+  .hp-menu__list { font-size: var(--hp-poem-sp); }
+  .hp-news__meta { gap: var(--space-3); }
+  .hp-cta { padding: 100px 28px 90px; text-align: center; }
+  .hp-cta__actions { flex-direction: column; align-items: center; }
+  .hp-cta__button { width: 100%; max-width: 300px; }
+  .hp-footer, body:has(.hp-cta) .hp-footer, .hp-sub .hp-footer { padding: 64px 35px 36px; }
+  .hp-footer__map { grid-template-columns: 1fr 1fr; }
+  .hp-footer__foot { margin-top: 64px; }
+}
+
+/* =====================================================================
+   このサイトだけの層（2026-11-11 今岡さん「細部がまだフォーマット感。拭いきれないのが課題」→ kirari を参考に分析し、全部入れる）
+   分析：docs/ANALYSIS-format-feel-kirari-2026-11-11.md。均等に当てた決まりの上に、
+   ①文字の大きな段 ②描いた矢印1種 ③触った時の返事 ④窓辺の印 ⑤縦書き ⑥写真の割り方の例外 ⑦動きの主役 を重ねる
+   ===================================================================== */
+:root {
+  --hp-display: 36px;     /* ①家の名前（14px と 20px だけだった段に「大」を1つ） */
+  --hp-display-sp: 26px;
+  --hp-lead: 30px;        /* ①最初の詩だけ */
+  --hp-lead-sp: 23px;
+  --hp-slow: 1.2s;
+}
+
+/* ① 文字の段：12（種類）／14（文）／20（詩）／30（最初の詩）／36（家の名前） */
+.hp-poem--lead { font-size: var(--hp-lead); letter-spacing: .26em; line-height: 2.1; }
+.hp-name { display: block; font-size: var(--hp-display); font-weight: 500; letter-spacing: .16em; line-height: 1.3; }
+.hp-name small { display: block; margin-top: 14px; font-size: var(--fs-s); font-weight: 600; letter-spacing: .2em; }
+.hp-kind { display: block; font-size: var(--fs-xs); font-weight: 600; letter-spacing: .3em; }
+
+/* ② 描いた矢印：1px の線と、上だけの返し（窓台の線のように片側だけ）。触ると線が伸びる */
+.hp-arrow { position: relative; display: inline-block; flex: none; width: 28px; height: 9px; color: inherit; transition: width .5s var(--ease); }
+.hp-arrow::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; border-top: 1px solid currentColor; }
+.hp-arrow::after { content: ""; position: absolute; right: 0; bottom: 0; width: 10px; border-top: 1px solid currentColor; transform: rotate(38deg); transform-origin: right center; }
+a:hover > .hp-arrow, a:focus-visible > .hp-arrow, a:hover .hp-more__arrow .hp-arrow { width: 44px; }
+.hp-more__arrow { width: auto; height: auto; border: 0; border-radius: 0; color: currentColor; } /* 箱と「›」をやめ、線の矢印だけに */
+.hp-more { gap: 14px; }
+.hp-more__arrow--box { border: 0; }
+
+/* ③ 触った時の返事（ホバーとキーボードの焦点） */
+.hp a:focus-visible, .hp button:focus-visible { outline: 1px solid var(--color-accent); outline-offset: 4px; }
+.hp .header__nav a { position: relative; }
+.hp .header__nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; border-top: 1px solid currentColor; transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease); }
+.hp .header__nav a:hover::after, .hp .header__nav a[aria-current="page"]::after { transform: scaleX(1); }
+.hp-sub .header__nav a[aria-current="page"] { text-decoration: none; }
+.hp .header__catalog { transition: background-color .5s var(--ease), color .5s var(--ease); }
+.hp .header__catalog:hover { background: var(--color-white); color: var(--hp-ink); }
+.hp .button { transition: background-color .5s var(--ease), color .5s var(--ease), border-color .5s var(--ease); }
+.hp .button:hover { opacity: 1; }
+.hp .button--light:hover { background: var(--color-accent); color: var(--color-white); }
+.hp .button--ghost:hover { background: var(--color-white); color: var(--hp-ink); }
+.hp .button--line:hover { background: var(--hp-ink); color: var(--color-white); }
+.hp-work__photo, .hp-note img, .hp-company__photo { transition: transform var(--hp-slow) var(--ease); }
+.hp-work:hover .hp-work__photo, .hp-note:hover img { transform: scale(1.025); }
+.hp-work::after { transition: opacity .8s var(--ease); }
+.hp-work:hover::after { opacity: .7; }
+.hp-work__go { position: absolute; z-index: 1; right: 64px; bottom: 60px; display: inline-flex; align-items: center; gap: 14px; font-size: var(--fs-xs); letter-spacing: .3em; opacity: 0; transform: translateX(-8px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+.hp-work:hover .hp-work__go, .hp-work:focus-visible .hp-work__go { opacity: 1; transform: none; }
+.hp-news__item a { transition: color .4s var(--ease); }
+.hp-news__item a::after { content: none; }
+.hp-news__item { position: relative; }
+.hp-news__item::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; border-top: 1px solid var(--hp-ink); transform: scaleX(0); transform-origin: left; transition: transform .7s var(--ease); }
+.hp-news__item:hover::after { transform: scaleX(1); }
+.hp-news__item .hp-arrow { position: absolute; right: 8px; top: 50%; color: var(--hp-gray); transition: width .5s var(--ease), color .5s var(--ease); }
+.hp-news__item a:hover .hp-arrow { color: var(--hp-ink); width: 40px; }
+.hp-footer__map a { position: relative; padding-bottom: 2px; }
+.hp-footer__map a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; border-top: 1px solid currentColor; transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease); }
+.hp-footer__map a:hover::after { transform: scaleX(1); }
+.hp-menu__list a { position: relative; }
+.hp-menu__list a::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 2px; border-top: 1px solid currentColor; transform: scaleX(0); transition: transform .5s var(--ease); }
+.hp-menu__list a:hover::after { transform: scaleX(1); }
+
+/* ④ 窓辺の印（窓の枠と、はみ出す窓台の線。1px）。FV・ヘッダー・フッター */
+.hp-mark { display: block; width: 30px; height: 34px; overflow: visible; fill: none; stroke: currentColor; stroke-width: 1.1; }
+.hp-fv__mark .hp-mark { width: 44px; height: 50px; margin: 0 auto 26px; }
+.hp .logo { display: flex; flex-direction: column; align-items: center; }
+.hp .logo .hp-mark { position: absolute; left: -30px; top: 3px; width: 18px; height: 21px; }
+.hp-footer__logo { position: relative; display: inline-block; padding-left: 44px; }
+.hp-footer__logo .hp-mark { position: absolute; left: 0; top: -2px; width: 28px; height: 32px; }
+
+/* ⑤ 縦書き：考えの詩（写真の右に縦）と、左の縁に今いる章の名前 */
+.hp-statement__copy--vertical { right: 9%; top: 50%; display: flex; flex-direction: row-reverse; align-items: flex-start; gap: 44px; }
+.hp-statement__copy--vertical .hp-poem { writing-mode: vertical-rl; font-size: 22px; letter-spacing: .34em; line-height: 2.2; }
+.hp-statement__copy--vertical .hp-label { writing-mode: vertical-rl; margin-top: 0; padding-top: 6px; font-size: var(--fs-xs); letter-spacing: .4em; }
+.hp-rail { position: fixed; z-index: 8; left: 22px; top: 50%; transform: translateY(-50%); writing-mode: vertical-rl; font-size: var(--fs-xs); font-weight: 600; letter-spacing: .44em; color: var(--color-white); mix-blend-mode: difference; pointer-events: none; opacity: 0; transition: opacity .6s var(--ease); }
+.hp-rail.is-on { opacity: 1; }
+.hp-rail__line { display: inline-block; height: 40px; margin-bottom: 14px; border-left: 1px solid currentColor; }
+
+/* ⑥ 写真の割り方の例外：手がけた家の3軒目だけ、文字を写真の外（白い地）へ。帯の縁に小さな寄りの写真を重ねる。
+   日々のことの文字は写真の下へ（同じ暗がりのグラデを 6→3 か所に） */
+.hp-work--outside { color: var(--hp-ink); overflow: visible; height: auto; }
+.hp-work--outside::after { content: none; }
+.hp-work--outside .hp-work__photo { display: block; height: 469px; }
+.hp-work--outside .hp-work__name { position: static; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: var(--space-3); margin: 0 var(--hp-frame); padding: 34px 13px 30px; border-bottom: 1px solid var(--color-line); }
+.hp-work--outside .hp-work__go { position: static; opacity: 1; transform: none; color: var(--hp-ink); }
+.hp-work--outside:hover .hp-work__photo { transform: none; }
+.hp-work--outside .hp-work__clip { display: block; overflow: hidden; }
+.hp-work--outside:hover .hp-work__clip img { transform: scale(1.025); }
+.hp-band-wrap { position: relative; margin-top: 140px; }
+.hp-band-wrap .hp-band { margin-top: 0; }
+.hp-band__detail { position: absolute; right: 64px; top: -96px; width: 240px; height: 300px; object-fit: cover; } /* 2026-11-11 レビュー3回目「白い枠はいらない。もう少し右に」：枠を外し 160→64 */
+.hp-note::after { content: none; }
+.hp-note { height: auto; display: flex; flex-direction: column; overflow: visible; }
+.hp-note__photo { display: block; height: 340px; overflow: hidden; }
+.hp-note__text { position: static; padding: 22px 24px 40px; }
+
+/* ⑦ 動きの主役：FV と手がけた家の写真だけ、窓が開くように左右から現れる（ほかは今のフェードのまま） */
+.js-motion .hp-fv__photo { clip-path: inset(0 18% 0 18%); transform: scale(1.06); transition: clip-path 1.6s cubic-bezier(.7, 0, .2, 1), transform 2.4s var(--ease); }
+.js-motion.is-loaded .hp-fv__photo { clip-path: inset(0 0 0 0); transform: none; }
+.js-motion .hp-fv__mark { opacity: 0; transition: opacity 1.2s var(--ease) .9s; }
+.js-motion.is-loaded .hp-fv__mark { opacity: 1; }
+.js-motion .hp-work[data-reveal] { opacity: 1; transform: none; }
+.js-motion .hp-work[data-reveal] .hp-work__photo, .js-motion .hp-work[data-reveal] .hp-work__clip { clip-path: inset(0 50% 0 50%); transition: clip-path 1.4s cubic-bezier(.7, 0, .2, 1), transform var(--hp-slow) var(--ease); }
+.js-motion .hp-work[data-reveal].is-in .hp-work__photo, .js-motion .hp-work[data-reveal].is-in .hp-work__clip { clip-path: inset(0 0 0 0); }
+.js-motion .hp-work[data-reveal] .hp-work__name { opacity: 0; transition: opacity .8s var(--ease) .9s; }
+.js-motion .hp-work[data-reveal].is-in .hp-work__name { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .hp-arrow, .hp-work__photo, .hp-note img, .hp-work__go { transition: none; } }
+
+@media (max-width: 1023px) {
+  .hp-rail { display: none; }
+  .hp-band__detail { right: 24px; width: 180px; height: 220px; top: -70px; }
+}
+@media (max-width: 767px) {
+  .hp-poem--lead { font-size: var(--hp-lead-sp); letter-spacing: .2em; }
+  .hp-name { font-size: var(--hp-display-sp); letter-spacing: .12em; }
+  .hp-name small { margin-top: 10px; font-size: var(--fs-xs); }
+  .hp-work__go { display: none; }
+  .hp-work--outside .hp-work__photo { height: 300px; }
+  .hp-work--outside .hp-work__name { margin: 0 28px; padding: 24px 0; grid-template-columns: 1fr; }
+  .hp-work--outside .hp-work__go { display: inline-flex; }
+  .hp-statement__copy--vertical { right: 28px; gap: 28px; }
+  .hp-statement__copy--vertical .hp-poem { font-size: 19px; letter-spacing: .26em; }
+  .hp-band-wrap { margin-top: 80px; }
+  .hp-band__detail { right: 16px; top: -60px; width: 130px; height: 160px; }
+  .hp-note__photo { height: 254px; }
+  .hp-fv__mark .hp-mark { width: 36px; height: 41px; margin-bottom: 20px; }
+  .hp .logo .hp-mark { left: -24px; width: 14px; height: 16px; }
+}
+
+/* 09 話を聞いてみる：A「窓辺で閉じる」（2026-11-11 レビュー5回目 ×「ここだけフォーマット感が強い」→ A/B で A を採用）。FV と同じ窓辺の写真を暗めに敷き、中央に印・詩・四角のボタン */
+.hp-square { display: inline-flex; align-items: center; justify-content: space-between; gap: 20px; width: 280px; height: 56px; padding: 0 24px; background: var(--color-pale); color: var(--hp-ink); font-size: var(--fs-s); /* 2026-11-11 今岡さん「四角を気持ち小さく」：320×64→280×56 */ font-weight: 600; letter-spacing: .12em; transition: background-color .5s var(--ease), color .5s var(--ease); }
+.hp-square:hover { background: var(--color-accent); color: var(--color-white); }
+.hp-square:hover .hp-arrow { width: 44px; }
+
+.hp-cta--a { position: relative; display: grid; place-items: center; height: 640px; padding: 0; overflow: hidden; text-align: center; border-bottom: 0; }
+.hp-cta__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 60%; }
+.hp-cta--a::after { content: ""; position: absolute; inset: 0; background: rgba(47, 43, 38, .5); }
+.hp-cta--a .hp-cta__body { position: relative; z-index: 1; }
+.hp-cta--a .hp-mark { width: 28px; height: 32px; margin: 0 auto 26px; color: var(--color-white); }
+.hp-cta--a .hp-poem { font-size: var(--hp-lead); letter-spacing: .26em; line-height: 1.6; }
+.hp-cta--a .hp-cta__text { margin-top: 24px; }
+.hp-cta--a .hp-cta__actions { justify-content: center; align-items: center; gap: 40px; margin-top: 48px; }
+.hp-textlink { position: relative; display: inline-flex; align-items: center; gap: 14px; padding-bottom: 6px; color: var(--color-white); font-size: var(--fs-s); font-weight: 600; letter-spacing: .14em; }
+.hp-textlink::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; border-top: 1px solid currentColor; transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease); }
+.hp-textlink:hover::after { transform: scaleX(1); }
+@media (max-width: 767px) {
+  .hp-cta--a { height: 560px; padding: 0 28px; }
+  .hp-cta__bg { object-position: 78% 60%; }
+  .hp-cta--a .hp-poem { font-size: var(--hp-lead-sp); letter-spacing: .2em; line-height: 1.9; }
+  .hp-cta--a .hp-cta__actions { flex-direction: column; gap: 28px; }
+  .hp-square { width: 100%; max-width: 280px; height: 54px; }
+}

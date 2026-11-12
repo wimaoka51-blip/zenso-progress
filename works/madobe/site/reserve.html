@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>無料の個別相談の予約｜Madobe</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500&family=Zen+Old+Mincho:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="form-page">
+<header class="form-header">
+  <a class="form-header__back" href="index.html">← ページに戻る</a>
+  <a class="form-header__logo" href="index.html"><span class="logo__name">Madobe</span><span class="logo__place">HIRAO, FUKUOKA</span></a>
+</header>
+<main class="form-main">
+  <h1 class="heading form-main__title">無料の個別相談を予約する</h1>
+  <p class="form-main__lead">60分・無料。概算の費用と進め方が分かります。<span class="phrase">相談の場で契約をお願いすることはありません。</span></p>
+  <ol class="form-steps"><li class="form-steps__item is-current">1 日時と内容</li><li class="form-steps__item">2 確認</li><li class="form-steps__item">3 完了（担当から1営業日以内に連絡）</li></ol>
+  <form class="form" action="#" method="post">
+    <fieldset class="form__group"><legend class="form__label">相談のしかた</legend>
+      <label class="form__choice"><input type="radio" name="type" value="visit" checked> 来店（平尾のショールーム）</label>
+      <label class="form__choice"><input type="radio" name="type" value="online"> オンライン</label>
+    </fieldset>
+    <div class="form__row"><label class="form__label" for="date">希望の日</label><input class="form__input" id="date" name="date" type="date" required></div>
+    <div class="form__row"><label class="form__label" for="time">希望の時間</label><select class="form__input" id="time" name="time"><option>10:00〜11:00</option><option>11:30〜12:30</option><option>13:30〜14:30</option><option>15:00〜16:00</option><option>16:30〜17:30</option></select></div>
+    <fieldset class="form__group"><legend class="form__label">今の状況</legend>
+      <label class="form__choice"><input type="radio" name="stage" value="before" checked> 物件をまだ買っていない</label>
+      <label class="form__choice"><input type="radio" name="stage" value="after"> 物件を買った・持っている</label>
+    </fieldset>
+    <div class="form__row"><label class="form__label" for="name">お名前</label><input class="form__input" id="name" name="name" type="text" autocomplete="name" required></div>
+    <div class="form__row"><label class="form__label" for="email">メールアドレス</label><input class="form__input" id="email" name="email" type="email" autocomplete="email" required></div>
+    <div class="form__row"><label class="form__label" for="note">聞きたいこと（任意）</label><textarea class="form__input form__input--area" id="note" name="note" rows="4"></textarea></div>
+    <button class="button form__submit" type="submit">この内容で予約する</button>
+    <p class="form__fine">※架空の作品のため、送信はされません。</p>
+  </form>
+  <p class="form-done" role="status" hidden>架空の作品のため、送信はされません。ご覧いただきありがとうございます。</p>
+</main>
+<footer class="footer"><p class="footer__note">© Madobe（架空の作品です）</p></footer>
+<script>
+  document.querySelector('.form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.querySelector('.form-done').hidden = false;
+    document.querySelector('.form-done').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+/* Madobe HP 版の下のページ（2026-11-11）。構造の元は un norm の下のページの実測（_sources/unnorm-works ほか）。
+   色・書体・ヘッダー・フッター・詩・もっと見るは hp.css と共通。ここは下のページにだけある形 */
+
+/* 写真の地の暗さ（2026-11-11 今岡さん「写真をもう少し明るめに」「窓辺から暮らしを考えるの背景も同じぐらいの明るさで揃えて」：.62／.55 → .44 にそろえる） */
+.hp-sub { --sub-shade: .44; }
+.hp-sub .header { position: fixed; }
+.hp-sub .header .logo { opacity: 1; pointer-events: auto; }
+.sub-main { padding-top: 88px; }
+.hp-sub .header__nav a[aria-current="page"] { text-decoration: underline 1px; text-underline-offset: 8px; } /* 今いるページの印（2026-11-11 今岡さん「3つとも直す」） */
+
+/* ページの頭（unnorm-works 01：章名 x165・y248、詩 x226・y426、2行 x226・y527） */
+.sub-head { padding: 160px 160px 120px 165px; }
+.sub-head__label { font-size: var(--hp-poem); font-weight: 500; letter-spacing: var(--hp-poem-ls); }
+.sub-head__poem { margin: 150px 0 0 61px; }
+.sub-head__text { margin: 70px 0 0 61px; font-size: var(--fs-s); line-height: 2.5; }
+
+/* 手がけた家の一覧（unnorm-works 02〜06：写真 1214×687・左 113、下に 1行 x206・写真の下 50） */
+.sub-works { padding: 0 113px; }
+.sub-works__item + .sub-works__item { margin-top: 160px; }
+.sub-works__item a { display: block; }
+.sub-works__photo { display: block; width: 100%; aspect-ratio: 1214 / 687; object-fit: cover; transition: transform var(--hp-slow) var(--ease); }
+.sub-works__clip { display: block; overflow: hidden; }
+.sub-works__item a:hover .sub-works__photo { transform: scale(1.025); }
+.sub-works__line { display: grid; grid-template-columns: 220px 1fr auto; align-items: end; font-weight: inherit; margin: 40px 0 0 93px; padding-bottom: 30px; border-bottom: 1px solid var(--color-line); }
+.sub-works__meta { display: grid; gap: 10px; padding-bottom: 6px; }
+.sub-works__line time { font-family: var(--font-en); font-size: var(--fs-s); letter-spacing: .14em; }
+.sub-works__go { display: inline-flex; align-items: center; gap: 14px; padding-bottom: 8px; font-size: var(--fs-xs); letter-spacing: .3em; }
+
+/* ページの下の墨の帯（2026-11-11 今岡さん「パンくずの所が寂しい。CTA ボタン含め雰囲気を」→「墨の地の帯に」）。フッターと同じ墨で、細い線で分ける */
+.sub-cta { margin-top: 160px; padding: 72px 160px 150px; background: var(--hp-ink); color: var(--color-white); border-bottom: 1px solid rgba(255, 255, 255, .14); }
+.sub-cta:not(.sub-cta--plain) { position: relative; overflow: hidden; } /* 2026-11-11 今岡さん「帯も写真の地にしたい」：トップの最後と同じく写真を暗めに敷く。玄関から奥へ続く廊下（入口の写真） */
+.sub-cta:not(.sub-cta--plain)::before { content: ""; position: absolute; inset: 0; background: url("../../../site/img/s3-entrance.webp") center 55% / cover no-repeat; }
+.sub-cta:not(.sub-cta--plain)::after { content: ""; position: absolute; inset: 0; background: rgba(47, 43, 38, var(--sub-shade)); }
+.sub-cta > * { position: relative; z-index: 1; }
+.sub-cta--plain { padding-bottom: 72px; } /* ご相談のページは自分へのボタンを出さず、パンくずだけ */
+.sub-cta .sub-crumbs ol { color: rgba(255, 255, 255, .62); }
+.sub-cta .sub-crumbs a { text-decoration-color: rgba(255, 255, 255, .3); }
+.sub-cta__body { margin-top: 110px; }
+.sub-cta__text { margin-top: var(--space-3); font-size: var(--fs-s); line-height: 2.2; opacity: .85; }
+.sub-cta__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 40px; margin-top: var(--space-5); } /* 2026-11-11 今岡さん「四角にそろえる」：トップの最後と同じ四角のボタン＋文字と線の矢印 */
+
+/* パンくず（今岡さんの決め：ページの下に小さく。墨の帯の上の端に） */
+.sub-crumbs ol { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: var(--fs-s); color: var(--color-note); }
+.sub-crumbs li + li::before { content: "›"; margin-right: 14px; font-family: var(--font-serif); }
+.sub-crumbs a { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--color-line); }
+
+
+/* 事例の詳細（unnorm-work-detail：章名 右 x1107・y206、日付と種類 x165・y296、全幅の写真 y414〜） */
+.sub-detail-head { position: relative; padding-top: 72px; }
+.sub-detail-head__label { margin-left: calc(1107px / 1440px * 100%); font-size: var(--hp-poem); font-weight: 500; letter-spacing: var(--hp-poem-ls); }
+.sub-detail-head__meta { display: flex; flex-wrap: wrap; gap: 8px 40px; margin: 40px 0 0 165px; font-size: var(--fs-s); letter-spacing: .14em; }
+.sub-detail-head__meta time { font-family: var(--font-en); }
+.sub-detail-head__photo { display: block; width: 100%; height: 741px; margin-top: 56px; object-fit: cover; }
+/* 名前と文（名前 x165・20px、文 x864・14px・行の間 35px、段の間 1行） */
+.sub-detail { display: grid; grid-template-columns: 699px 1fr; padding: 80px 120px 110px 165px; }
+.sub-detail__name { font-size: var(--hp-display); font-weight: 500; letter-spacing: .16em; line-height: 1.5; } /* 2026-11-11 文字の大きな段（家の名前 36px） */
+.sub-detail__name span { display: block; margin-top: 14px; font-size: var(--fs-s); letter-spacing: .2em; color: var(--color-note); }
+.sub-detail__text { padding-top: 64px; }
+.sub-detail__para { font-size: var(--fs-s); line-height: 2.5; }
+.sub-detail__para + .sub-detail__para { margin-top: 35px; }
+/* 写真（中央 823・広い 1111・上下の2枚。間は 20px） */
+.sub-photos { display: grid; gap: 20px; justify-items: center; }
+.sub-photo--center { width: calc(823px / 1440px * 100%); }
+.sub-photo--wide, .sub-photo--pair { width: calc(1111px / 1440px * 100%); }
+.sub-photo__img { display: block; width: 100%; object-fit: cover; }
+.sub-photo--center .sub-photo__img { aspect-ratio: 823 / 753; }
+.sub-photo--wide .sub-photo__img { aspect-ratio: 1111 / 624; }
+.sub-photo--pair { display: grid; gap: 20px; }
+.sub-photo__img--top { aspect-ratio: 1111 / 403; }
+.sub-photo__img--bottom { aspect-ratio: 1111 / 477; object-position: center 60%; }
+/* 前後の送り（un norm：中央に BACK TO LIST。左右に前後の家） */
+.sub-pager { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--space-3); max-width: 900px; margin: 160px auto 0; padding: 0 28px; font-size: var(--fs-s); letter-spacing: .14em; }
+.sub-pager__prev { justify-self: start; }
+.sub-pager__next { justify-self: end; }
+.sub-pager__list { padding: 10px 26px; border: 1px solid var(--hp-gray); border-radius: var(--radius-bar); transition: background-color .5s var(--ease), color .5s var(--ease); }
+.sub-pager__list:hover { background: var(--hp-ink); color: var(--color-white); border-color: var(--hp-ink); }
+.sub-pager__prev, .sub-pager__next { display: inline-flex; align-items: center; gap: 16px; }
+.hp-arrow--back { transform: scaleX(-1); }
+.js-motion [data-open] { clip-path: inset(0 50% 0 50%); transition: clip-path 1.4s cubic-bezier(.7, 0, .2, 1); }
+.js-motion.is-loaded [data-open] { clip-path: inset(0 0 0 0); }
+.sub-crumbs a { transition: text-decoration-color .4s var(--ease); }
+.sub-crumbs a:hover { text-decoration-color: currentColor; }
+
+/* 私たちの考え（ぼかした写真の地と、最後の暗い写真の一言は unnorm-brand から。
+   1〜4 は 2026-11-11 A/B で B を採用：1つの章にまとめ、左に章名と大きな詩を止め、右に3つを線で区切る（unnorm-about と同じ左右の組み） */
+.idea { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; padding: 150px 160px 160px; }
+.idea__lead { align-self: start; }
+.js-motion .idea__lead { position: sticky; top: 160px; }
+.idea__label { margin-bottom: var(--space-4); font-size: var(--fs-m); font-weight: 600; letter-spacing: .24em; }
+.idea__intro { margin-top: var(--space-4); font-size: var(--fs-s); line-height: 2.4; }
+.idea__list { border-top: 1px solid rgba(255, 255, 255, .32); }
+.idea__item { padding: 44px 0; border-bottom: 1px solid rgba(255, 255, 255, .32); }
+.idea__poem { font-size: var(--fs-l); font-weight: 500; letter-spacing: .2em; line-height: 1.8; }
+.idea__para { margin-top: var(--space-2); font-size: var(--fs-s); line-height: 2.3; }
+.sub-idea { position: relative; color: var(--color-white); } /* 2026-11-11「最初の3つの背景も写真に」：ぼかした明るい地をやめ、写真を暗めに敷いて白い文字 */
+.sub-idea__bg { position: sticky; top: 0; height: 100vh; margin-bottom: -100vh; overflow: hidden; }
+.sub-idea__bg::before { content: ""; position: absolute; inset: 0; background: url("../../../site/img/s4-living.webp") center 40% / cover no-repeat; } /* 飾りの地なので画像の要素にしない */
+.sub-idea__bg::after { content: ""; position: absolute; inset: 0; background: rgba(47, 43, 38, var(--sub-shade)); }
+.sub-idea-end { position: relative; height: 900px; display: grid; place-items: center; overflow: hidden; color: var(--color-white); text-align: center; }
+.sub-idea-end__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.sub-idea-end::after { content: ""; position: absolute; inset: 0; background: rgba(47, 43, 38, var(--sub-shade)); }
+.sub-idea-end__body { position: relative; z-index: 1; }
+.sub-idea-end__mark { margin-bottom: var(--space-4); font-family: var(--font-serif); font-size: 34px; letter-spacing: .06em; }
+.hp-sub .sub-idea-end + .sub-cta, .hp-sub .sub-main:has(.sub-idea-end) + .sub-cta { margin-top: 0; }
+
+/* 会社のこと・ご相談（unnorm-about：左に章名 x159・一言、止める。右 x720・幅 561 に一覧。行は線で区切る） */
+.sub-split { display: grid; grid-template-columns: 561px 561px; justify-content: space-between; padding: 150px 159px 120px; }
+.sub-split__lead { align-self: start; }
+.js-motion .sub-split__lead { position: sticky; top: 160px; } /* 止めるのは実物だけ（レビューの撮影は固定・sticky の要素を隠すため） */
+.sub-split__label { font-size: var(--hp-poem); font-weight: 500; letter-spacing: var(--hp-poem-ls); }
+.sub-split__line { margin-top: 100px; }
+.sub-split__kicker { padding-bottom: var(--space-3); font-size: var(--fs-s); letter-spacing: .24em; color: var(--color-note); border-bottom: 1px solid var(--color-line); }
+.sub-split__kicker--access { margin-top: 120px; }
+.sub-office { width: 400px; margin-top: 70px; } /* 2026-11-11 今岡さん「小さな事務所ですの下に、少し小さめに」 */
+.sub-office img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.sub-office figcaption { margin-top: var(--space-2); font-size: var(--fs-s); color: var(--color-note); }
+.sub-profile__row { padding: 34px 0; border-bottom: 1px solid var(--color-line); font-size: var(--fs-s); line-height: 2.1; }
+.sub-profile__row dt { margin-bottom: var(--space-1); color: var(--color-note); }
+.sub-map { margin-top: var(--space-4); }
+.sub-map__svg { display: block; width: 100%; height: auto; }
+.sub-map__svg--sp { display: none; }
+.sub-map figcaption { margin-top: var(--space-2); font-size: var(--fs-s); }
+.hp-form__intro { margin-top: var(--space-3); font-size: var(--fs-s); line-height: 2.2; } /* 2026-11-11 今岡さん「3つとも直す」：相談の中身と送信後の流れ */
+.hp-form { accent-color: var(--color-ink); } /* ラジオを既定の青から墨に（2026-11-11 AI レビュー） */
+.hp-form__row { padding: 30px 0; border: 0; border-bottom: 1px solid var(--color-line); }
+.hp-form__row:has(.hp-form__input) { border-bottom: 0; } /* 入力欄の下線と行の区切り線が2本重なるので、入力欄の行は下線1本に */
+fieldset.hp-form__row > legend { float: left; width: 100%; padding: 0; } /* legend を枠の中の余白に入れる */
+fieldset.hp-form__row > legend + * { clear: both; }
+.hp-form__label { display: block; margin-bottom: var(--space-2); font-size: var(--fs-s); color: var(--color-note); }
+.hp-form__choices { display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: var(--fs-m); }
+.hp-form__choices label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+.hp-form__input { width: 100%; min-height: 48px; padding: 8px 0; border: 0; border-bottom: 1px solid var(--color-ink); background: transparent; font: inherit; font-size: var(--fs-m); color: inherit; }
+.hp-form__input--area { min-height: 120px; }
+.hp-form__submit { margin-top: var(--space-5); border: 0; cursor: pointer; font-family: inherit; }
+.hp-square--ink { background: var(--hp-ink); color: var(--color-white); }
+.hp-form__fine, .hp-form__done { margin-top: var(--space-2); font-size: var(--fs-s); color: var(--color-note); }
+.hp-form__done { color: var(--color-ink); }
+
+@media (max-width: 1023px) {
+  .sub-head { padding: 120px 40px 100px; }
+  .sub-works { padding: 0 40px; }
+  .sub-works__line { margin-left: 0; }
+  .sub-works__line { grid-template-columns: 180px 1fr auto; }
+  .sub-cta { padding: 64px 40px 120px; }
+  .sub-detail-head__label { margin-left: 40px; }
+  .sub-detail-head__meta { margin-left: 40px; }
+  .sub-detail-head__photo { height: 520px; }
+  .sub-detail { grid-template-columns: 1fr; padding: 90px 40px 120px; }
+  .sub-detail__text { padding-top: 40px; }
+  .sub-photo--center { width: 72%; }
+  .sub-photo--wide, .sub-photo--pair { width: calc(100% - 80px); }
+  .idea { grid-template-columns: 1fr; padding: 120px 40px; gap: 50px; }
+  .js-motion .idea__lead { position: static; }
+  .sub-split { grid-template-columns: 1fr; padding: 120px 40px 100px; gap: 60px; }
+  .js-motion .sub-split__lead { position: static; }
+  .sub-split__line { margin-top: 40px; }
+  .sub-office { width: 100%; max-width: 480px; margin-top: 40px; }
+}
+
+@media (max-width: 767px) {
+  .sub-main { padding-top: 92px; }
+  .sub-head { padding: 80px 28px 80px; }
+  .sub-head__poem { margin: 70px 0 0; }
+  .sub-head__text { margin: 40px 0 0; }
+  .sub-works { padding: 0; }
+  .sub-works__item + .sub-works__item { margin-top: 90px; }
+  .sub-works__line { grid-template-columns: 1fr; gap: 12px; margin: 22px 28px 0; padding-bottom: 22px; }
+  .sub-works__go { display: none; }
+  .sub-detail__name { font-size: var(--hp-display-sp); }
+  .sub-cta { margin-top: 100px; padding: 48px 28px 100px; text-align: center; }
+  .sub-cta .sub-crumbs ol { justify-content: center; }
+  .sub-cta__body { margin-top: 70px; }
+  .sub-cta__actions { flex-direction: column; align-items: center; gap: 28px; }
+  .sub-detail-head { padding-top: 40px; }
+  .sub-detail-head__label { margin-left: 28px; }
+  .sub-detail-head__meta { flex-direction: column; gap: 4px; margin: 24px 28px 0; }
+  .sub-detail-head__photo { height: 420px; margin-top: 32px; }
+  .sub-detail { padding: 70px 28px 90px; }
+  .sub-photos { gap: 8px; }
+  .sub-photo--center { width: 82%; }
+  .sub-photo--wide, .sub-photo--pair { width: 100%; }
+  .sub-photo--pair { gap: 8px; }
+  .sub-pager { grid-template-columns: 1fr 1fr; margin-top: 90px; }
+  .sub-pager__list { grid-column: 1 / -1; grid-row: 2; justify-self: center; }
+  .sub-idea-end { height: 640px; }
+  .idea { padding: 80px 28px; }
+  .idea__poem { font-size: 18px; letter-spacing: .14em; }
+  .sub-split { padding: 80px 28px; }
+  .sub-split__kicker--access { margin-top: 80px; }
+  .sub-map__svg--pc { display: none; }
+  .sub-map__svg--sp { display: block; }
+  .hp-form__submit { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) { .sub-works__photo { transition: none; } }

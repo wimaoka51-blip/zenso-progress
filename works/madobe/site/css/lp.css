@@ -1,0 +1,402 @@
+/* Madobe LP 版だけの層（2026-11-11 今岡さん「LP が今回のクオリティに届いていないので直したい」「LP と HP の定義は守って」）。
+   style.css は HP と共通なので触らず、LP だけここで重ねる。計画 docs/LP-FIX-PLAN-2026-11-11.md、判断の基準は web-build 冒頭の原則7つ。
+   LP 型 B の働き（疑問に答えて相談まで運ぶ・入口・数字・帯のメニュー）は落とさない */
+:root { --lp-shade: .44; --lp-slow: 1.2s; }
+
+/* 描いた素材：窓辺の印 C（そろえる物）と線の矢印（片側だけの返し） */
+.lp-mark { display: block; width: 18px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.1; overflow: visible; }
+.lp .logo .lp-mark { position: absolute; left: -30px; top: 9px; } /* 2026-11-11 レビュー8回目「ロゴの印が少し上。文字の高さと合わせて」：3→9px */
+.lp-arrow { position: relative; display: inline-block; flex: none; width: 28px; height: 9px; transition: width .5s var(--ease); }
+.lp-arrow::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; border-top: 1px solid currentColor; }
+.lp-arrow::after { content: ""; position: absolute; right: 0; bottom: 0; width: 10px; border-top: 1px solid currentColor; transform: rotate(38deg); transform-origin: right center; }
+a:hover .lp-arrow, a:focus-visible .lp-arrow { width: 44px; }
+
+/* ボタン（2026-11-11 レビュー8回目 A/B で四角を採用。body の .lp-square） */
+.lp .button { gap: 18px; transition: background-color .5s var(--ease), color .5s var(--ease), border-color .5s var(--ease); }
+.lp .button:hover { opacity: 1; }
+.lp .button--light:hover { background: var(--color-accent); color: var(--color-white); }
+.lp .button--line:hover { background: var(--color-ink); color: var(--color-white); }
+.lp .button--ghost:hover { background: var(--color-white); color: var(--color-ink); }
+.lp .button:not(.button--light):not(.button--line):not(.button--ghost):hover { background: var(--color-accent); }
+.lp-square .button { border-radius: 0; justify-content: space-between; padding: 0 26px; }
+.lp-square .bar__cta { border-radius: 0; }
+
+/* 触った時の返事 */
+.lp a:focus-visible, .lp button:focus-visible, .lp summary:focus-visible { outline: 1px solid var(--color-accent); outline-offset: 4px; }
+.lp .header__nav a, .lp .footer__nav a, .lp .textlink { position: relative; }
+.lp .header__nav a::after, .lp .footer__nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; border-top: 1px solid currentColor; transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease); }
+.lp .header__nav a:hover::after, .lp .footer__nav a:hover::after { transform: scaleX(1); }
+.lp .header__catalog { transition: background-color .5s var(--ease), color .5s var(--ease); }
+.lp .header__catalog:hover { background: var(--color-white); color: var(--color-ink); }
+.lp .bar__tab { transition: background-color .4s var(--ease), color .4s var(--ease); }
+.lp .bar__tab:hover { background: var(--color-accent); color: var(--color-white); }
+.lp .case__photo, .lp .voice img, .lp .scene__photo img, .lp .faq__photo { transition: transform var(--lp-slow) var(--ease); }
+.lp .case { overflow: hidden; }
+.lp .case:hover .case__photo { transform: scale(1.025); }
+.lp .qa__item { transition: background-color .4s var(--ease); }
+.lp .qa__item:hover { background: rgba(255, 255, 255, .5); }
+
+/* 居続ける物：帯のメニューの下端に、読み進んだ分だけ伸びる黄土の線 */
+.lp .bar { overflow: hidden; }
+.lp .bar::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: calc(var(--lp-read, 0) * 100%); background: var(--color-accent); }
+
+/* 01 FV：地名の2行をカーテンから外し、リードの上に小さく */
+.lp .fv__place { display: none; }
+.fv__where { margin-bottom: var(--space-2); font-size: var(--fs-s); font-weight: 600; letter-spacing: .14em; }
+
+/* 05 途中1：平尾の家の写真の、右の壁に文字を置く（原則1 一体） */
+.mid--wall { place-items: center end; text-align: left; }
+.mid--wall .mid__photo { object-position: center 62%; }
+.mid--wall::after { background: linear-gradient(to left, rgba(47, 43, 38, calc(var(--lp-shade) + .16)) 0%, rgba(47, 43, 38, var(--lp-shade)) 34%, rgba(47, 43, 38, .12) 70%); }
+.mid--wall .mid__body { width: 420px; margin-right: 6%; padding: 0; }
+.mid__kicker { font-size: var(--fs-s); font-weight: 600; letter-spacing: .2em; opacity: .9; }
+.mid--wall .mid__title { margin-top: var(--space-2); }
+
+/* 07 費用：足し算を主役の図に（島を1つに）。数字は1本の線の上に並び、工事費から「動く3つ」へ線を下ろす */
+.price .sec-head--split { align-items: flex-start; }
+.price .sec-head__aside { display: none; }
+.sum__case { max-width: 1140px; margin: var(--space-6) auto 0; font-size: var(--fs-s); font-weight: 600; letter-spacing: .14em; color: var(--color-note); }
+.price .sum { margin-top: var(--space-2); flex-wrap: nowrap; align-items: flex-end; border-top: 0; border-bottom: 1px solid var(--color-ink); padding: 0 0 var(--space-3); }
+.price .sum__num { font-size: 48px; }
+.price .sum__item--total .sum__num { font-size: 96px; line-height: .9; color: var(--color-ink); }
+.price .sum__item--total dt { color: var(--color-ink); }
+.sum__item--cost { position: relative; }
+.sum__item--cost::after { content: ""; position: absolute; left: 0; top: calc(100% + var(--space-3) + 1px); height: 56px; border-left: 1px solid var(--color-ink); }
+.price .price__sub { margin-top: 56px; padding-left: 24px; font-size: var(--fs-m); font-weight: 600; }
+.price .points { margin-top: var(--space-2); padding-left: 24px; gap: 40px; }
+.price .points__item { border-top: 0; border-left: 1px solid var(--color-line); padding: 0 0 0 var(--space-2); }
+.price .offer { grid-template-columns: auto 1fr auto; margin-top: var(--space-6); padding: var(--space-4) 0 0; border: 0; border-top: 1px solid var(--color-ink); background: transparent; }
+.price .offer__button { width: 320px; height: 60px; background: var(--color-ink); }
+.js-motion .price .sum.is-in .sum__item, .js-motion .price .sum.is-in .sum__op { animation: lp-add .6s var(--ease) both; }
+.js-motion .price .sum .sum__item, .js-motion .price .sum .sum__op { opacity: 0; }
+.js-motion .price .sum.is-in > :nth-child(1) { animation-delay: 0s; }
+.js-motion .price .sum.is-in > :nth-child(2), .js-motion .price .sum.is-in > :nth-child(3) { animation-delay: .3s; }
+.js-motion .price .sum.is-in > :nth-child(4), .js-motion .price .sum.is-in > :nth-child(5) { animation-delay: .6s; }
+.js-motion .price .sum.is-in > :nth-child(6), .js-motion .price .sum.is-in > :nth-child(7) { animation-delay: .9s; }
+.js-motion .price .sum.is-in > :nth-child(8), .js-motion .price .sum.is-in > :nth-child(9) { animation-delay: 1.3s; }
+@keyframes lp-add { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* 12 最後の相談：入口3つは残す（LP の働き）。箱をやめ、写真の空いた壁に3行で（A）／食卓の上下に分けて（B） */
+.last--rows { padding: 0; min-height: 760px; display: grid; align-items: center; }
+.last--rows::after { background: linear-gradient(to right, rgba(47, 43, 38, calc(var(--lp-shade) + .14)) 0%, rgba(47, 43, 38, var(--lp-shade)) 45%, rgba(47, 43, 38, .1) 75%); }
+.last--rows .last__photo { object-position: center 60%; }
+.last--rows .last__body { max-width: none; margin: 0 0 0 9%; width: 520px; text-align: left; }
+.last--rows .last__title { font-size: 30px; }
+.rows { margin-top: var(--space-5); border-top: 1px solid rgba(255, 255, 255, .45); }
+.row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: var(--space-3); padding: 26px 0; border-bottom: 1px solid rgba(255, 255, 255, .45); color: var(--color-white); }
+.row__name { font-size: var(--fs-l); font-weight: 500; letter-spacing: .1em; white-space: nowrap; }
+.row__text { display: block; margin-top: 6px; font-size: var(--fs-s); opacity: .9; }
+.row .lp-arrow { width: 36px; }
+.row:hover .lp-arrow { width: 52px; }
+.row--main { padding: 32px 0; }
+.row--main .row__name { font-size: 26px; }
+.row__go { display: inline-flex; align-items: center; gap: 16px; font-size: var(--fs-s); font-weight: 600; letter-spacing: .14em; }
+.row--main .row__go { padding: 14px 22px; background: var(--color-pale); color: var(--color-ink); transition: background-color .5s var(--ease), color .5s var(--ease); }
+.row--main:hover .row__go { background: var(--color-accent); color: var(--color-white); }
+.lp:not(.lp-square) .row--main .row__go { border-radius: var(--radius-pill); }
+.last--table { padding: 0; min-height: 820px; display: grid; grid-template-rows: auto 1fr auto; text-align: center; }
+.last--table::after { background: linear-gradient(to bottom, rgba(47, 43, 38, calc(var(--lp-shade) + .12)) 0%, rgba(47, 43, 38, .14) 34%, rgba(47, 43, 38, .3) 58%, rgba(47, 43, 38, .82) 100%); }
+.last--table .last__photo { object-position: center 55%; }
+.last--table .last__head { position: relative; z-index: 1; padding-top: 110px; }
+.last--table .last__title { font-size: 30px; }
+.last--table .rows { position: relative; z-index: 1; grid-row: 3; display: grid; grid-template-columns: 1.45fr 1fr 1fr; margin: 0 6% 64px; border-top: 1px solid rgba(255, 255, 255, .45); text-align: left; }
+.last--table .row { border-bottom: 0; padding: 26px 32px 0 0; }
+.last--table .row + .row { padding-left: 32px; border-left: 1px solid rgba(255, 255, 255, .3); }
+
+@media (prefers-reduced-motion: reduce) { .lp-arrow, .lp .case__photo { transition: none; } }
+@media (max-width: 1023px) {
+  .price .sum { flex-wrap: wrap; row-gap: var(--space-3); }
+  .sum__item--cost::after { display: none; }
+  .mid--wall .mid__body { width: 360px; margin-right: 40px; }
+  .last--rows .last__body { margin-left: 40px; }
+  .last--table .rows { margin: 0 40px 56px; grid-template-columns: 1fr; }
+  .last--table .row + .row { padding-left: 0; border-left: 0; }
+}
+@media (max-width: 767px) {
+  .lp .logo .lp-mark { left: -24px; width: 14px; height: 16px; }
+  .fv__where { font-size: 12px; letter-spacing: .1em; }
+  .mid--wall { place-items: end center; }
+  .mid--wall::after { background: linear-gradient(to top, rgba(47, 43, 38, calc(var(--lp-shade) + .2)) 0%, rgba(47, 43, 38, var(--lp-shade)) 45%, rgba(47, 43, 38, .1) 80%); }
+  .mid--wall .mid__photo { object-position: 30% center; }
+  .mid--wall .mid__body { width: auto; margin: 0 28px 56px; }
+  .price .sum { flex-wrap: wrap; }
+  .price .sum__num { font-size: 34px; }
+  .price .sum__item--total .sum__num { font-size: 72px; }
+  .sum__item--cost::after { display: none; }
+  .price .price__sub, .price .points { padding-left: 0; }
+  .price .offer { grid-template-columns: 1fr; }
+  .price .offer__button { width: 100%; }
+  .last--rows { min-height: 0; padding: 120px 0 64px; align-items: end; }
+  .last--rows::after { background: linear-gradient(to top, rgba(47, 43, 38, calc(var(--lp-shade) + .22)) 0%, rgba(47, 43, 38, var(--lp-shade)) 60%, rgba(47, 43, 38, .14) 100%); }
+  .last--rows .last__photo { object-position: 30% center; }
+  .last--rows .last__body { width: auto; margin: 0 28px; }
+  .last--rows .last__title, .last--table .last__title { font-size: 23px; }
+  .row__name { font-size: 18px; }
+  .row--main { grid-template-columns: 1fr; gap: 16px; }
+  .row--main .row__go { justify-self: start; }
+  .row__name { white-space: normal; }
+  .row--main .row__name { font-size: 20px; }
+  .last--table { min-height: 0; }
+  .last--table .last__head { padding: 80px 28px 0; }
+  .last--table .rows { margin: 280px 28px 48px; }
+}
+
+/* ===== 07・08 の直し（2026-11-11 レビュー8回目「文字だけだとフォーマット感。写真ではない別の演出を A/B で」「パッと見て情報がすっと入らない」） ===== */
+.price--plan, .price--line { padding: var(--space-7) 150px; }
+.poffer { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: var(--space-3); margin-top: var(--space-5); padding-top: var(--space-3); border-top: 1px solid var(--color-ink); }
+.poffer__lead { font-size: var(--fs-m); font-weight: 600; line-height: 1.8; }
+.poffer__num { font-family: var(--font-serif); font-size: 48px; font-weight: 500; line-height: 1; margin-right: 4px; vertical-align: -6px; }
+.poffer__unit { margin-right: var(--space-2); font-size: var(--fs-s); }
+.poffer .button { width: 300px; height: 56px; }
+
+/* 07 A：間取りの上に費用 */
+.pplan { max-width: 1140px; margin: var(--space-6) auto 0; display: grid; grid-template-columns: 7fr 5fr; gap: 80px; align-items: start; }
+.pplan__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.pplan__dim { display: flex; align-items: baseline; gap: 12px; margin-top: var(--space-3); padding-top: var(--space-2); border-top: 1px solid var(--color-ink); font-family: var(--font-serif); font-size: 22px; }
+.pplan__dim b { margin-left: auto; font-family: var(--font-jp); font-size: var(--fs-l); font-weight: 600; }
+.pplan__x { color: var(--color-note); }
+.pplan__points { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: var(--space-4); font-size: var(--fs-s); line-height: 1.9; }
+.pplan__points b { display: block; margin-bottom: 6px; font-size: var(--fs-m); }
+.pplan__case { font-size: var(--fs-s); font-weight: 600; letter-spacing: .14em; color: var(--color-note); }
+.tally { margin-top: var(--space-2); }
+.tally__row { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--color-line); font-size: var(--fs-s); }
+.tally__row dt { color: var(--color-note); }
+.tally__row .sum__num { font-size: 32px; }
+.tally__row--cost dt, .tally__row--cost dd { color: var(--color-ink); font-weight: 600; }
+.tally__row--cost { border-left: 2px solid var(--color-accent); padding-left: 12px; }
+.tally__row--total { align-items: flex-end; padding-top: 18px; border-top: 2px solid var(--color-ink); border-bottom: 0; }
+.tally__row--total dt { color: var(--color-ink); font-weight: 600; }
+.tally__row--total .sum__num { font-size: 88px; line-height: .9; }
+.pplan__side .poffer { grid-template-columns: 1fr; }
+.pplan__side .poffer .button { width: 100%; }
+.js-motion .tally .tally__row { opacity: 0; }
+.js-motion .tally.is-in .tally__row { animation: lp-add .6s var(--ease) both; }
+.js-motion .tally.is-in .tally__row:nth-child(2) { animation-delay: .3s; }
+.js-motion .tally.is-in .tally__row:nth-child(3) { animation-delay: .6s; }
+.js-motion .tally.is-in .tally__row:nth-child(4) { animation-delay: .9s; }
+.js-motion .tally.is-in .tally__row:nth-child(5) { animation-delay: 1.3s; }
+
+/* 07 B：総額を1本の線の長さで */
+.pline__total { max-width: 1140px; margin: var(--space-6) auto 0; }
+.pline__case { display: block; font-size: var(--fs-s); font-weight: 600; letter-spacing: .14em; color: var(--color-note); }
+.pline__num { font-family: var(--font-serif); font-size: 120px; font-weight: 500; line-height: 1; }
+.pline__unit { margin-left: 6px; font-size: var(--fs-l); }
+.pline { max-width: 1140px; margin: var(--space-4) auto 0; display: flex; align-items: flex-end; }
+.pline__seg { position: relative; flex: 0 0 calc(var(--w) * 1%); padding-bottom: 14px; border-bottom: 1px solid var(--color-ink); }
+.pline__seg + .pline__seg { border-left: 1px solid var(--color-line); padding-left: 8px; }
+.pline__name { display: block; font-size: var(--fs-s); color: var(--color-note); white-space: nowrap; }
+.pline__val { font-family: var(--font-serif); font-size: 22px; white-space: nowrap; }
+.pline__val small { font-family: var(--font-jp); font-size: var(--fs-xs); margin-left: 2px; }
+.pline__seg--cost { border-bottom: 3px solid var(--color-accent); }
+.pline__seg--cost .pline__name { color: var(--color-ink); font-weight: 600; }
+.pline__seg--cost .pline__val { font-size: 48px; line-height: 1; }
+.pline__range { position: absolute; left: 8px; top: calc(100% + 12px); font-size: var(--fs-xs); color: var(--color-note); white-space: nowrap; }
+.pline__seg--thin .pline__name, .pline__seg--thin .pline__val { position: absolute; bottom: calc(100% + 4px); font-size: var(--fs-xs); }
+.pline__seg--thin .pline__name { bottom: calc(100% + 26px); }
+.pline__seg--thin:last-child .pline__name, .pline__seg--thin:last-child .pline__val { right: 0; }
+.pline__below { max-width: 1140px; margin: 64px auto 0; display: grid; grid-template-columns: 62% 1fr; gap: 0; }
+.pline__points { grid-column: 2; padding-left: 8px; border-left: 1px solid var(--color-ink); }
+.pline__points li { padding: 14px 0 14px 18px; border-bottom: 1px solid var(--color-line); font-size: var(--fs-s); line-height: 1.8; }
+.pline__points b { display: block; font-size: 18px; font-weight: 500; }
+.pline__below .poffer { grid-column: 1 / -1; }
+.js-motion .pline .pline__seg { opacity: 0; }
+.js-motion .pline.is-in .pline__seg { animation: lp-add .6s var(--ease) both; }
+.js-motion .pline.is-in .pline__seg:nth-child(2) { animation-delay: .3s; }
+.js-motion .pline.is-in .pline__seg:nth-child(3) { animation-delay: .6s; }
+.js-motion .pline.is-in .pline__seg:nth-child(4) { animation-delay: .8s; }
+
+/* 08 A：月の名前で逆算（横） */
+.timing--months { padding: var(--space-7) 150px; }
+.months { max-width: 1140px; margin: var(--space-6) auto 0; }
+.months__ex { font-size: var(--fs-s); font-weight: 600; letter-spacing: .14em; color: var(--color-note); }
+.months__ends { display: flex; justify-content: space-between; align-items: flex-end; margin-top: var(--space-2); }
+.months__end { font-size: var(--fs-l); font-weight: 600; }
+.months__m { font-family: var(--font-serif); font-size: 80px; font-weight: 500; line-height: 1; margin-right: 10px; }
+.months__m small { font-family: var(--font-jp); font-size: 24px; margin-left: 2px; }
+.months__end--goal { text-align: right; }
+.months__line { position: relative; display: flex; margin-top: var(--space-3); height: 24px; }
+.months__seg { flex: var(--w); border-bottom: 1px solid var(--color-ink); }
+.months__seg--work { border-bottom: 3px solid var(--color-ink); }
+.months__line::before { content: ""; position: absolute; left: -6px; bottom: -6px; width: 13px; height: 13px; border-radius: 50%; background: var(--color-accent); }
+.months__ticks { position: absolute; inset: 0; display: flex; justify-content: space-between; pointer-events: none; }
+.months__ticks i { width: 1px; height: 12px; margin-top: 12px; background: var(--color-ink); }
+.months__steps { display: flex; margin-top: var(--space-3); }
+.months__steps li { flex: var(--w); padding: 0 24px 0 0; font-size: var(--fs-s); line-height: 1.8; }
+.months__steps li + li { padding-left: 16px; border-left: 1px solid var(--color-line); }
+.months__steps b { display: block; font-size: 18px; font-weight: 500; }
+.months__start { margin-top: var(--space-2); padding: 4px 0 4px 18px; border-left: 2px solid var(--color-accent); font-size: var(--fs-s); line-height: 1.9; }
+.months__start b { margin-right: 14px; font-size: 18px; font-weight: 500; }
+
+/* 08 B：入居から上へ逆算（縦） */
+.timing--down { padding: var(--space-7) 150px; }
+.down { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: 5fr 7fr; gap: 80px; align-items: start; }
+.js-motion .down__lead { position: sticky; top: 140px; }
+.down__num { margin-top: var(--space-5); font-family: var(--font-serif); font-size: 160px; font-weight: 500; line-height: .9; }
+.down__num small { font-family: var(--font-jp); font-size: 30px; margin-left: 6px; }
+.down__note { margin-top: var(--space-3); font-size: var(--fs-m); line-height: 1.9; }
+.down__line { position: relative; margin-top: 12px; padding-left: 120px; }
+.down__line::before { content: ""; position: absolute; left: 96px; top: 10px; bottom: 10px; border-left: 1px solid var(--color-ink); }
+.down__step { position: relative; min-height: calc(var(--h) * 120px); padding: 0 0 28px 28px; font-size: var(--fs-s); line-height: 1.8; }
+.down__step b { display: block; font-size: 18px; font-weight: 500; }
+.down__step::before { content: ""; position: absolute; left: -29px; top: 9px; width: 9px; height: 9px; border-radius: 50%; background: var(--color-ink); }
+.down__step--start::before { background: var(--color-accent); width: 13px; height: 13px; left: -31px; top: 7px; }
+.down__step--work { box-shadow: inset 3px 0 0 -0px transparent; }
+.down__step--work::after { content: ""; position: absolute; left: -26px; top: 18px; bottom: 0; border-left: 3px solid var(--color-ink); }
+.down__m { position: absolute; left: -120px; top: 0; width: 78px; text-align: right; font-family: var(--font-serif); font-size: 32px; line-height: 1; }
+.down__m small { font-family: var(--font-jp); font-size: 13px; }
+.down__step--start .down__m, .down__step--goal .down__m { font-family: var(--font-jp); font-size: var(--fs-m); font-weight: 600; top: 4px; }
+
+@media (max-width: 1023px) {
+  .price--plan, .price--line, .timing--months, .timing--down { padding: var(--space-6) 40px; }
+  .pplan, .down { grid-template-columns: 1fr; gap: var(--space-5); }
+  .js-motion .down__lead { position: static; }
+  .pline__below { grid-template-columns: 1fr; }
+  .pline__points { grid-column: 1; }
+}
+@media (max-width: 767px) {
+  .price--plan, .price--line, .timing--months, .timing--down { padding: var(--space-6) 20px; }
+  .pplan__points { grid-template-columns: 1fr; gap: 16px; }
+  .pplan__dim { flex-wrap: wrap; font-size: 18px; }
+  .pplan__dim b { margin-left: 0; width: 100%; }
+  .tally__row--total .sum__num { font-size: 64px; }
+  .poffer { grid-template-columns: 1fr; }
+  .poffer .button { width: 100%; }
+  .pline__num { font-size: 80px; }
+  .pline { flex-direction: column; align-items: stretch; }
+  .pline__seg { flex: none; min-height: calc(var(--w) * 4px + 40px); padding: 8px 0 8px 16px; border-bottom: 0; border-left: 3px solid var(--color-ink); }
+  .pline__seg + .pline__seg { border-left: 3px solid var(--color-line); padding-left: 16px; }
+  .pline .pline__seg.pline__seg--cost { border-left-color: var(--color-accent); }
+  .pline__seg--thin .pline__name, .pline__seg--thin .pline__val { position: static; }
+  .pline__range { position: static; display: block; margin-top: 4px; }
+  .months__m { font-size: 56px; }
+  .months__steps { flex-direction: column; gap: 14px; }
+  .months__steps li + li { padding-left: 0; border-left: 0; }
+  .down__num { font-size: 96px; }
+  .down__line { padding-left: 88px; }
+  .down__line::before { left: 64px; }
+  .down__m { left: -88px; width: 56px; font-size: 24px; }
+}
+
+/* 地の色（2026-11-11 レビュー8回目「背景白の方がいいか悩んでいる」→ 全体の縮小図で A/B） */
+.lp-bg-group .scenes { background: var(--color-pale); }
+.lp-bg-group .price, .lp-bg-group .faq { background: var(--color-white); }
+.lp-bg-white .intro, .lp-bg-white .scenes, .lp-bg-white .price, .lp-bg-white .faq { background: var(--color-white); }
+
+/* 06 事例の間取り：色つきの図面にしたので枠の箱を外す（2026-11-11 レビュー9回目「間取りの図だけ変えて」） */
+.lp .case__plans img { border: 0; }
+/* 01 スマホの FV のボタン：四角にして文字が窮屈だった所（2026-11-11 レビュー9回目「スマホの CTA の文字数が合っていない」） */
+@media (max-width: 767px) {
+  .lp-square .fv__lead .button { width: 100%; max-width: 320px; padding: 0 20px; font-size: 14px; letter-spacing: .04em; }
+  .lp-square .button { padding: 0 20px; }
+}
+/* 10 事例集のボタン：ほかの入口と同じ墨の四角に（2026-11-11 レビュー9回目「CTA ボタン統一して」） */
+.lp .catalog .button { width: 300px; height: 56px; white-space: nowrap; }
+@media (max-width: 767px) { .lp .catalog .button { width: 100%; } }
+
+/* 間取り図：ぼかした写真の上に白い線の図面と黄土の丸（2026-11-11 今岡さん「こんな雰囲気の間取り図がいい」）。地の写真はその家の1枚 */
+.pplan__fig, .lp .case__plans { position: relative; isolation: isolate; overflow: hidden; }
+.pplan__fig::before, .lp .case__plans::before { content: ""; position: absolute; inset: -30px; z-index: -2; background: var(--plan-bg) center / cover no-repeat; filter: blur(16px) saturate(.9) brightness(1.08); } /* --plan-bg は lp.css から見た場所（../img/）で書く */
+.pplan__fig::after, .lp .case__plans::after { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(46, 43, 38, .24); } /* 地は明るい窓辺の壁をぼかした1枚（参考の空気に近い明るさ） */
+.pplan__fig { padding: 40px 36px 28px; color: var(--color-white); }
+.pplan__fig .pplan__dim { border-top-color: rgba(255, 255, 255, .6); }
+.pplan__fig .pplan__x { color: rgba(255, 255, 255, .7); }
+.pplan__fig .pplan__points { color: var(--color-white); }
+.pplan__legend { display: flex; align-items: center; gap: 10px; margin-top: 14px; font-size: var(--fs-s); }
+.pplan__dot { width: 14px; height: 14px; border-radius: 50%; background: var(--color-accent); }
+.pplan__oval { width: 26px; height: 12px; margin-left: 18px; border-radius: 50%; background: rgba(255, 255, 255, .45); }
+.lp .case__plans { padding: 12px 10px 8px; }
+.lp .case__plans figcaption { color: rgba(255, 255, 255, .9); }
+@media (max-width: 767px) { .pplan__fig { padding: 28px 18px 20px; } }
+
+/* ===== HP 版とそろえる（2026-11-11 今岡さん「フォントだけホームページ版と統一して。CTA ボタンも統一してもいい」） =====
+   書体はもとから同じ（Zen Old Mincho・Crimson Pro）。そろえるのは見出しの大きさ・字間・行間と、ボタンの寸法と文字。
+   LP の働き（見出しで疑問に答える）は残し、HP の「最初の詩」と同じ段（30px・字間を広く）に下げる */
+.lp .heading { font-size: 30px; letter-spacing: .22em; line-height: 1.9; }
+.lp .mid__title, .lp .last__title { letter-spacing: .22em; line-height: 1.9; }
+.lp .scene__title { letter-spacing: .2em; }
+.lp .label { letter-spacing: .24em; }
+.lp .fv__title { letter-spacing: .12em; }
+/* ボタン：HP の四角（280×56・14px・字間 .12em・左右 24px・線の矢印）と同じ寸法に */
+.lp .button, .lp .button--light, .lp .offer__button, .lp .poffer .button, .lp .catalog .button { width: 280px; height: 56px; padding: 0 24px; font-size: var(--fs-s); letter-spacing: .12em; }
+.lp .pplan__side .poffer .button { width: 100%; }
+@media (max-width: 767px) {
+  .lp .heading { font-size: 23px; letter-spacing: .16em; line-height: 1.8; }
+  .lp .mid__title, .lp .last__title { letter-spacing: .16em; }
+  .lp .button, .lp .button--light, .lp .poffer .button, .lp .catalog .button { width: 100%; max-width: 300px; }
+  /* 01 スマホの FV：ボタンを一番下に（2026-11-11 レビュー11回目「CTA ボタン一番下になってない。スマホ版」）。注記をボタンの上へ */
+  .lp .fv__lead { display: flex; flex-direction: column; align-items: center; }
+  .lp .fv__note { display: none; } /* 2026-11-11 レビュー12回目「消しても良さそう」（スマホの FV の注記。60分・来店かオンラインは途中の入口と最後の章にある） */
+  .lp .fv__lead .button { margin-top: 24px; }
+}
+/* 05：言葉を直して見出しが長くなったので、壁の幅に2行で収める（2026-11-11 レビュー13回目の後） */
+.lp .button { white-space: nowrap; }
+.mid--wall .mid__body { width: 480px; margin-right: 5%; }
+.mid--wall .mid__title { font-size: 26px; letter-spacing: .18em; }
+.mid--wall .mid__title .phrase { display: block; }
+@media (max-width: 767px) { .mid--wall .mid__body { width: auto; } .mid--wall .mid__title { font-size: 21px; letter-spacing: .12em; } }
+
+/* ===== 14回目：写真の地（2026-11-11 今岡さん「白地ではなく部屋の写真か部屋のぼかしを。視認性を確保しつつ統一感を」。計画 docs/LP-PHOTO-GROUND-PLAN-2026-11-11.md） ===== */
+:root { --lp-veil: .30; }
+
+/* 02 悩み・共感：窓辺の写真の左の空いた壁に文字を載せて1枚に（墨 .44 のべた） */
+.intro--photo { position: relative; height: 860px; overflow: hidden; color: var(--color-white); }
+.intro--photo .intro__photo { position: absolute; inset: 0; }
+.intro--photo .intro__photo img { height: 100%; object-position: center top; }
+.intro--photo::after { content: ""; position: absolute; inset: 0; background: rgba(47, 43, 38, var(--lp-shade)); }
+.intro--photo .intro__body { position: absolute; z-index: 1; left: 9%; top: 96px; width: 520px; padding: 0; text-align: left; }
+.intro--photo .heading { font-size: 26px; letter-spacing: .18em; }
+.intro--photo .intro__text { font-size: var(--fs-m); line-height: 2; }
+.intro--photo .intro__strong { font-size: 20px; }
+
+/* 03 特徴・強み：PC だけ、玄関の写真の下の部分に3つを載せる（下からのグラデ） */
+@media (min-width: 1024px) {
+  .strength__stage { position: relative; margin: var(--space-5) 0 0 214px; color: var(--color-white); }
+  .strength__stage .strength__photo { margin: 0; }
+  .strength__stage .strength__photo img { height: 820px; object-position: center bottom; }
+  .strength__stage::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(47, 43, 38, .6) 0%, rgba(47, 43, 38, var(--lp-shade)) 25%, rgba(47, 43, 38, 0) 48%); pointer-events: none; }
+  .strength__stage .strength__items { position: absolute; z-index: 1; left: 48px; right: 100px; bottom: 48px; padding: 0; }
+  .strength__stage .strength__item { border-top-color: rgba(255, 255, 255, .45); }
+}
+
+/* 06〜11 の地：ぼかした窓辺の1枚を画面に固定して奥に（章の境で光がずれない）。文字は白 */
+.veil { position: relative; clip-path: inset(0); color: var(--color-white); background: var(--color-ink); }
+.veil__bg { position: fixed; inset: 0; z-index: 0; background: linear-gradient(rgba(47, 43, 38, var(--lp-veil)), rgba(47, 43, 38, var(--lp-veil))), url("../img/s12-window-blur.webp") 80% center / cover no-repeat; pointer-events: none; }
+.veil > :not(.veil__bg) { position: relative; z-index: 1; }
+.veil .label, .veil .case__data dt, .veil .case__unit, .veil .case__plans figcaption { color: rgba(255, 255, 255, .8); }
+.veil .case__data { border-top-color: rgba(255, 255, 255, .3); }
+.veil .textlink { color: var(--color-white); }
+.veil .case__plans { padding: 0; }
+.veil .case__plans::before, .veil .case__plans::after { display: none; }
+.lp .case__plans img { height: 96px; object-fit: contain; } /* 3軒の図の高さをそろえ、家の名前の高さのずれを直す */
+/* B：明るいぼかし＋墨の文字（06 の A/B） */
+.veil--light { color: var(--color-ink); }
+.veil--light .veil__bg { background: linear-gradient(rgba(255, 255, 255, .58), rgba(255, 255, 255, .58)), url("../img/s12-window-blur.webp") 80% center / cover no-repeat; }
+.veil--light .label, .veil--light .case__data dt, .veil--light .case__unit { color: var(--color-note); }
+.veil--light .case__data { border-top-color: var(--color-line); }
+.veil--light .textlink { color: var(--color-ink); }
+.veil--light .case__plans { padding: 10px 8px 6px; background: rgba(46, 43, 38, .55); }
+.veil--light .case__plans figcaption { color: rgba(255, 255, 255, .9); }
+
+@media (max-width: 767px) {
+  .intro--photo { height: 640px; }
+  .intro--photo .intro__photo img { object-position: 20% center; }
+  .intro--photo .intro__body { left: 20px; right: 20px; top: 56px; width: auto; }
+  .intro--photo .heading { font-size: 21px; letter-spacing: .12em; }
+  .intro--photo .intro__text { font-size: 14px; }
+  .intro--photo .intro__strong { font-size: 15px; }
+  .veil__bg { background-position: 30% center; }
+}
+html:not(.js-motion) .veil__bg { position: absolute; } /* 自動の撮影・動きを減らす設定では、章の中に敷く（撮影で画面の外が墨にならないように） */
+
+/* ===== 16回目：06 の A（暗めのぼかし＋白の文字）を 07・08・10・11 にも（2026-11-11 レビュー15回目「採用した A のような背景に」） =====
+   章の中の色は、墨・線・注の3つの値を veil の中で白に言いかえて一度に変える。ボタンだけは白の四角に墨の文字 */
+.lp section.veil { background: #2E2B26; --color-ink: #FFFFFF; --color-line: rgba(255, 255, 255, .3); --color-note: rgba(255, 255, 255, .78); }
+.veil .button { background: #FFFFFF; color: #2E2B26; }
+.veil .lp-arrow { color: #2E2B26; }
+/* 07：間取りの箱をやめて地の上に直に（06 と同じ） */
+.veil .pplan__fig { padding: 0; }
+.veil .pplan__fig::before, .veil .pplan__fig::after { display: none; }
+/* 10：事例集の白い箱と黒い枠をやめて、白い線2本の行に。本の絵は線で描いた1冊に */
+.veil .catalog { background: transparent; border: 0; border-top: 1px solid rgba(255, 255, 255, .6); border-bottom: 1px solid rgba(255, 255, 255, .6); padding: var(--space-4) 0; }
+.veil .catalog__book { background: rgba(255, 255, 255, .08); }
+.lp .veil .qa__item:hover { background: rgba(255, 255, 255, .08); }

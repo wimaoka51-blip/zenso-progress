@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>事例集の請求｜Madobe</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500&family=Zen+Old+Mincho:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="form-page">
+<header class="form-header">
+  <a class="form-header__back" href="index.html">← ページに戻る</a>
+  <a class="form-header__logo" href="index.html"><span class="logo__name">Madobe</span><span class="logo__place">HIRAO, FUKUOKA</span></a>
+</header>
+<main class="form-main">
+  <h1 class="heading form-main__title">事例集を請求する（無料）</h1>
+  <p class="form-main__lead">12軒の写真・間取り・工事費を1冊にまとめました。<span class="phrase">郵送か PDF でお送りします。</span></p>
+  <form class="form" action="#" method="post">
+    <fieldset class="form__group"><legend class="form__label">受け取り方</legend>
+      <label class="form__choice"><input type="radio" name="way" value="pdf" checked> PDF（メールですぐに）</label>
+      <label class="form__choice"><input type="radio" name="way" value="post"> 郵送（3〜5日）</label>
+    </fieldset>
+    <div class="form__row"><label class="form__label" for="name">お名前</label><input class="form__input" id="name" name="name" type="text" autocomplete="name" required></div>
+    <div class="form__row"><label class="form__label" for="email">メールアドレス</label><input class="form__input" id="email" name="email" type="email" autocomplete="email" required></div>
+    <div class="form__row"><label class="form__label" for="address">住所（郵送のときだけ）</label><input class="form__input" id="address" name="address" type="text" autocomplete="street-address"></div>
+    <button class="button form__submit" type="submit">事例集を請求する</button>
+    <p class="form__fine">※架空の作品のため、送信はされません。営業の電話はしません。</p>
+  </form>
+  <p class="form-done" role="status" hidden>架空の作品のため、送信はされません。ご覧いただきありがとうございます。</p>
+</main>
+<footer class="footer"><p class="footer__note">© Madobe（架空の作品です）</p></footer>
+<script>
+  // HP から来た時は、戻る先を HP に（2026-11-11 AI レビュー：HP の「事例集を請求する」から LP のトップへ落ちていた）
+  if (/[?&]from=hp\b/.test(location.search)) {
+    var hpBack = document.referrer && /\/hp\/site\//.test(document.referrer) ? document.referrer : '../hp/site/index.html';
+    document.querySelectorAll('.form-header__back, .form-header__logo').forEach(function (a) { a.href = hpBack; });
+  }
+  document.querySelector('.form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.querySelector('.form-done').hidden = false;
+    document.querySelector('.form-done').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+</script>
+</body>
+</html>

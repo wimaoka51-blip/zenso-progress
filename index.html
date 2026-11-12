@@ -105,6 +105,24 @@ th,td{text-align:left;padding:13px 16px 13px 0;border-bottom:1px solid var(--lin
 th{font-size:12px;color:var(--sub);font-weight:500;border-bottom-color:var(--ink)}
 td:first-child{font-weight:500}
 
+/* 作品：写真1枚と、見る入口 */
+.works{display:grid;gap:28px}
+.work{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;align-items:center}
+.work img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--face)}
+.work h3{margin:0 0 6px;font-size:20px;font-weight:700;font-family:var(--num);letter-spacing:.01em}
+.work p{margin:0 0 18px;font-size:13.5px;color:var(--sub)}
+.links{display:grid;gap:0;border-top:1px solid var(--line)}
+.links a{display:flex;justify-content:space-between;align-items:center;padding:13px 2px;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none;font-weight:500;font-size:14.5px}
+.links a::after{content:"→";font-family:var(--num);color:var(--accent)}
+.links a:hover{color:var(--accent)}
+.links a:focus-visible,.fb a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* 感想 */
+.fb{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;justify-content:space-between;padding:22px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+.fb p{margin:0;font-size:14px;max-width:34em}
+.fb a{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--on-ink);text-decoration:none;font-weight:500;font-size:14px;padding:13px 22px}
+.fb a::after{content:"→";font-family:var(--num)}
+
 /* 動き */
 .log{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 .log li{display:grid;grid-template-columns:52px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
@@ -117,6 +135,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-s
   .overview{grid-template-columns:1fr;justify-items:start;gap:22px}
   h1{font-size:23px}
   .ask{padding:18px 18px}
+  .work{grid-template-columns:1fr;gap:16px}
 }
 @media (prefers-reduced-motion:no-preference){.bar i{transition:width .6s ease}}
 </style>
@@ -133,7 +152,8 @@ const md = iso => { const d = jst(iso); return `${d.getUTCMonth()+1}/${d.getUTCD
 const WD = "日月火水木金土";
 const ORDER = ["見てほしい","進行中","未着手","完了"];
 
-function render(d) {
+function render(d, site) {
+  site = site || {works: [], feedback: ""};
   const ms = d.milestones.filter(m => m.due).sort((a,b) => a.due.localeCompare(b.due));
   const today = jst(new Date().toISOString()); today.setUTCHours(0,0,0,0);
   const cur = ms.find(m => jst(m.due) >= today && m.open > 0) || ms[ms.length-1];
@@ -184,6 +204,20 @@ function render(d) {
     <div class="ask"><ol>${asks.map(a => `<li><span>${esc(a)}</span></li>`).join("")}</ol></div>
   </section>` : ""}
 
+  ${site.works.length ? `<section>
+    <h2>できた作品</h2>
+    <p class="lead">実際のページを開いて見られます。</p>
+    <div class="works">${site.works.map(w => `<article class="work">
+      ${w.image ? `<img src="${esc(w.image)}" alt="${esc(w.title)} のページの写真" loading="lazy">` : ""}
+      <div><h3>${esc(w.title)}</h3><p>${esc(w.desc)}</p>
+      <div class="links">${w.links.map(l => `<a href="${esc(l.href)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join("")}</div></div>
+    </article>`).join("")}</div>
+  </section>` : ""}
+
+  ${site.feedback ? `<section aria-label="感想">
+    <div class="fb"><p>気づいたこと・感想があれば、ひと言いただけると助かります。名前は書かなくても送れます。</p><a href="${esc(site.feedback)}" target="_blank" rel="noopener">感想を送る</a></div>
+  </section>` : ""}
+
   <section>
     <h2>残っている課題 <small><span class="num">${openTasks.length}</span> 件</small></h2>
     <p class="lead">％は「済んだ手順 ÷ 全部の手順」です。</p>
@@ -216,9 +250,9 @@ function render(d) {
   <footer><span>作業の区切りごとに自動で更新しています。</span></footer>`;
 }
 
-fetch("data.json", {cache: "no-store"})
-  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-  .then(render)
+const getJSON = u => fetch(u, {cache: "no-store"}).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+Promise.all([getJSON("data.json"), getJSON("site.json").catch(() => null)])
+  .then(([d, site]) => render(d, site))
   .catch(() => { document.getElementById("app").innerHTML = `<p class="empty">進み具合を読み込めませんでした。少し待ってから開き直してください。</p>`; });
 </script>
 </body>
