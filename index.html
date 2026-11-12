@@ -47,6 +47,10 @@ h1{font-size:clamp(24px,4vw,32px);line-height:1.4;margin:14px 0 0;font-weight:70
 .latest{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:baseline;margin-top:18px;font-size:15.5px}
 .latest b{font-size:13px;font-weight:700;color:var(--on-ink);background:var(--ink);padding:1px 8px;letter-spacing:.04em}
 .latest span{min-width:0}
+.latest.now b{background:var(--accent)}
+.latest.now strong{font-weight:700}
+.task.is-now{border-top:3px solid var(--accent);margin-top:-1px;padding-top:18px}
+.now-tag{display:inline-block;font-size:12.5px;font-weight:700;color:var(--on-ink);background:var(--accent);padding:1px 8px;margin-right:10px;vertical-align:2px;letter-spacing:.04em}
 .latest .when{color:var(--sub);font-size:14px;margin-right:8px}
 
 /* 見出し：r の肩の四分円 */
@@ -180,6 +184,7 @@ function render(d, site) {
   const due = jst(cur.due);
   const days = Math.round((due - today) / 864e5);
   const latest = d.log[0];
+  const nowTasks = openTasks.filter(t => t.status === "進行中");
   const st = (s, wait) => `<span class="st"><span class="mk mk-${wait ? "待ち" : s}"></span>${wait ? "待ち" : s}</span>`;
   const cm = site.comment && site.comment.action;
 
@@ -196,6 +201,7 @@ function render(d, site) {
       <div class="stat"><dt>次の面談</dt><dd>${due.getUTCMonth()+1}/${due.getUTCDate()}<small>（${WD[due.getUTCDay()]}）</small></dd>
         <div class="note">${days >= 0 ? `あと <span class="num">${days}</span> 日` : "済み"}</div></div>
     </dl>
+    ${nowTasks.length ? `<p class="latest now"><b>いま</b><span><strong>${nowTasks.map(t => esc(t.title)).join("、")}</strong> に取り掛かっています</span></p>` : ""}
     ${latest ? `<p class="latest"><b>最新</b><span><span class="when num">${md(latest.at)}</span>${esc(latest.card)}${latest.text && latest.text !== "完了" ? `：${esc(latest.text)}` : "（完了）"}</span></p>` : ""}
   </header>
 
@@ -226,8 +232,8 @@ function render(d, site) {
   <section>
     <h2>残っている課題 <small><span class="num">${openTasks.length}</span> 件・％は済んだ手順の割合</small></h2>
     ${openTasks.length ? `<div class="tasks">${openTasks.map(t => { const p = t.steps.length ? pct(t.steps) : 0; const wait = t.labels.includes("待ち"); return `
-      <article class="task">
-        <div class="task-top"><div class="task-name">${esc(t.title)}</div><div class="task-pct num">${p}<small>%</small></div></div>
+      <article class="task${t.status === "進行中" ? " is-now" : ""}">
+        <div class="task-top"><div class="task-name">${t.status === "進行中" ? `<span class="now-tag">いま取り掛かり中</span>` : ""}${esc(t.title)}</div><div class="task-pct num">${p}<small>%</small></div></div>
         ${t.desc ? `<p class="task-desc">${esc(t.desc)}</p>` : ""}
         <div class="bar"><i style="width:${p}%"></i></div>
         <div class="task-foot">${st(t.status, wait && t.status === "未着手")}${t.steps.length ? `<span>手順 <span class="num">${t.steps.filter(x=>x[1]).length}/${t.steps.length}</span></span>` : ""}</div>

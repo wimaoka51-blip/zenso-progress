@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-12T09:01+09:00",
+ "updated": "2026-11-12T09:25+09:00",
  "milestones": [
   {
    "title": "11/06 面談の指摘",
@@ -10,13 +10,85 @@
   },
   {
    "title": "11/24 面談",
-   "description": "課題：1つの作品から LP 版と HP 版（題材 Madobe）",
+   "description": "課題：1つの題材から LP 版と HP 版を作り分ける",
    "due": "2026-11-24T00:00:00Z",
    "open": 2,
-   "closed": 3
+   "closed": 4
   }
  ],
  "cards": [
+  {
+   "number": 14,
+   "title": "王道の LP と同じ題材の HP 版",
+   "labels": [
+    "課題"
+   ],
+   "milestone": "11/24 面談",
+   "status": "未着手",
+   "steps": [
+    [
+     "ページ構成",
+     false
+    ],
+    [
+     "トップ",
+     false
+    ],
+    [
+     "下のページ",
+     false
+    ],
+    [
+     "全ページ ◎",
+     false
+    ]
+   ],
+   "bullets": [],
+   "desc": "王道の LP 版と同じ題材・同じトンマナで作る HP",
+   "closedAt": null
+  },
+  {
+   "number": 13,
+   "title": "王道の LP 版（型 A）",
+   "labels": [
+    "課題"
+   ],
+   "milestone": "11/24 面談",
+   "status": "進行中",
+   "steps": [
+    [
+     "題材を決める",
+     false
+    ],
+    [
+     "理想を決める",
+     false
+    ],
+    [
+     "見本を選んで実測",
+     false
+    ],
+    [
+     "構成とコピー",
+     false
+    ],
+    [
+     "写真をそろえる",
+     false
+    ],
+    [
+     "全章を実装",
+     false
+    ],
+    [
+     "全章 ◎",
+     false
+    ]
+   ],
+   "bullets": [],
+   "desc": "Madobe（静かな LP）に続いて、課題のもう1つの形。価格や特典で比べて選ぶ人に、その場で決めてもらう LP。題材は決まり次第ここに書きます",
+   "closedAt": null
+  },
   {
    "number": 12,
    "title": "次の面談で見てほしいこと",
@@ -34,35 +106,13 @@
    "closedAt": null
   },
   {
-   "number": 11,
-   "title": "進み具合の共有の仕組み",
-   "labels": [
-    "課題"
-   ],
-   "milestone": "11/24 面談",
-   "status": "進行中",
-   "steps": [
-    [
-     "何を見せるか決める（課題・指摘・％）",
-     true
-    ],
-    [
-     "面談で見てもらい、足りない物を聞く",
-     false
-    ]
-   ],
-   "bullets": [],
-   "desc": "",
-   "closedAt": null
-  },
-  {
    "number": 10,
    "title": "Madobe の公開",
    "labels": [
     "課題"
    ],
    "milestone": "11/24 面談",
-   "status": "進行中",
+   "status": "完了",
    "steps": [
     [
      "公開すると決める",
@@ -75,15 +125,11 @@
     [
      "進み具合のページから見られるようにする",
      true
-    ],
-    [
-     "感想を送れる欄を用意する",
-     false
     ]
    ],
    "bullets": [],
    "desc": "同じ題材の LP 版と HP 版を、誰でも見られる形で公開する（進み具合のページの中）",
-   "closedAt": null
+   "closedAt": "2026-11-12T00:24:18Z"
   },
   {
    "number": 8,
@@ -117,7 +163,7 @@
   },
   {
    "number": 7,
-   "title": "Madobe LP 版",
+   "title": "Madobe 静かな LP 版（型 B）",
    "labels": [
     "課題"
    ],
@@ -284,6 +330,16 @@
  ],
  "log": [
   {
+   "at": "2026-11-12T00:24:48Z",
+   "card": "王道の LP 版（型 A）",
+   "text": "取り掛かりました。題材を決めるところからです。"
+  },
+  {
+   "at": "2026-11-12T00:24:18Z",
+   "card": "Madobe の公開",
+   "text": "完了"
+  },
+  {
    "at": "2026-11-11T23:59:56Z",
    "card": "Madobe の公開",
    "text": "LP 版と HP 版を公開し、進み具合のページの「できた作品」から開けるようにしました。"
@@ -295,7 +351,7 @@
   },
   {
    "at": "2026-11-11T11:05:57Z",
-   "card": "Madobe LP 版",
+   "card": "Madobe 静かな LP 版（型 B）",
    "text": "完了"
   },
   {

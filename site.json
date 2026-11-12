@@ -2,11 +2,11 @@
   "works": [
     {
       "title": "Madobe",
-      "desc": "架空のリノベーション会社。同じ題材で LP 版と HP 版を作り分けた作品",
+      "desc": "架空のリノベーション会社。同じ題材で、静かな LP 版（型 B）と HP 版を作り分けた作品",
       "image": "works/madobe/site/img/fv-dining.webp",
       "links": [
         {
-          "label": "LP 版を見る",
+          "label": "静かな LP 版を見る",
           "href": "works/madobe/site/"
         },
         {
