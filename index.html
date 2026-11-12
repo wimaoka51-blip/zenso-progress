@@ -89,6 +89,35 @@ h2 small{font-size:14px;color:var(--sub);font-weight:500}
 .cm .msg.err{color:var(--err)}
 .cm .msg.ok{color:var(--ink);font-weight:500}
 
+/* 課題の受け取り方 */
+.brief{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:28px;border-top:1px solid var(--ink);padding-top:20px}
+.brief dt{font-size:14px;font-weight:700;color:var(--sub);margin-bottom:6px}
+.brief dd{margin:0;font-size:16px}
+.brief ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.brief li{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:16px}
+.brief li::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--accent);margin-top:.62em}
+
+/* そろえた物・変えた物 */
+.sd{margin-top:36px;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr);gap:28px}
+.sd>*,.brief>*,.work>*{min-width:0}
+.sd h4{margin:0 0 10px;font-size:15px;font-weight:700;padding-bottom:8px;border-bottom:1px solid var(--ink)}
+.sd ul{list-style:none;margin:0;padding:0}
+.sd ul li{padding:10px 0;border-bottom:1px solid var(--line);font-size:15px;display:grid;grid-template-columns:20px 1fr;align-items:baseline}
+.sd ul li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ink)}
+.sd table{min-width:440px;font-size:14.5px}
+.sd th,.sd td{padding:10px 14px 10px 0}
+.sd td:first-child{font-weight:700;white-space:nowrap}
+.sd td:last-child{color:var(--ink)}
+
+/* 予定 */
+.plan{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.plan li{display:grid;grid-template-columns:96px 1fr auto;gap:14px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line);font-size:16px}
+.plan .d{font-family:var(--num);font-weight:600;font-size:17px}
+.plan .done{color:var(--sub)}
+.plan .done span:nth-child(2){text-decoration:line-through;text-decoration-color:var(--faint)}
+.plan .tag{font-size:13px;color:var(--sub)}
+.plan li.meet .d,.plan li.meet span:nth-child(2){color:var(--accent);font-weight:700}
+
 /* 状態の印（ロゴの形） */
 .st{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--sub);font-weight:500;white-space:nowrap}
 .mk{width:10px;height:10px;flex:none;display:inline-block}
@@ -149,6 +178,9 @@ footer{font-size:13.5px;color:var(--sub);border-top:1px solid var(--line);paddin
   .ask{padding:20px}
   .ask li{font-size:16px}
   .cm .row{grid-template-columns:1fr}
+  .brief,.sd{grid-template-columns:1fr;gap:20px}
+  .plan li{grid-template-columns:72px 1fr}
+  .plan .tag{grid-column:2}
   h2{font-size:20px}
 }
 @media (prefers-reduced-motion:no-preference){.bar i,.bar-all i{transition:width .6s ease}}
@@ -205,6 +237,14 @@ function render(d, site) {
     ${latest ? `<p class="latest"><b>最新</b><span><span class="when num">${md(latest.at)}</span>${esc(latest.card)}${latest.text && latest.text !== "完了" ? `：${esc(latest.text)}` : "（完了）"}</span></p>` : ""}
   </header>
 
+  ${site.brief ? `<section>
+    <h2>課題の受け取り方</h2>
+    <dl class="brief">
+      <div><dt>いただいた課題</dt><dd>${esc(site.brief.task)}</dd></div>
+      <div><dt>こう受け取って進めています</dt><dd><ol>${site.brief.reading.map(r => `<li><span>${esc(r)}</span></li>`).join("")}</ol></dd></div>
+    </dl>
+  </section>` : ""}
+
   ${asks.length ? `<section>
     <h2>次の面談で見てほしいこと</h2>
     <div class="ask"><ol>${asks.map(a => `<li><span>${esc(a)}</span></li>`).join("")}</ol></div>
@@ -226,7 +266,19 @@ function render(d, site) {
           <p class="msg" role="status" aria-live="polite"></p>
         </form>` : ""}
       </div>
-    </article>`).join("")}
+    </article>
+    ${w.same && w.diff ? `<div class="sd">
+      <div><h4>LP と HP でそろえた物</h4><ul>${w.same.map(s => `<li><span>${esc(s)}</span></li>`).join("")}</ul></div>
+      <div><h4>変えた物（役割だけ）</h4><div class="table-box"><table>
+        <thead><tr><th></th><th>静かな LP 版</th><th>HP 版</th></tr></thead>
+        <tbody>${w.diff.map(r => `<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join("")}</tbody>
+      </table></div></div>
+    </div>` : ""}`).join("")}
+  </section>` : ""}
+
+  ${site.plan && site.plan.length ? `<section>
+    <h2>次の面談までの予定</h2>
+    <ul class="plan">${site.plan.map(p => `<li class="${p.done ? "done" : ""}${p.meet ? " meet" : ""}"><span class="d">${esc(p.date)}</span><span>${esc(p.text)}</span>${p.done ? `<span class="tag">済み</span>` : ""}</li>`).join("")}</ul>
   </section>` : ""}
 
   <section>
