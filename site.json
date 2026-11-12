@@ -1,13 +1,18 @@
 {
-  "feedback": "",
   "works": [
     {
       "title": "Madobe",
       "desc": "架空のリノベーション会社。同じ題材で LP 版と HP 版を作り分けた作品",
       "image": "works/madobe/site/img/fv-dining.webp",
       "links": [
-        {"label": "LP 版を見る", "href": "works/madobe/site/"},
-        {"label": "HP 版を見る", "href": "works/madobe/hp/site/"}
+        {
+          "label": "LP 版を見る",
+          "href": "works/madobe/site/"
+        },
+        {
+          "label": "HP 版を見る",
+          "href": "works/madobe/hp/site/"
+        }
       ]
     }
   ]

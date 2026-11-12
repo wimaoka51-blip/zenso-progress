@@ -9,151 +9,160 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Poppins:wght@500;600&display=swap">
 <style>
-/* rokuma（2026-11-11 の決まり）：白い地・墨・細い横線。青は主役の数字と「見てほしい」だけ。ロゴの形は状態の印にだけ使う
-   四分円（r の肩）＝章の印／丸（o）＝完了・番号／半円（k）＝進行中／点（k の点）＝見てほしい */
+/* rokuma の決まり（白い地・墨・細い横線・青は少しだけ）のまま、忙しい人が上の1画面で分かる組み方に。
+   上から：3つの数字 → 最新の動き → 見てほしいこと → 作品（＋コメント）→ 残り → 完了 → 指摘 → 動き */
 :root{
-  --bg:#ffffff; --ink:#111214; --sub:#5e6166; --faint:#8a8d91; --line:#e4e4e0; --face:#f3f3f1;
-  --accent:#2850b8; --decide:#9a6b1f; --on-ink:#ffffff;
+  --bg:#ffffff; --ink:#111214; --sub:#4f5257; --faint:#6f7276; --line:#e4e4e0; --face:#f3f3f1;
+  --accent:#2850b8; --decide:#9a6b1f; --on-ink:#ffffff; --err:#a3412f;
   --jp:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif;
   --num:Poppins,"Noto Sans JP",Arial,sans-serif;
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){:root{
-  --bg:#141518; --ink:#ececea; --sub:#b3b5b8; --faint:#9a9da1; --line:#2e3035; --face:#1c1d21;
-  --accent:#8fa8e8; --decide:#e3b56a; --on-ink:#141518; color-scheme:dark}}
+  --bg:#141518; --ink:#ececea; --sub:#c2c4c7; --faint:#a3a6aa; --line:#2e3035; --face:#1d1e22;
+  --accent:#9db3ee; --decide:#e3b56a; --on-ink:#141518; --err:#e98b78; color-scheme:dark}}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--jp);font-size:15px;line-height:1.75;-webkit-text-size-adjust:100%}
-.wrap{max-width:820px;margin:0 auto;padding-block:36px 72px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));display:grid;grid-template-columns:minmax(0,1fr);gap:56px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--jp);font-size:16px;line-height:1.75;-webkit-text-size-adjust:100%}
+.wrap{max-width:900px;margin:0 auto;padding-block:32px 80px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));display:grid;grid-template-columns:minmax(0,1fr);gap:64px}
 .wrap>*{min-width:0}
 .num{font-family:var(--num);font-weight:500;font-variant-numeric:tabular-nums}
 
 /* 頭 */
-.brand{display:flex;align-items:center;gap:12px;color:var(--sub);font-size:13px}
-.brand b{font-family:var(--num);font-weight:600;font-size:14px;letter-spacing:.06em;color:var(--ink)}
+.brand{display:flex;align-items:center;gap:12px;color:var(--sub);font-size:14px}
+.brand b{font-family:var(--num);font-weight:600;font-size:15px;letter-spacing:.08em;color:var(--ink)}
 .brand span{padding-left:12px;border-left:1px solid var(--line)}
-h1{font-size:28px;line-height:1.4;margin:20px 0 10px;font-weight:700;text-wrap:balance}
-.meta{display:flex;flex-wrap:wrap;gap:4px 24px;color:var(--sub);font-size:13.5px}
-.meta b{color:var(--ink);font-weight:500}
+h1{font-size:clamp(24px,4vw,32px);line-height:1.4;margin:14px 0 0;font-weight:700;text-wrap:balance}
 
-/* 全体：面は使わず、上下の線だけ */
-.overview{display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center;padding-block:28px;border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
-.ring{position:relative;width:128px;height:128px}
-.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
-.ring .pct{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
-.ring .pct strong{font-family:var(--num);font-size:34px;font-weight:600;line-height:1;color:var(--accent);letter-spacing:-.01em}
-.ring .pct strong small{font-size:15px;margin-left:1px}
-.ring .pct span{font-size:11.5px;color:var(--sub);margin-top:6px}
-.ov-body{display:grid;gap:14px}
-.ov-body p{margin:0}
-.counts{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:13px;color:var(--sub)}
-.counts .num{color:var(--ink)}
+/* 3つの数字：ここだけ見れば分かる */
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:2px solid var(--ink);border-bottom:1px solid var(--line);margin-top:28px}
+.stat{padding:18px 20px 20px;border-left:1px solid var(--line);display:grid;gap:2px;align-content:start}
+.stat:first-child{border-left:0;padding-left:0}
+.stat dt{font-size:14px;color:var(--sub);font-weight:500}
+.stat dd{margin:0;font-family:var(--num);font-weight:600;font-size:clamp(34px,6vw,48px);line-height:1.15;letter-spacing:-.01em}
+.stat dd small{font-size:.42em;font-weight:500;margin-left:3px;letter-spacing:0}
+.stat dd.key{color:var(--accent)}
+.stat .note{font-size:13.5px;color:var(--sub)}
+.bar-all{height:6px;background:var(--line);margin-top:10px}
+.bar-all i{display:block;height:100%;background:var(--accent)}
+.latest{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:baseline;margin-top:18px;font-size:15.5px}
+.latest b{font-size:13px;font-weight:700;color:var(--on-ink);background:var(--ink);padding:1px 8px;letter-spacing:.04em}
+.latest span{min-width:0}
+.latest .when{color:var(--sub);font-size:14px;margin-right:8px}
 
-/* 状態の印（ロゴの形）。ピルは使わない */
-.st{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--sub);white-space:nowrap}
-.mk{width:9px;height:9px;flex:none;display:inline-block}
+/* 見出し：r の肩の四分円 */
+h2{font-size:22px;line-height:1.4;margin:0 0 18px;font-weight:700;display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px}
+h2::before{content:"";width:14px;height:14px;border-top-left-radius:14px;background:var(--ink);flex:none}
+h2 small{font-size:14px;color:var(--sub);font-weight:500}
+
+/* 見てほしいこと */
+.ask{background:var(--face);padding:24px 28px;counter-reset:a}
+.ask ol{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ask li{display:grid;grid-template-columns:28px 1fr;gap:14px;align-items:start;font-size:17px;font-weight:500}
+.ask li::before{counter-increment:a;content:counter(a);width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--on-ink);font-family:var(--num);font-size:13px;font-weight:600;display:grid;place-content:center;margin-top:1px}
+
+/* 作品 */
+.work{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:32px;align-items:start}
+.work img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--face)}
+.work h3{margin:0 0 6px;font-size:26px;font-weight:600;font-family:var(--num);line-height:1.3}
+.work .desc{margin:0 0 18px;font-size:15px;color:var(--sub)}
+.links{display:grid;border-top:1px solid var(--ink)}
+.links a{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:56px;padding:8px 4px;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none;font-weight:700;font-size:17px}
+.links a::after{content:"→";font-family:var(--num);font-weight:500;color:var(--accent);font-size:18px}
+.links a:hover{color:var(--accent)}
+
+/* コメント */
+.cm{margin-top:24px;display:grid;gap:10px}
+.cm label{font-size:15px;font-weight:700}
+.cm .hint{font-size:13.5px;color:var(--sub);margin:-6px 0 0}
+.cm textarea,.cm input{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--faint);border-radius:0;padding:12px 14px}
+.cm textarea{min-height:112px;resize:vertical;line-height:1.7}
+.cm textarea:focus,.cm input:focus{outline:2px solid var(--accent);outline-offset:0;border-color:var(--accent)}
+.cm .row{display:grid;grid-template-columns:1fr auto;gap:10px}
+.cm button{font:inherit;font-weight:700;font-size:15px;background:var(--ink);color:var(--on-ink);border:0;padding:0 24px;min-height:50px;cursor:pointer}
+.cm button:disabled{opacity:.5;cursor:default}
+.cm button:focus-visible,.links a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.cm .msg{font-size:14px;margin:0;min-height:1.5em}
+.cm .msg.err{color:var(--err)}
+.cm .msg.ok{color:var(--ink);font-weight:500}
+
+/* 状態の印（ロゴの形） */
+.st{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--sub);font-weight:500;white-space:nowrap}
+.mk{width:10px;height:10px;flex:none;display:inline-block}
 .mk-完了{border-radius:50%;background:var(--ink)}
-.mk-進行中{border-radius:0 0 9px 9px;height:5px;background:var(--ink);margin-top:4px}
-.mk-見てほしい{border-radius:50%;background:var(--accent);width:7px;height:7px}
-.mk-未着手{border-radius:50%;border:1.5px solid var(--faint)}
-.mk-待ち{border-radius:50%;border:1.5px solid var(--decide)}
+.mk-進行中{border-radius:0 0 10px 10px;height:5px;background:var(--ink);margin-top:5px}
+.mk-見てほしい{border-radius:50%;background:var(--accent)}
+.mk-未着手{border-radius:50%;border:2px solid var(--faint)}
+.mk-待ち{border-radius:50%;border:2px solid var(--decide)}
 
-/* 章の見出し：r の肩の四分円 */
-h2{font-size:18px;margin:0 0 6px;font-weight:700;display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px}
-h2::before{content:"";width:12px;height:12px;border-top-left-radius:12px;background:var(--ink);flex:none}
-h2 small{font-size:12.5px;color:var(--sub);font-weight:400}
-.lead{margin:0 0 18px 24px;font-size:12.5px;color:var(--sub)}
-
-/* 見てほしいこと：ページで1つだけの面。番号は墨の丸に白い数字 */
-.ask{background:var(--face);padding:22px 26px}
-.ask ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
-.ask li{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start}
-.ask li::before{counter-increment:a;content:counter(a);width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--on-ink);font-family:var(--num);font-size:12px;font-weight:600;display:grid;place-content:center;margin-top:2px}
-.ask ol{counter-reset:a}
-
-/* 課題：箱にしない。横線で区切る */
-.tasks{border-top:1px solid var(--line)}
+/* 残っている課題 */
+.tasks{border-top:1px solid var(--ink)}
 .task{padding:20px 0;border-bottom:1px solid var(--line);display:grid;gap:10px}
 .task-top{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline}
-.task-name{font-weight:700;font-size:16px}
-.task-pct{font-size:20px;font-weight:600}
-.task-pct small{font-size:12px;margin-left:1px}
-.task-desc{font-size:13px;color:var(--sub);margin:-4px 0 0}
-.bar{height:3px;background:var(--line)}
+.task-name{font-weight:700;font-size:18px}
+.task-pct{font-size:26px;font-weight:600;line-height:1}
+.task-pct small{font-size:13px;margin-left:2px}
+.task-desc{font-size:14.5px;color:var(--sub);margin:-2px 0 0}
+.bar{height:6px;background:var(--line)}
 .bar i{display:block;height:100%;background:var(--ink)}
-.s-見てほしい .bar i{background:var(--accent)}
-.task-foot{display:flex;flex-wrap:wrap;gap:6px 20px;align-items:center;font-size:12.5px;color:var(--sub)}
-details summary{cursor:pointer;color:var(--sub);font-size:12.5px;list-style:none;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:4px}
+.task-foot{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;font-size:14px;color:var(--sub)}
+details summary{cursor:pointer;color:var(--ink);font-size:14px;font-weight:500;list-style:none;text-decoration:underline;text-decoration-color:var(--faint);text-underline-offset:4px;width:fit-content}
 details summary::-webkit-details-marker{display:none}
-details[open] summary{color:var(--ink)}
-summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.steps{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:3px;font-size:13.5px}
-.steps li{display:grid;grid-template-columns:18px 1fr;align-items:center}
+.steps{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:4px;font-size:15px}
+.steps li{display:grid;grid-template-columns:20px 1fr;align-items:center}
 .steps li.off{color:var(--sub)}
-.steps li::before{content:"";width:7px;height:7px;border-radius:50%;border:1.5px solid var(--faint)}
+.steps li::before{content:"";width:8px;height:8px;border-radius:50%;border:2px solid var(--faint)}
 .steps li.on::before{background:var(--ink);border-color:var(--ink)}
 
-.sub-h{font-size:13px;font-weight:500;color:var(--sub);margin:28px 0 0}
+.sub-h{font-size:15px;font-weight:700;margin:32px 0 0;color:var(--sub)}
 .done-list{list-style:none;margin:8px 0 0;padding:0;border-top:1px solid var(--line)}
-.done-list li{display:grid;grid-template-columns:18px 1fr auto;align-items:center;gap:6px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
-.done-list li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ink)}
-.done-list .num{color:var(--faint);font-size:12.5px}
+.done-list li{display:grid;grid-template-columns:20px 1fr auto;align-items:center;gap:6px;padding:12px 0;border-bottom:1px solid var(--line);font-size:16px}
+.done-list li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ink)}
+.done-list .num{color:var(--sub);font-size:14px}
 
-/* 表：横線だけ */
+/* 表 */
 .table-box{overflow-x:auto}
-table{border-collapse:collapse;width:100%;min-width:500px;font-size:13.5px}
-th,td{text-align:left;padding:13px 16px 13px 0;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:12px;color:var(--sub);font-weight:500;border-bottom-color:var(--ink)}
-td:first-child{font-weight:500}
-
-/* 作品：写真1枚と、見る入口 */
-.works{display:grid;gap:28px}
-.work{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;align-items:center}
-.work img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--face)}
-.work h3{margin:0 0 6px;font-size:20px;font-weight:700;font-family:var(--num);letter-spacing:.01em}
-.work p{margin:0 0 18px;font-size:13.5px;color:var(--sub)}
-.links{display:grid;gap:0;border-top:1px solid var(--line)}
-.links a{display:flex;justify-content:space-between;align-items:center;padding:13px 2px;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none;font-weight:500;font-size:14.5px}
-.links a::after{content:"→";font-family:var(--num);color:var(--accent)}
-.links a:hover{color:var(--accent)}
-.links a:focus-visible,.fb a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-
-/* 感想 */
-.fb{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;justify-content:space-between;padding:22px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
-.fb p{margin:0;font-size:14px;max-width:34em}
-.fb a{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--on-ink);text-decoration:none;font-weight:500;font-size:14px;padding:13px 22px}
-.fb a::after{content:"→";font-family:var(--num)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:15px}
+th,td{text-align:left;padding:14px 18px 14px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13.5px;color:var(--sub);font-weight:500;border-bottom:1px solid var(--ink)}
+td:first-child{font-weight:700}
+td:last-child{color:var(--sub)}
 
 /* 動き */
 .log{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.log li{display:grid;grid-template-columns:52px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
-.log time{color:var(--faint);font-size:12.5px;padding-top:2px}
-.log .card{display:block;font-size:12.5px;color:var(--sub)}
-.empty{color:var(--sub);font-size:13.5px;margin:0}
-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--faint);border-top:1px solid var(--line);padding-top:18px}
+.log li{display:grid;grid-template-columns:56px 1fr;gap:14px;padding:13px 0;border-bottom:1px solid var(--line);font-size:15.5px}
+.log time{color:var(--sub);font-size:14px;padding-top:2px}
+.log .card{display:block;font-size:14px;color:var(--sub)}
+.empty{color:var(--sub);font-size:15px;margin:0}
+footer{font-size:13.5px;color:var(--sub);border-top:1px solid var(--line);padding-top:18px}
 
-@media (max-width:560px){
-  .overview{grid-template-columns:1fr;justify-items:start;gap:22px}
-  h1{font-size:23px}
-  .ask{padding:18px 18px}
-  .work{grid-template-columns:1fr;gap:16px}
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{gap:52px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat:nth-child(3){grid-column:1/-1;border-left:0;padding-left:0;border-top:1px solid var(--line)}
+  .stat:nth-child(2){padding-right:0}
+  .work{grid-template-columns:1fr;gap:18px}
+  .ask{padding:20px}
+  .ask li{font-size:16px}
+  .cm .row{grid-template-columns:1fr}
+  h2{font-size:20px}
 }
-@media (prefers-reduced-motion:no-preference){.bar i{transition:width .6s ease}}
+@media (prefers-reduced-motion:no-preference){.bar i,.bar-all i{transition:width .6s ease}}
 </style>
 </head>
 <body>
-<div class="wrap" id="app">
+<main class="wrap" id="app">
   <p class="empty">読み込んでいます…</p>
-</div>
+</main>
 <script>
 const esc = t => String(t ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const pct = s => s.length ? Math.round(s.filter(x => x[1]).length / s.length * 100) : 0;
 const jst = iso => new Date(new Date(iso).getTime() + 9 * 3600e3);
 const md = iso => { const d = jst(iso); return `${d.getUTCMonth()+1}/${d.getUTCDate()}`; };
 const WD = "日月火水木金土";
-const ORDER = ["見てほしい","進行中","未着手","完了"];
 
 function render(d, site) {
-  site = site || {works: [], feedback: ""};
+  site = site || {works: []};
   const ms = d.milestones.filter(m => m.due).sort((a,b) => a.due.localeCompare(b.due));
   const today = jst(new Date().toISOString()); today.setUTCHours(0,0,0,0);
   const cur = ms.find(m => jst(m.due) >= today && m.open > 0) || ms[ms.length-1];
@@ -170,63 +179,58 @@ function render(d, site) {
   const total = pct(steps);
   const due = jst(cur.due);
   const days = Math.round((due - today) / 864e5);
-  const r = 58, circ = 2 * Math.PI * r;
-  const cnt = {}; tasks.forEach(t => cnt[t.status] = (cnt[t.status]||0) + 1);
+  const latest = d.log[0];
   const st = (s, wait) => `<span class="st"><span class="mk mk-${wait ? "待ち" : s}"></span>${wait ? "待ち" : s}</span>`;
+  const cm = site.comment && site.comment.action;
 
   document.getElementById("app").innerHTML = `
   <header>
     <div class="brand"><b>ZENSO</b><span>課題の進み具合</span></div>
     <h1>${esc(cur.description.replace(/^課題：/, "") || cur.title)}</h1>
-    <div class="meta">
-      <span>次の面談 <b>${due.getUTCMonth()+1}/${due.getUTCDate()}（${WD[due.getUTCDay()]}）</b>${days >= 0 ? `　あと <b class="num">${days}</b> 日` : ""}</span>
-      <span>最終更新 <b class="num">${esc(md(d.updated))} ${esc(d.updated.slice(11,16))}</b></span>
-    </div>
+    <dl class="stats">
+      <div class="stat"><dt>進み具合</dt><dd class="key">${total}<small>%</small></dd>
+        <div class="note">手順 <span class="num">${steps.filter(x=>x[1]).length}/${steps.length}</span> 済み</div>
+        <div class="bar-all"><i style="width:${total}%"></i></div></div>
+      <div class="stat"><dt>残っている課題</dt><dd>${openTasks.length}<small>件</small></dd>
+        <div class="note">完了 <span class="num">${doneTasks.length}</span> 件</div></div>
+      <div class="stat"><dt>次の面談</dt><dd>${due.getUTCMonth()+1}/${due.getUTCDate()}<small>（${WD[due.getUTCDay()]}）</small></dd>
+        <div class="note">${days >= 0 ? `あと <span class="num">${days}</span> 日` : "済み"}</div></div>
+    </dl>
+    ${latest ? `<p class="latest"><b>最新</b><span><span class="when num">${md(latest.at)}</span>${esc(latest.card)}${latest.text && latest.text !== "完了" ? `：${esc(latest.text)}` : "（完了）"}</span></p>` : ""}
   </header>
-
-  <section class="overview" aria-label="全体の進み具合">
-    <div class="ring">
-      <svg viewBox="0 0 132 132" aria-hidden="true">
-        <circle cx="66" cy="66" r="${r}" fill="none" stroke="var(--line)" stroke-width="6"/>
-        <circle cx="66" cy="66" r="${r}" fill="none" stroke="var(--accent)" stroke-width="6" stroke-dasharray="${circ*total/100} ${circ}"/>
-      </svg>
-      <div class="pct"><strong>${total}<small>%</small></strong><span>手順の進み</span></div>
-    </div>
-    <div class="ov-body">
-      <p>課題 <span class="num">${doneTasks.length}</span> / <span class="num">${tasks.length}</span> 件が完了。中の手順は <span class="num">${steps.filter(x=>x[1]).length}</span> / <span class="num">${steps.length}</span> 済みです。</p>
-      <div class="counts">${ORDER.filter(k => cnt[k]).map(k => `<span class="st"><span class="mk mk-${k}"></span>${k} <span class="num">${cnt[k]}</span></span>`).join("")}</div>
-    </div>
-  </section>
 
   ${asks.length ? `<section>
     <h2>次の面談で見てほしいこと</h2>
-    <p class="lead">今岡から、見ていただきたい所です。</p>
     <div class="ask"><ol>${asks.map(a => `<li><span>${esc(a)}</span></li>`).join("")}</ol></div>
   </section>` : ""}
 
   ${site.works.length ? `<section>
     <h2>できた作品</h2>
-    <p class="lead">実際のページを開いて見られます。</p>
-    <div class="works">${site.works.map(w => `<article class="work">
+    ${site.works.map((w, i) => `<article class="work">
       ${w.image ? `<img src="${esc(w.image)}" alt="${esc(w.title)} のページの写真" loading="lazy">` : ""}
-      <div><h3>${esc(w.title)}</h3><p>${esc(w.desc)}</p>
-      <div class="links">${w.links.map(l => `<a href="${esc(l.href)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join("")}</div></div>
-    </article>`).join("")}</div>
-  </section>` : ""}
-
-  ${site.feedback ? `<section aria-label="感想">
-    <div class="fb"><p>気づいたこと・感想があれば、ひと言いただけると助かります。名前は書かなくても送れます。</p><a href="${esc(site.feedback)}" target="_blank" rel="noopener">感想を送る</a></div>
+      <div>
+        <h3>${esc(w.title)}</h3>
+        <p class="desc">${esc(w.desc)}</p>
+        <div class="links">${w.links.map(l => `<a href="${esc(l.href)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join("")}</div>
+        ${cm ? `<form class="cm" data-work="${esc(w.title)}" novalidate>
+          <label for="cm-text-${i}">${esc(w.title)} へのコメント</label>
+          <p class="hint">気づいたこと・感想をひと言どうぞ。今岡にだけ届きます。</p>
+          <textarea id="cm-text-${i}" name="text" placeholder="例：HP 版のトップ、写真の明るさが LP 版とそろっていて良い"></textarea>
+          <div class="row"><input id="cm-name-${i}" name="name" placeholder="お名前（なくても送れます）" aria-label="お名前（任意）"><button type="submit">送る</button></div>
+          <p class="msg" role="status" aria-live="polite"></p>
+        </form>` : ""}
+      </div>
+    </article>`).join("")}
   </section>` : ""}
 
   <section>
-    <h2>残っている課題 <small><span class="num">${openTasks.length}</span> 件</small></h2>
-    <p class="lead">％は「済んだ手順 ÷ 全部の手順」です。</p>
+    <h2>残っている課題 <small><span class="num">${openTasks.length}</span> 件・％は済んだ手順の割合</small></h2>
     ${openTasks.length ? `<div class="tasks">${openTasks.map(t => { const p = t.steps.length ? pct(t.steps) : 0; const wait = t.labels.includes("待ち"); return `
-      <article class="task s-${t.status}">
+      <article class="task">
         <div class="task-top"><div class="task-name">${esc(t.title)}</div><div class="task-pct num">${p}<small>%</small></div></div>
         ${t.desc ? `<p class="task-desc">${esc(t.desc)}</p>` : ""}
         <div class="bar"><i style="width:${p}%"></i></div>
-        <div class="task-foot">${st(t.status, wait && t.status === "未着手")}${t.steps.length ? `<span><span class="num">${t.steps.filter(x=>x[1]).length}/${t.steps.length}</span> 手順</span>` : ""}</div>
+        <div class="task-foot">${st(t.status, wait && t.status === "未着手")}${t.steps.length ? `<span>手順 <span class="num">${t.steps.filter(x=>x[1]).length}/${t.steps.length}</span></span>` : ""}</div>
         ${t.steps.length ? `<details><summary>手順を見る</summary><ul class="steps">${t.steps.map(s => `<li class="${s[1]?"on":"off"}">${esc(s[0])}</li>`).join("")}</ul></details>` : ""}
       </article>`; }).join("")}</div>` : `<p class="empty">残っている課題はありません。</p>`}
     ${doneTasks.length ? `<h3 class="sub-h">完了した課題 <span class="num">${doneTasks.length}</span> 件</h3>
@@ -235,7 +239,6 @@ function render(d, site) {
 
   ${fb.length ? `<section>
     <h2>${esc(fbTitle)} <small><span class="num">${fb.filter(f=>f.status==="完了").length}/${fb.length}</span> 対応済み</small></h2>
-    <p class="lead">前回いただいた指摘と、その対応です。</p>
     <div class="table-box"><table>
       <thead><tr><th>指摘</th><th>状態</th><th>どう直したか</th></tr></thead>
       <tbody>${fb.map(f => `<tr><td>${esc(f.title)}</td><td>${st(f.status)}</td><td>${f.steps.map(s => esc(s[0])).join("<br>")}</td></tr>`).join("")}</tbody>
@@ -244,11 +247,29 @@ function render(d, site) {
 
   <section>
     <h2>最近の動き</h2>
-    ${d.log.length ? `<ul class="log">${d.log.slice(0,12).map(l => `<li><time class="num">${md(l.at)}</time><span><span class="card">${esc(l.card)}</span>${esc(l.text)}</span></li>`).join("")}</ul>` : `<p class="empty">まだありません。</p>`}
+    ${d.log.length ? `<ul class="log">${d.log.slice(0,10).map(l => `<li><time class="num">${md(l.at)}</time><span><span class="card">${esc(l.card)}</span>${esc(l.text)}</span></li>`).join("")}</ul>` : `<p class="empty">まだありません。</p>`}
   </section>
 
-  <footer><span>作業の区切りごとに自動で更新しています。</span></footer>`;
+  <footer>最終更新 <span class="num">${esc(md(d.updated))} ${esc(d.updated.slice(11,16))}</span>　作業の区切りごとに自動で更新しています。</footer>`;
+
+  if (cm) document.querySelectorAll(".cm").forEach(f => f.addEventListener("submit", e => send(e, f, site.comment)));
 }
+
+function send(e, f, c) {
+  e.preventDefault();
+  const text = f.text.value.trim(), msg = f.querySelector(".msg"), btn = f.querySelector("button");
+  if (!text) { msg.className = "msg err"; msg.textContent = "コメントを入れてから送ってください。"; f.text.focus(); return; }
+  const body = new FormData();
+  body.append(c.fields.text, text);
+  if (c.fields.work) body.append(c.fields.work, f.dataset.work);
+  if (c.fields.name) body.append(c.fields.name, f.name.value.trim());
+  btn.disabled = true; msg.className = "msg"; msg.textContent = "送っています…";
+  fetch(c.action, {method: "POST", mode: "no-cors", body})
+    .then(() => { f.reset(); msg.className = "msg ok"; msg.textContent = "送りました。ありがとうございます。"; })
+    .catch(() => { msg.className = "msg err"; msg.textContent = "送れませんでした。通信を確かめて、もう一度お試しください。"; })
+    .finally(() => { btn.disabled = false; });
+}
+document.addEventListener("input", e => { if (e.target.name === "text") { const m = e.target.form?.querySelector(".msg.err"); if (m) { m.textContent = ""; m.className = "msg"; } } });
 
 const getJSON = u => fetch(u, {cache: "no-store"}).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
 Promise.all([getJSON("data.json"), getJSON("site.json").catch(() => null)])
