@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""非公開リポジトリ zenso-mentoring のカードから、公開ページ用の data.json を作る。
+"""非公開リポジトリ zenso-tasks のカードから、公開ページ用の data.json を作る。
 
 載せるのは：課題名・説明の1行目・チェックリスト・状態・締め切り・今岡のコメント。
 いただいたコメントや本文の細部は載せない（公開ページのため）。
@@ -7,7 +7,7 @@
 import json, re, subprocess, datetime, pathlib
 
 OWNER = "wimaoka51-blip"
-REPO = f"{OWNER}/zenso-mentoring"
+REPO = f"{OWNER}/zenso-tasks"
 PROJECT = "1"
 OUT = pathlib.Path(__file__).with_name("data.json")
 
