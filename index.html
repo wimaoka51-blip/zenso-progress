@@ -270,7 +270,7 @@ function render(d, site) {
     ${w.same && w.diff ? `<div class="sd">
       <div><h4>LP と HP でそろえた物</h4><ul>${w.same.map(s => `<li><span>${esc(s)}</span></li>`).join("")}</ul></div>
       <div><h4>変えた物（役割だけ）</h4><div class="table-box"><table>
-        <thead><tr><th></th><th>静かな LP 版</th><th>HP 版</th></tr></thead>
+        <thead><tr><th></th><th>${esc(w.lpLabel || "静かな LP 版")}</th><th>HP 版</th></tr></thead>
         <tbody>${w.diff.map(r => `<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join("")}</tbody>
       </table></div></div>
     </div>` : ""}`).join("")}
