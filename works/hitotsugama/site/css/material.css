@@ -1,0 +1,12 @@
+/* 回3 素材「朝の窓」（2026-11-20 今岡さん「B 薄めで」。DESIGN 0e）
+   写真と同じ「晴れた朝、窓から斜めに入る光」を、写真のない章（02・06・07）の地に薄く1枚。地の色・配置・大きさは変えない。FV と 04 には入れない */
+:root{--window-light:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22390%22%20height%3D%22640%22%20viewBox%3D%220%200%20390%20640%22%3E%3Cdefs%3E%3Cfilter%20id%3D%22b%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%3CfeGaussianBlur%20stdDeviation%3D%225%22/%3E%3C/filter%3E%3Cmask%20id%3D%22m%22%3E%3Crect%20width%3D%22390%22%20height%3D%22640%22%20fill%3D%22%23fff%22/%3E%3Cg%20fill%3D%22%23000%22%3E%3Cpolygon%20points%3D%22118%2C110%20230%2C110%20289%2C250%20177%2C250%22/%3E%3Cpolygon%20points%3D%22240%2C110%20352%2C110%20411%2C250%20299%2C250%22/%3E%3Cpolygon%20points%3D%22181%2C260%20293%2C260%20352%2C400%20240%2C400%22/%3E%3Cpolygon%20points%3D%22303%2C260%20415%2C260%20474%2C400%20362%2C400%22/%3E%3C/g%3E%3C/mask%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%22.68%22%20cy%3D%22.42%22%20r%3D%22.55%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%236b4526%22%20stop-opacity%3D%221%22/%3E%3Cstop%20offset%3D%22.6%22%20stop-color%3D%22%236b4526%22%20stop-opacity%3D%22.55%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236b4526%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Cg%20filter%3D%22url%28%23b%29%22%3E%3Crect%20width%3D%22390%22%20height%3D%22640%22%20fill%3D%22url%28%23r%29%22%20opacity%3D%220.1%22%20mask%3D%22url%28%23m%29%22/%3E%3Cg%20fill%3D%22%23ffe3ad%22%20opacity%3D%220.22%22%3E%3Cpolygon%20points%3D%22118%2C110%20230%2C110%20289%2C250%20177%2C250%22/%3E%3Cpolygon%20points%3D%22240%2C110%20352%2C110%20411%2C250%20299%2C250%22/%3E%3Cpolygon%20points%3D%22181%2C260%20293%2C260%20352%2C400%20240%2C400%22/%3E%3Cpolygon%20points%3D%22303%2C260%20415%2C260%20474%2C400%20362%2C400%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+#shelf,.sq6,.sq7{isolation:isolate}
+.sq6{overflow:visible}
+#shelf::before,.sq6::before,.sq7::before{content:"";position:absolute;left:0;right:0;height:640px;background:var(--window-light) right top/390px 640px no-repeat;pointer-events:none;z-index:0}
+.sq6::before{top:60px}
+#shelf::before{top:120px;transform:scaleX(-1);opacity:.8}
+.sq7::before{top:180px;opacity:.8}
+#shelf>*,.sq6>*,.sq7>*{position:relative;z-index:1}
+/* 切り抜きの影：光と同じ向き（左上から）に、薄く長く */
+.sq6__cut,.sq7__ink,#shelf .cut{filter:drop-shadow(16px 14px 12px rgba(90,53,23,.14))}

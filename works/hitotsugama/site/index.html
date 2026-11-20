@@ -11,8 +11,8 @@
 <meta name="description" content="住宅街の角の、石窯ひとつのパン屋。朝6時半の窯出しのパンを、焼いてすぐ凍らせてお届けします。はじめての6個は1,980円（税込・送料込み）。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&family=IM+Fell+English&family=Zen+Maru+Gothic:wght@500;700;900&family=Caveat:wght@600&family=Klee+One:wght@600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=20261114d">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&family=IM+Fell+English&family=Zen+Maru+Gothic:wght@500;700;900&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=20261120r11"><link rel="stylesheet" href="css/material.css?v=1"><link rel="stylesheet" href="css/kf.css?v=2">
 </head>
 <body>
 <svg width="0" height="0" class="vh" aria-hidden="true">
@@ -22,11 +22,6 @@
 <div class="ground" aria-hidden="true"><img src="img/bg-mise-2.jpg" alt="" width="1400" height="933"></div>
 
 <div class="stage">
-  <div class="inkfv" aria-hidden="true">
-    <img class="inkfv__camp" src="img/ink-campagne-cut.png" alt="" width="700" height="647">
-    <img class="inkfv__bag" src="img/ink-baguette-cut.png" alt="" width="700" height="225">
-    <img class="inkfv__croi" src="img/ink-croissant-cut.png" alt="" width="700" height="516">
-  </div>
 
   <aside class="side side--l" aria-label="店名">
     <a class="logo" href="#top" aria-label="Hitotsugama Bakery トップへ">
@@ -51,15 +46,14 @@
 
     <!-- 02 4つの棚 -->
     <section class="sec" id="shelf" aria-labelledby="h-shelf">
-      <p class="script" aria-hidden="true">fresh from the oven</p>
-      <p class="eyebrow" data-in>4つの棚<span>four shelves</span></p>
-      <h2 class="h2" id="h-shelf" data-in><span class="phrase">4つの棚から、</span><br><span class="phrase"><em class="mark-b">6個</em>を詰めて届けます。</span></h2>
+            <p class="eyebrow" data-in>4つの棚<span>four shelves</span></p>
+      <h2 class="h2" id="h-shelf" data-in><span class="phrase">4つの棚から、</span><br><span class="phrase">6個を詰めて届けます。</span></h2>
       <ul class="shelf">
-        <li data-in><a href="#menu"><img src="img/ink-campagne-cut.png" alt="" width="700" height="647" loading="lazy"><b>食事パン</b><small>毎朝の主食に</small></a></li>
-        <li data-in><a href="#menu"><img src="img/ink-croissant-cut.png" alt="" width="700" height="516" loading="lazy"><b>甘いパン</b><small>午後のひと休みに</small></a></li>
+        <li data-in><a href="#menu"><img class="cut" src="img/cut-campagne.webp" alt="" width="480" height="469" loading="lazy"><b>食事パン</b><small>毎朝の主食に</small></a></li>
+        <li data-in><a href="#menu"><img class="cut" src="img/cut-croissant.webp" alt="" width="480" height="348" loading="lazy"><b>甘いパン</b><small>午後のひと休みに</small></a></li>
         <li class="shelf__board" aria-hidden="true"></li>
-        <li data-in><a href="#menu"><img src="img/ink-pan-cut.png" alt="" width="700" height="555" loading="lazy"><b>惣菜パン</b><small>お昼の一皿に</small></a></li>
-        <li data-in><a href="#menu"><img src="img/ink-kisetsu-cut.png" alt="" width="700" height="637" loading="lazy"><b>季節のパン</b><small>その月だけの1つ</small></a></li>
+        <li data-in><a href="#menu"><img class="cut" src="img/cut-curry.webp" alt="" width="480" height="355" loading="lazy"><b>惣菜パン</b><small>お昼の一皿に</small></a></li>
+        <li data-in><a href="#menu"><img class="cut" src="img/cut-fig.webp" alt="" width="480" height="464" loading="lazy"><b>季節のパン</b><small>その月だけの1つ</small></a></li>
         <li class="shelf__board" aria-hidden="true"></li>
       </ul>
     </section>
@@ -68,7 +62,6 @@
     <section class="sec sq3" id="about" aria-labelledby="h-about">
       <figure class="sq3__main" data-reveal><img src="img/w1-pack.webp" alt="店の木の作業台で、焼きたての丸パンを袋に入れ、箱に詰めている手元" width="1120" height="1400" loading="lazy"></figure>
       <div class="sq3__row">
-        <figure class="sq3__round"><img src="img/w2-crust.webp" alt="窓辺の網の上で冷ましている、焼きたてのカンパーニュ" width="1254" height="1254" loading="lazy"></figure>
         <div class="sq3__who"><p class="sq-label">ひとつ窯のこと</p></div>
       </div>
       <h2 class="sq-h" id="h-about" data-in>石窯ひとつで、<br>毎朝焼ける分だけ。</h2>
@@ -98,10 +91,17 @@
         </div>
       </div>
       <div class="sq4__kiln" data-in>
-        <img class="sq4__ink" src="img/ink-kama-cut.png" alt="" width="620" height="700" loading="lazy">
+        <img class="sq4__ink cut" src="img/cut-kama.webp" alt="" width="453" height="480" loading="lazy">
         <p class="sq4__kt">窯はひとつ。<br><span class="phrase">月に300セット</span><span class="phrase">まで。</span></p>
         <p class="sq4__kb">一度に焼ける数が決まっているので、増やせません。今月分がなくなったら、翌月の窯出しにご案内します。</p>
       </div>
+      <figure class="kf kf--flow" data-in>
+        <ol class="kf-steps">
+          <li><svg viewBox="0 0 96 32" width="96" height="32" aria-hidden="true"><circle cx="8" cy="8" r="6" class="kf-bun"/><circle cx="24" cy="8" r="6" class="kf-bun"/><circle cx="40" cy="8" r="6" class="kf-bun"/><circle cx="56" cy="8" r="6" class="kf-bun"/><circle cx="72" cy="8" r="6" class="kf-bun"/><circle cx="88" cy="8" r="6" class="kf-bun"/><circle cx="8" cy="24" r="6" class="kf-bun"/><circle cx="24" cy="24" r="6" class="kf-bun"/><circle cx="40" cy="24" r="6" class="kf-bun"/><circle cx="56" cy="24" r="6" class="kf-bun"/><circle cx="72" cy="24" r="6" class="kf-bun"/><circle cx="88" cy="24" r="6" class="kf-bun"/></svg><b>1回に12個</b><small>窯に入る数</small></li>
+          <li><b class="kf-big">月に300<span>セット</span></b><small>焼ける回数から決まる上限</small></li>
+          <li class="kf-now"><b class="kf-big">残り 86<span>セット</span></b><small data-today-short>11/20 朝の時点</small></li>
+        </ol>
+      </figure>
     </section>
 
     <!-- 05 定期便の紹介（2026-11-14 03・04 の組み方を広げた）：小ラベルは右上、写真の下端は窯の口を逆さにした弧、「5分」が弧にかかる。見出しは写真の下に左寄せ -->
@@ -111,61 +111,61 @@
       <p class="sq5__min" data-in><b>5</b><span>分<small>トースターで</small></span></p>
       <h2 class="sq-h sq5__h" id="h-toast" data-in>焼いてすぐ凍らせるから、<br>焼きたてに戻ります。</h2>
       <p class="body sq5__body" data-in>解凍はいりません。凍ったままトースターに入れて5分。皮はぱりっと、中はふわっと戻ります。</p>
-      <img class="sq5__ink" data-ink src="img/ink-toaster-cut.png" alt="" width="700" height="568" loading="lazy" aria-hidden="true">
+      <img class="sq5__ink cut" src="img/cut-toaster.webp" alt="" width="480" height="388" loading="lazy" aria-hidden="true">
     </section>
 
     <!-- 06 特長（2026-11-14）：見出しは中央。01 だけ大きく、窯の火のペン画を右端で切って後ろに。02・03 は罫1本の下に並べる（カードなし） -->
     <section class="sec sq6" id="feat" aria-labelledby="h-feat">
-      <p class="sq-label sq6__label">選ばれる理由</p>
-      <h2 class="sq-h sq6__h" id="h-feat" data-in>毎朝並ぶ人がいる<br>理由は、3つです。</h2>
+      <p class="sq-label sq6__label">焼き方</p>
+      <h2 class="sq-h sq6__h" id="h-feat" data-in>冷凍する前に、<br>店でしていること。</h2>
       <div class="sq6__big" data-in>
-        <img class="sq6__ink" data-ink src="img/ink-fire-cut.png" alt="" width="700" height="548" loading="lazy" aria-hidden="true">
+        <img class="sq6__cut cut" src="img/cut-kama.webp" alt="" width="453" height="480" loading="lazy" aria-hidden="true">
         <p class="sq6__no">01</p>
-        <h3 class="sq6__bh">石窯の強い火で、<br>皮がぱりっと。</h3>
-        <p class="sq6__t">高い温度で一気に焼くので、皮は香ばしく、中はしっとり。冷凍しても、この皮が戻ります。</p>
+        <h3 class="sq6__bh">260℃の石窯で<br>焼きます。</h3>
+        <p class="sq6__t">皮までしっかり焼くので、凍らせてもトースターで戻ります。</p>
       </div>
       <dl class="sq6__rows" data-in>
-        <div><dt><span>02</span>国産の小麦と、店の酵母。</dt><dd>ひと晩かけて、ゆっくり発酵させます。</dd></div>
-        <div><dt><span>03</span>窯ひとつ分を、手で見る。</dt><dd>焼ける数だけを、ひとつずつ。</dd></div>
+        <div><dt><span>02</span>粉は国産、酵母は店のもの。</dt><dd>ひと晩おいて、発酵させます。</dd></div>
+        <div><dt><span>03</span>1回に焼くのは、12個。</dt><dd>全部に目が届く数です。</dd></div>
       </dl>
     </section>
 
     <!-- 07 声（2026-11-14）：カードをやめ、地に直接。左・右寄せ・左と置き場所を変え、真ん中の声の後ろにクロワッサンのペン画を左端で切る -->
     <section class="sec sq7" id="voice" aria-labelledby="h-voice">
-      <h2 class="sq-h sq7__h" id="h-voice" data-in>届いた家の朝は、<br>こう変わりました。</h2>
+      <h2 class="sq-h sq7__h" id="h-voice" data-in>3回目、6回目、<br>12回目の方の声。</h2>
       <p class="sq-label sq7__label">届いた家の声</p>
       <ul class="sq7__list">
-        <li class="sq7__v" data-in><p class="sq7__q">平日の朝に、焼きたての香りがするようになりました。子どもが先に起きてきます。</p><p class="sq7__who">40代・4人家族　6回目</p></li>
-        <li class="sq7__v sq7__v--r" data-in><img class="sq7__ink" data-ink src="img/ink-croissant-cut.png" alt="" width="700" height="516" loading="lazy" aria-hidden="true"><p class="sq7__q"><span class="phrase">冷凍とは思えない、</span><span class="phrase">皮のぱりっと感。</span><br><span class="phrase">トースターの5分が</span><span class="phrase">楽しみです。</span></p><p class="sq7__who">30代・ひとり暮らし　3回目</p></li>
-        <li class="sq7__v" data-in><p class="sq7__q">近くにパン屋がないので、月に一度の箱が待ち遠しいです。</p><p class="sq7__who">60代・2人暮らし　12回目</p></li>
+        <li class="sq7__v" data-in><p class="sq7__q"><span class="phrase">平日の朝に、</span><span class="phrase">焼きたての香りが</span><span class="phrase">するようになりました。</span><span class="phrase">子どもが先に</span><span class="phrase">起きてきます。</span></p><p class="sq7__who">40代・4人家族　6回目</p></li>
+        <li class="sq7__v sq7__v--r" data-in><p class="sq7__q"><span class="phrase">冷凍とは思えない、</span><span class="phrase">皮のぱりっと感。</span><br><span class="phrase">トースターの5分が</span><span class="phrase">楽しみです。</span></p><p class="sq7__who">30代・ひとり暮らし　3回目</p></li>
+        <li class="sq7__v" data-in><p class="sq7__q"><span class="phrase">近くにパン屋がないので、</span><span class="phrase">月に一度の箱が</span><span class="phrase">待ち遠しいです。</span></p><p class="sq7__who">60代・2人暮らし　12回目</p></li>
       </ul>
       <p class="cta-hand" data-in>はじめての6個は、送料込みで 1,980円</p>
       <a class="btn btn--wide" href="#order" data-in>お試しを注文する<svg aria-hidden="true"><use href="#arrow"/></svg></a>
     </section>
 
     <!-- 08 12のパン：分類ごとに写真を縁まで、品書きを点線で。2つ目と4つ目は写真の切り方を変える -->
-    <section class="sec sec--menu" id="menu" aria-labelledby="h-menu">
-      <div class="hb" data-in><span class="hb__wave" aria-hidden="true"></span><p class="hb__ja">今月の12のパン</p><p class="hb__en" aria-hidden="true">this month&rsquo;s twelve</p></div>
-      <h2 class="h2" id="h-menu" data-in><span class="phrase">今月の12のパン。</span><br><span class="phrase">お試しは、</span><span class="phrase"><em class="mark-b">この中から6個</em>。</span></h2>
-      <div class="cat" data-in>
-        <figure class="cat__photo"><img src="img/w5-shokuji.webp" alt="店の木のまな板に、カンパーニュ・山型食パン・くるみのパン" width="1400" height="933" loading="lazy"></figure>
-        <h3 class="cat__h"><span class="cat__n">1</span>食事パン<small>毎朝の主食に</small><span class="cat__en" aria-hidden="true">daily bread</span></h3>
-        <dl class="list"><div><dt>石窯カンパーニュ</dt><dd>噛むほど香ばしい</dd></div><div><dt>山型食パン</dt><dd>耳までやわらか</dd></div><div><dt>くるみのパン</dt><dd>朝のスープに</dd></div></dl>
+    <section class="sec m8" id="menu" aria-labelledby="h-menu">
+      <p class="sq-label m8__label" data-in>今月の12のパン</p>
+      <h2 class="sq-h m8__head" id="h-menu" data-in><span class="phrase">今月の12のパン。</span><br><span class="phrase">お試しは、</span><span class="phrase">この中から6個。</span></h2>
+      <div class="m8__cat" data-in>
+        <figure class="m8__photo"><img src="img/w5-shokuji.webp" alt="店の木のまな板に、カンパーニュ・山型食パン・くるみのパン" width="1400" height="933" loading="lazy"></figure>
+        <div class="m8__txt"><p class="m8__no">01</p><h3 class="m8__h">食事パン<small>毎朝の主食に</small><span class="m8__en" aria-hidden="true">daily bread</span></h3>
+        <dl class="m8__list"><div><dt>石窯カンパーニュ</dt><dd>噛むほど香ばしい</dd></div><div><dt>山型食パン</dt><dd>耳までやわらか</dd></div><div><dt>くるみのパン</dt><dd>朝のスープに</dd></div></dl></div>
       </div>
-      <div class="cat cat--r" data-in>
-        <figure class="cat__photo"><img src="img/w6-amai.webp" alt="店の天板に、クロワッサン・あんぱん・シナモンロール" width="1400" height="933" loading="lazy"></figure>
-        <h3 class="cat__h"><span class="cat__n">2</span>甘いパン<small>午後のひと休みに</small><span class="cat__en" aria-hidden="true">sweet</span></h3>
-        <dl class="list"><div><dt>クロワッサン</dt><dd>バターの層</dd></div><div><dt>あんぱん</dt><dd>こしあん</dd></div><div><dt>シナモンロール</dt><dd>やさしい甘さ</dd></div></dl>
+      <div class="m8__cat m8__cat--r" data-in>
+        <figure class="m8__photo"><img src="img/w6-amai.webp" alt="店の天板に、クロワッサン・あんぱん・シナモンロール" width="1400" height="933" loading="lazy"></figure>
+        <div class="m8__txt"><p class="m8__no">02</p><h3 class="m8__h">甘いパン<small>午後のひと休みに</small><span class="m8__en" aria-hidden="true">sweet</span></h3>
+        <dl class="m8__list"><div><dt>クロワッサン</dt><dd>バターの層</dd></div><div><dt>あんぱん</dt><dd>こしあん</dd></div><div><dt>シナモンロール</dt><dd>やさしい甘さ</dd></div></dl></div>
       </div>
-      <div class="cat" data-in>
-        <figure class="cat__photo"><img src="img/w7-sozai.webp" alt="店のアルミのトレーに、カレーパン・ベーコンエピ・チーズのフォカッチャ" width="1400" height="933" loading="lazy"></figure>
-        <h3 class="cat__h"><span class="cat__n">3</span>惣菜パン<small>お昼の一皿に</small><span class="cat__en" aria-hidden="true">savory</span></h3>
-        <dl class="list"><div><dt>焼きカレーパン</dt><dd>揚げずに焼く</dd></div><div><dt>ベーコンエピ</dt><dd>黒こしょう</dd></div><div><dt>チーズのフォカッチャ</dt><dd>温めてとろり</dd></div></dl>
+      <div class="m8__cat" data-in>
+        <figure class="m8__photo"><img src="img/w7-sozai.webp" alt="店のアルミのトレーに、カレーパン・ベーコンエピ・チーズのフォカッチャ" width="1400" height="933" loading="lazy"></figure>
+        <div class="m8__txt"><p class="m8__no">03</p><h3 class="m8__h">惣菜パン<small>お昼の一皿に</small><span class="m8__en" aria-hidden="true">savory</span></h3>
+        <dl class="m8__list"><div><dt>焼きカレーパン</dt><dd>揚げずに焼く</dd></div><div><dt>ベーコンエピ</dt><dd>黒こしょう</dd></div><div><dt>チーズのフォカッチャ</dt><dd>温めてとろり</dd></div></dl></div>
       </div>
-      <div class="cat cat--r cat--season" data-in>
-        <figure class="cat__photo"><span class="sticker sticker--s" aria-hidden="true"><small>今月だけ</small><b>秋</b></span><img src="img/w8-kisetsu.webp" alt="窓辺のかごに、いちじくのパン・栗のブリオッシュ・りんごのデニッシュ" width="1400" height="933" loading="lazy"></figure>
-        <h3 class="cat__h"><span class="cat__n">4</span>季節のパン<small>その月だけの1つ</small><span class="cat__en" aria-hidden="true">seasonal</span></h3>
-        <dl class="list"><div><dt>いちじくのパン</dt><dd>秋だけ</dd></div><div><dt>栗のブリオッシュ</dt><dd>秋だけ</dd></div><div><dt>りんごのデニッシュ</dt><dd>秋だけ</dd></div></dl>
+      <div class="m8__cat m8__cat--r" data-in>
+        <figure class="m8__photo"><img src="img/w8-kisetsu.webp" alt="窓辺のかごに、いちじくのパン・栗のブリオッシュ・りんごのデニッシュ" width="1400" height="933" loading="lazy"></figure>
+        <div class="m8__txt"><p class="m8__no">04</p><h3 class="m8__h">季節のパン<small>その月だけの1つ</small><span class="m8__en" aria-hidden="true">seasonal</span></h3>
+        <dl class="m8__list m8__list--season"><div><dt>いちじくのパン</dt><dd>秋だけ</dd></div><div><dt>栗のブリオッシュ</dt><dd>秋だけ</dd></div><div><dt>りんごのデニッシュ</dt><dd>秋だけ</dd></div></dl></div>
       </div>
       <p class="cta-hand" data-in>お試しの6個は、店で選んで詰めます</p>
       <a class="btn btn--wide" href="#order" data-in>お試しを注文する<svg aria-hidden="true"><use href="#arrow"/></svg></a>
@@ -173,19 +173,19 @@
 
     <!-- 09 届くまで：3段を点線でつなぐ。数字を大きく -->
     <section class="sec sec--flow" id="flow" aria-labelledby="h-flow">
-      <div class="hb" data-in><span class="hb__wave" aria-hidden="true"></span><p class="hb__ja">届くまで</p><p class="hb__en" aria-hidden="true">how it works</p></div>
-      <h2 class="h2" id="h-flow" data-in><span class="phrase">注文から朝の食卓まで、</span><br><span class="phrase"><em class="mark-b">3つだけ</em>。</span></h2>
+      <div class="hb" data-in><p class="hb__ja">届くまで</p><p class="hb__en" aria-hidden="true">how it works</p></div>
+      <h2 class="h2" id="h-flow" data-in><span class="phrase">注文から朝の食卓まで、</span><br><span class="phrase">3つだけ。</span></h2>
       <ol class="flow">
-        <li class="step"><span class="step__n"><small>step</small>1</span><img src="img/ink-kama-cut.png" alt="" width="620" height="700" loading="lazy"><h3>3分で注文</h3><p>お試しの6個を<span class="phrase">ボタンから注文。</span></p></li>
-        <li class="step"><span class="step__n"><small>step</small>2</span><img src="img/ink-box-cut.png" alt="" width="700" height="605" loading="lazy"><h3>冷凍で届く</h3><p>焼いた翌日に、冷凍便で届きます。</p></li>
-        <li class="step"><span class="step__n"><small>step</small>3</span><img src="img/ink-toaster-cut.png" alt="" width="700" height="568" loading="lazy"><h3>凍ったまま5分</h3><p>トースターで焼きたてに戻ります。</p></li>
+        <li class="step"><span class="step__n"><small>step</small>1</span><img class="cut" src="img/cut-kama.webp" alt="" width="453" height="480" loading="lazy"><h3>まず、6個だけ</h3><p>店が選ぶ6個。<span class="phrase">1,980円、税・送料込み。</span><span class="phrase">1回きりです。</span></p></li>
+        <li class="step"><span class="step__n"><small>step</small>2</span><img class="cut" src="img/cut-box.webp" alt="" width="480" height="405" loading="lazy"><h3>届いたら冷凍庫へ</h3><p>焼いた翌日に、冷凍便で届きます。</p></li>
+        <li class="step"><span class="step__n"><small>step</small>3</span><img class="cut" src="img/cut-toaster.webp" alt="" width="480" height="388" loading="lazy"><h3>食べる朝に、5分焼く</h3><p>トースターで焼きたてに戻ります。</p></li>
       </ol>
       <a class="link" href="#order" data-in>お試しを注文する<svg aria-hidden="true"><use href="#arrow"/></svg></a>
     </section>
 
     <!-- 10 よくある質問：開け閉めできる一覧 -->
     <section class="sec sec--faq" id="faq" aria-labelledby="h-faq">
-      <div class="hb" data-in><span class="hb__wave" aria-hidden="true"></span><p class="hb__ja">よくある質問</p><p class="hb__en" aria-hidden="true">Q &amp; A</p></div>
+      <div class="hb" data-in><p class="hb__ja">よくある質問</p><p class="hb__en" aria-hidden="true">Q &amp; A</p></div>
       <h2 class="h2" id="h-faq" data-in><span class="phrase">冷凍庫に入るか、</span><span class="phrase">やめられるか。</span><br><span class="phrase">先にお答えします。</span></h2>
       <div class="faq">
         <details open><summary>冷凍庫に入りますか？</summary><p>6個で、A4の紙ほどの平たい袋が2つです。引き出しの冷凍庫にも立てて入ります。</p></details>
@@ -202,18 +202,17 @@
       <figure class="end__photo"><img src="img/w9-window.webp" alt="窓辺の小さな木の卓に、焼き戻したクロワッサンとカンパーニュ、湯気の立つマグ" width="1050" height="1400" loading="lazy">
         <div class="end__head"><p class="hb__en" aria-hidden="true">see you at the next bake</p><h2 class="end__h" id="h-end"><span class="phrase">次の窯出しに、</span><br><span class="phrase">あなたの6個を。</span></h2></div>
       </figure>
-      <img class="end__ink" src="img/ink-baguette-cut.png" alt="" width="700" height="225" loading="lazy">
       <div class="end__box" data-in>
         <p class="end__en" aria-hidden="true">only 300 boxes a month</p><p class="end__left">今月は<b>300</b>セットまで。<span class="left__badge">今月の残り<b>86</b></span></p>
         <p class="cta-hand">続けるかどうかは、届いてから決められます</p>
         <a class="btn btn--wide" href="#order">お試しを注文する<svg aria-hidden="true"><use href="#arrow"/></svg></a>
-        <a class="link link--s" href="#">定期便ではじめる<svg aria-hidden="true"><use href="#arrow"/></svg></a>
+        <a class="link link--s" href="#order">定期便ではじめる<svg aria-hidden="true"><use href="#arrow"/></svg></a>
       </div>
     </section>
 
     <!-- 12 降り口：LINE -->
     <section class="sec sec--line" id="line" aria-labelledby="h-line">
-      <img class="line__ink" src="img/ink-campagne-cut.png" alt="" width="700" height="647" loading="lazy">
+      <img class="line__ink cut" src="img/cut-campagne.webp" alt="" width="480" height="469" loading="lazy">
       <p class="line__en" aria-hidden="true">just in case</p><h2 class="line__h" id="h-line">まだ迷う方へ</h2>
       <p class="body">窯出しの朝だけ、LINEでお知らせします。今月分が終わっていた時も、翌月の受付をお知らせします。</p>
       <p class="cta-hand">登録は1タップ。いつでも外せます</p>

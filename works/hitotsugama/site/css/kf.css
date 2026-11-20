@@ -1,0 +1,15 @@
+/* 回5 このお店だけの図「流れ」（2026-11-20 今岡さん「C3 流れ」。DESIGN 0g）：1回に12個 → 月に300セット → 残り86 */
+.kf{margin:28px var(--pad) 0;text-align:left}
+.kf svg{display:block;max-width:100%;height:auto}
+.kf figcaption{margin-top:10px;font-size:var(--fs-xs);line-height:1.8;letter-spacing:var(--ls-body);color:var(--c-ink-2)}
+.kf-big{font-size:var(--fs-xl)!important}
+.kf-big span{font-size:var(--fs-body);margin-left:4px}
+.kf-now b{color:var(--c-fire-d)}
+.kf-bun{fill:none;stroke:var(--c-ink);stroke-width:1.5}
+.kf-steps{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.kf-steps li{position:relative;display:grid;gap:4px;padding:14px 0 14px 18px;border-left:1px solid var(--c-ink-line)}
+.kf-steps li::before{content:"";position:absolute;left:-4px;top:22px;width:7px;height:7px;border-radius:50%;background:var(--c-ink)}
+.kf-steps li.kf-now::before{background:var(--c-fire-d)}
+.kf-steps b{font:700 var(--fs-m)/1.4 var(--ff-pop);letter-spacing:var(--ls-h);color:var(--c-ink)}
+.kf-now b{color:var(--c-fire-d)}
+.kf-steps small{font-size:var(--fs-xs);color:var(--c-ink-2)}

@@ -14,8 +14,11 @@
   --ff-mincho:"Shippori Mincho",serif;
   --ff-en:"IM Fell English",serif;
 
-  --fs-xs:12px; --fs-s:13px; --fs-body:14px; --fs-m:16px; --fs-l:18px; --fs-xl:22px; --fs-num:44px; --fs-big:104px;
-  --ls-wide:.42em; --ls-mid:.2em; --ls-body:.08em;
+  /* 組版の土台（2026-11-20 回0。web-build implementation「組版の土台」）：大きさ7段・最小 13px・字間3種 */
+  --fs-xs:13px; --fs-body:15px; --fs-m:17px; --fs-l:20px; --fs-xl:24px; --fs-num:44px; --fs-big:96px; --fs-logo:38px;
+  --fs-s:var(--fs-xs);
+  --ls-wide:.42em; /* FV の一言だけ（回4 で見直す） */
+  --ls-h:.08em; --ls-body:.04em; --ls-tag:.14em; --ls-mid:var(--ls-h);
 
   --space-1:8px; --space-2:16px; --space-3:24px; --space-4:32px; --space-5:48px; --space-6:72px; --space-7:104px;
   --col:375px; --pad:26px;
@@ -44,23 +47,23 @@ img{max-width:100%;height:auto;display:block}
 .side--l{display:flex;align-items:center;justify-content:center;padding-bottom:34vh}
 .logo{display:grid;justify-items:center;gap:var(--space-1);text-align:center}
 .logo__mark{width:118px}
-.logo__name{font:400 38px/1.05 var(--ff-en);letter-spacing:.01em;margin-top:var(--space-1)}
-.logo__sub{font-size:var(--fs-xs);letter-spacing:.34em;margin-right:-.34em;color:var(--c-ink-2);margin-top:var(--space-1)}
+.logo__name{font:400 var(--fs-logo)/1.05 var(--ff-en);letter-spacing:.01em;margin-top:var(--space-1)}
+.logo__sub{font-size:var(--fs-xs);letter-spacing:var(--ls-tag);margin-right:-.14em;color:var(--c-ink-2);margin-top:var(--space-1)}
 
 /* 右：メニュー */
 .side--r{display:flex;flex-direction:column;justify-content:center;padding:0 0 22vh clamp(60px,7.6vw,110px)}
 .menu{list-style:none;margin:0;padding:0;width:250px}
-.menu__a{display:flex;align-items:baseline;gap:10px;height:46px;font:500 var(--fs-m)/46px var(--ff-mincho);letter-spacing:.22em;transition:color .2s}
+.menu__a{display:flex;align-items:baseline;gap:10px;height:46px;font:500 var(--fs-m)/46px var(--ff-mincho);letter-spacing:var(--ls-tag);transition:color .2s}
 .menu__a::after{content:"";flex:1;border-bottom:1px solid var(--c-ink-line);transform:translateY(-4px);transition:border-color .2s}
-.menu__a small{order:2;font-size:11px;letter-spacing:.16em;color:var(--c-ink-2)}
+.menu__a small{order:2;font-size:var(--fs-xs);letter-spacing:var(--ls-tag);color:var(--c-ink-2)}
 .menu__a:hover{color:var(--c-fire)}
 .menu__a:hover::after{border-color:var(--c-fire)}
 
-.mypage{margin-top:var(--space-2);font-size:var(--fs-s);letter-spacing:.14em;color:var(--c-ink-2);text-decoration:underline;text-underline-offset:4px}
+.mypage{margin-top:var(--space-2);font-size:var(--fs-s);letter-spacing:var(--ls-tag);color:var(--c-ink-2);text-decoration:underline;text-underline-offset:4px}
 .mypage:hover{color:var(--c-fire)}
 
 /* ボタン（墨のべた・四角） */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;height:52px;padding:0 var(--space-3);background:var(--c-ink);color:var(--c-paper);font:500 var(--fs-body)/1 var(--ff-mincho);letter-spacing:.2em;transition:background .25s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;height:52px;padding:0 var(--space-3);background:var(--c-ink);color:var(--c-paper);font:500 var(--fs-body)/1 var(--ff-mincho);letter-spacing:var(--ls-tag);transition:background .25s}
 .btn svg{width:22px;height:9px;transition:transform .25s var(--ease)}
 .btn:hover{background:var(--c-fire)}
 .btn:hover svg{transform:translateX(4px)}
@@ -69,10 +72,9 @@ img{max-width:100%;height:auto;display:block}
 
 /* 墨のペン画（FV の両脇・中央の列にかけない） */
 .inkfv{position:absolute;left:0;right:0;top:0;height:100vh;min-height:680px;pointer-events:none;z-index:4;overflow:hidden}
-.inkfv img{position:absolute;opacity:.42;mix-blend-mode:multiply}
-.inkfv__camp{width:210px;left:calc(50% - 187.5px - 260px);bottom:13%}
-.inkfv__bag{width:260px;left:calc(50% + 187.5px + 56px);bottom:14%;transform:rotate(-4deg)}
-.inkfv__croi{width:clamp(140px,13vw,200px);right:-4vw;top:-2%;transform:rotate(-12deg)}
+.inkfv img{position:absolute}
+.inkfv__camp{width:180px;left:calc(50% - 187.5px - 250px);bottom:12%;transform:rotate(-6deg)}
+.inkfv__croi{width:clamp(130px,12vw,180px);right:-2vw;top:-1%;transform:rotate(-6deg)}
 
 /* ===== 01 FV ===== */
 .fv{position:relative;height:100vh;min-height:680px;overflow:hidden}
@@ -82,19 +84,19 @@ img{max-width:100%;height:auto;display:block}
 .fv__bar{display:none}
 .fv__copy{position:absolute;left:var(--pad);top:92px;z-index:2;margin:0;color:var(--c-white);font:500 var(--fs-l)/2.5 var(--ff-mincho);letter-spacing:var(--ls-wide);text-shadow:0 1px 10px rgba(60,36,18,.55)}
 .fv__under{position:absolute;left:0;right:0;bottom:22px;z-index:2;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;row-gap:var(--space-1);padding:0 22px}
-.fv__what{flex-basis:100%;margin:0;font-size:var(--fs-s);line-height:1;letter-spacing:.34em;color:var(--c-ink-2)}
-.price{margin:0;font-size:13px;line-height:1.6;letter-spacing:.14em}
-.price b{display:block;font:500 28px/1.1 var(--ff-mincho);letter-spacing:.06em}
+.fv__what{flex-basis:100%;margin:0;font-size:var(--fs-s);line-height:1;letter-spacing:var(--ls-tag);color:var(--c-ink-2)}
+.price{margin:0;font-size:var(--fs-xs);line-height:1.6;letter-spacing:var(--ls-tag)}
+.price b{display:block;font:500 var(--fs-xl)/1.1 var(--ff-mincho);letter-spacing:var(--ls-body)}
 .price i{font-style:normal;font-size:var(--fs-body);margin-left:2px}
 
 /* ===== 章の共通 ===== */
 .sec{position:relative;padding:var(--space-7) var(--pad)}
 .eyebrow{display:flex;align-items:center;gap:12px;margin:0 0 var(--space-2);font-size:var(--fs-s);line-height:1;letter-spacing:var(--ls-wide);color:var(--c-ink-2)}
 .eyebrow::before{content:"";width:28px;height:1px;background:var(--c-ink)}
-.eyebrow span{font:400 13px/1 var(--ff-en);letter-spacing:.04em;margin-left:auto}
+.eyebrow span{font:400 var(--fs-xs)/1 var(--ff-en);letter-spacing:var(--ls-body);margin-left:auto}
 .h2{margin:0 0 var(--space-3);font:500 var(--fs-xl)/1.85 var(--ff-mincho);letter-spacing:var(--ls-mid)}
 .body{margin:0 0 var(--space-3);letter-spacing:var(--ls-body);line-height:2.15}
-.link{display:inline-flex;align-items:center;gap:12px;font-size:var(--fs-body);letter-spacing:.18em;padding-bottom:6px;border-bottom:1px solid var(--c-ink);transition:color .2s,border-color .2s}
+.link{display:inline-flex;align-items:center;gap:12px;font-size:var(--fs-body);letter-spacing:var(--ls-tag);padding-bottom:6px;border-bottom:1px solid var(--c-ink);transition:color .2s,border-color .2s}
 .link svg{width:22px;height:9px;transition:transform .25s var(--ease)}
 .link:hover{color:var(--c-fire);border-color:var(--c-fire)}
 .link:hover svg{transform:translateX(4px)}
@@ -104,12 +106,18 @@ img{max-width:100%;height:auto;display:block}
 .shelf li{position:relative}
 .shelf a{display:grid;justify-items:center;text-align:center;gap:4px;transition:transform .3s var(--ease)}
 .shelf a:hover{transform:translateY(-4px)}
-.shelf img{height:92px;width:auto;object-fit:contain;mix-blend-mode:multiply}
+.shelf img{height:112px;width:auto;object-fit:contain}
+/* 実物の切り抜き（2026-11-18 今岡さん「あみとバケツのように、絵ではなく実物の切り抜きに。ちょっとポップに」）：影は左上の光からの落ち影1種類・傾きは ±6度まで */
+.cut{filter:drop-shadow(6px 10px 8px rgba(90,53,23,.24))}
+.shelf li:nth-child(1) img{transform:rotate(-5deg)}
+.shelf li:nth-child(2) img{transform:rotate(4deg)}
+.shelf li:nth-child(4) img{transform:rotate(3deg)}
+.shelf li:nth-child(5) img{transform:rotate(-4deg)}
 .shelf__board{grid-column:1/-1;height:0;border-top:1px solid var(--c-ink);margin:-36px calc(var(--pad) * -1) 0;position:relative}
 .shelf__board::before,.shelf__board::after{content:"";position:absolute;top:0;width:1px;height:14px;background:var(--c-ink)}
 .shelf__board::before{left:22%}.shelf__board::after{right:22%}
-.shelf b{display:block;margin-top:var(--space-3);font:500 var(--fs-m)/1.4 var(--ff-mincho);letter-spacing:.24em}
-.shelf small{font-size:var(--fs-s);letter-spacing:.12em;color:var(--c-ink-2)}
+.shelf b{display:block;margin-top:var(--space-3);font:500 var(--fs-m)/1.4 var(--ff-mincho);letter-spacing:var(--ls-tag)}
+.shelf small{font-size:var(--fs-s);letter-spacing:var(--ls-h);color:var(--c-ink-2)}
 
 /* ===== 03 ひとつ窯のこと：窯の写真の暗いレンガに見出し、下に大きな 6:30 ===== */
 
@@ -136,8 +144,8 @@ img{max-width:100%;height:auto;display:block}
 .btn--wide{width:100%;max-width:none;height:56px}
 
 .foot{padding:var(--space-6) var(--pad);text-align:center;background:var(--c-ink);color:var(--c-paper)}
-.foot__name{margin:0 0 var(--space-1);font:400 26px/1 var(--ff-en)}
-.foot small{font-size:var(--fs-xs);letter-spacing:.14em;opacity:.75}
+.foot__name{margin:0 0 var(--space-1);font:400 var(--fs-xl)/1 var(--ff-en)}
+.foot small{font-size:var(--fs-xs);letter-spacing:var(--ls-tag);opacity:.75}
 
 /* 動き（読み込みとスクロール）。.js-motion の時だけ隠す */
 .js-motion [data-in]{opacity:0;transform:translateY(12px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
@@ -149,7 +157,7 @@ img{max-width:100%;height:auto;display:block}
   .side,.inkfv,.ground{display:none}
   .fv{height:100svh;min-height:620px}
   .fv__bar{position:absolute;left:0;right:0;top:0;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:18px 20px;color:var(--c-white)}
-  .fv__bar a{display:flex;align-items:center;gap:8px;font:400 19px/1 var(--ff-en);text-shadow:0 1px 8px rgba(60,36,18,.4)}
+  .fv__bar a{display:flex;align-items:center;gap:8px;font:400 var(--fs-l)/1 var(--ff-en);text-shadow:0 1px 8px rgba(60,36,18,.4)}
   .fv__bar img{width:28px;filter:invert(1) brightness(2)}
   .burger{width:30px;height:30px;display:grid;align-content:center;gap:6px;background:none;border:0;padding:0;cursor:pointer}
   .burger i{display:block;height:1.5px;background:var(--c-white)}
@@ -162,43 +170,39 @@ img{max-width:100%;height:auto;display:block}
 .script,.sticker{display:none}
 
 [data-mood="b"]{
-  --c-ink:#5a3517; --c-ink-2:#8a6040; --c-ink-line:rgba(90,53,23,.28);
-  --c-paper:#f8efe0; --c-paper-2:#f3e2c6; --c-fire:#e58a2b; --c-fire-d:#ad5216; --c-band:#f2b75e;
+  --c-ink:#5a3517; --c-ink-2:#7a5436; --c-ink-line:rgba(90,53,23,.28);
+  --c-paper:#f8efe0; --c-paper-2:#f3e2c6; --c-fire:#e58a2b; --c-fire-d:#a24c13; --c-band:#f2b75e;
   --ff-pop:"Zen Maru Gothic",sans-serif;
 }
 [data-mood="b"] .col{font-family:var(--ff-pop);font-weight:500}
-[data-mood="b"] .sec .body,[data-mood="b"] .price__lead,[data-mood="b"] .kiln__body{font-family:var(--ff-pop);font-weight:500;letter-spacing:.06em}
+[data-mood="b"] .sec .body,[data-mood="b"] .price__lead,[data-mood="b"] .kiln__body{font-family:var(--ff-pop);font-weight:500;letter-spacing:var(--ls-body)}
 /* 見出し：丸ゴシックの太字・字間を少し・大きく */
-[data-mood="b"] .h2,[data-mood="b"] .kiln__t{font-family:var(--ff-pop);font-weight:900;letter-spacing:.08em;font-size:24px;line-height:1.7}
-[data-mood="b"] .eyebrow,[data-mood="b"] .head-block__ja{font-family:var(--ff-pop);font-weight:700;letter-spacing:.24em;color:var(--c-fire)}
-[data-mood="b"] .eyebrow::before{width:40px;height:6px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 6'%3E%3Cpath d='M1 3c3-3 5-3 8 0s5 3 8 0 5-3 8 0 5 3 8 0 5-3 6 0' fill='none' stroke='%23e58a2b' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat}
+[data-mood="b"] .h2,[data-mood="b"] .kiln__t{font-family:var(--ff-pop);font-weight:700;letter-spacing:var(--ls-h);font-size:var(--fs-xl);line-height:1.7}
+[data-mood="b"] .eyebrow,[data-mood="b"] .head-block__ja{font-family:var(--ff-pop);font-weight:700;letter-spacing:var(--ls-tag);color:var(--c-ink)}
 /* 手書きの欧文の添え（少し傾ける） */
-[data-mood="b"] .script{display:block;margin:0 0 4px;font:600 22px/1 "Caveat",cursive;color:var(--c-fire);transform:rotate(-6deg);transform-origin:left}
-[data-mood="b"] .head-block__en,[data-mood="b"] .hero-tag__en,[data-mood="b"] .eyebrow span{font-family:"Caveat",cursive;font-style:normal;font-weight:600;font-size:20px;color:var(--c-fire);transform:rotate(-5deg);display:inline-block}
+[data-mood="b"] .head-block__en,[data-mood="b"] .hero-tag__en,[data-mood="b"] .eyebrow span{font-family:"Caveat",cursive;font-style:normal;font-weight:600;font-size:var(--fs-l);color:var(--c-fire-d);display:inline-block}
 
 /* 強調：焼き色の帯（字の下 1/3） */
 
 .mark-b{font-style:normal}
-[data-mood="b"] .mark-b{background:linear-gradient(transparent 62%,rgba(242,183,94,.85) 62% 92%,transparent 92%);padding:0 2px}
 /* 数字：太い丸ゴシック */
 
 /* 棚：札の文字を丸ゴシック、ペン画を焼き色寄りに */
-[data-mood="b"] .shelf b{font-family:var(--ff-pop);font-weight:900;letter-spacing:.14em}
-[data-mood="b"] .shelf b::after{content:"";display:block;width:36px;height:6px;margin:6px auto 0;background:var(--c-band);border-radius:3px}
-[data-mood="b"] .shelf img,[data-mood="b"] .inside img,[data-mood="b"] .kiln__ink,[data-mood="b"] .hero-tag__ink{filter:sepia(.6) saturate(1.6) hue-rotate(-8deg)}
+[data-mood="b"] .shelf b{font-family:var(--ff-pop);font-weight:700;letter-spacing:var(--ls-tag)}
+[data-mood="b"] .inside img,[data-mood="b"] .kiln__ink,[data-mood="b"] .hero-tag__ink{filter:sepia(.6) saturate(1.6) hue-rotate(-8deg)}
 /* 丸いステッカー（写真の角にかかる） */
 
-[data-mood="b"] .sticker{position:absolute;left:14px;top:-34px;z-index:3;display:grid;place-items:center;align-content:center;width:96px;height:96px;border-radius:50%;background:var(--c-fire-d);color:#fff;transform:rotate(-10deg);box-shadow:0 0 0 3px var(--c-paper-2),0 0 0 4px var(--c-fire-d)}
-[data-mood="b"] .sticker small{font:700 11px/1.2 var(--ff-pop);letter-spacing:.06em}
-[data-mood="b"] .sticker b{font:900 30px/1 var(--ff-pop)}
+[data-mood="b"] .sticker{position:absolute;left:14px;top:-34px;z-index:3;display:grid;place-items:center;align-content:center;width:96px;height:96px;border-radius:50%;background:var(--c-fire-d);color:#fff;transform:rotate(-10deg);outline:1px solid var(--c-fire-d);outline-offset:3px}
+[data-mood="b"] .sticker small{font:700 var(--fs-xs)/1.2 var(--ff-pop);letter-spacing:var(--ls-body)}
+[data-mood="b"] .sticker b{font:900 var(--fs-xl)/1 var(--ff-pop)}
 /* 値札・明細・ボタンを角丸に */
 
-[data-mood="b"] .sec .btn{border-radius:999px;font-family:var(--ff-pop);font-weight:900;letter-spacing:.14em;background:var(--c-fire-d);color:#fff;box-shadow:0 4px 0 #7d3a0f}
+[data-mood="b"] .sec .btn{border-radius:999px;font-family:var(--ff-pop);font-weight:900;letter-spacing:var(--ls-tag);background:var(--c-fire-d);color:#fff;box-shadow:0 4px 0 #7d3a0f}
 [data-mood="b"] .sec .btn:hover{background:var(--c-ink);box-shadow:0 4px 0 #2e1b0b}
 
 [data-mood="b"] .link{font-family:var(--ff-pop);font-weight:700}
 /* FV と両脇も、ボタンと小さな文字だけ親しみにそろえる（2026-11-13 今岡さん）。写真・白い一文・ロゴ・ペン画はそのまま */
-[data-mood="b"] .btn{border-radius:999px;font-family:var(--ff-pop);font-weight:900;letter-spacing:.14em;background:var(--c-fire-d);color:#fff;box-shadow:0 4px 0 #7d3a0f}
+[data-mood="b"] .btn{border-radius:999px;font-family:var(--ff-pop);font-weight:900;letter-spacing:var(--ls-tag);background:var(--c-fire-d);color:#fff;box-shadow:0 4px 0 #7d3a0f}
 [data-mood="b"] .btn:hover{background:var(--c-ink);box-shadow:0 4px 0 #2e1b0b}
 [data-mood="b"] .price,[data-mood="b"] .fv__what,[data-mood="b"] .menu__a,[data-mood="b"] .mypage,[data-mood="b"] .logo__sub{font-family:var(--ff-pop);font-weight:700}
 [data-mood="b"] .price b{font-family:var(--ff-pop);font-weight:900}
@@ -207,9 +211,8 @@ img{max-width:100%;height:auto;display:block}
 /* ===== 05〜13（2026-11-13。DESIGN 4a 章の部品一式・親しみ。無地の章の点検表を通す） ===== */
 /* 見出しの塊（05 以降の共通）：波線＋小見出し＋手書きの欧文 */
 .hb{display:grid;justify-items:start;gap:6px;margin-bottom:var(--space-2)}
-.hb__wave{width:40px;height:6px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 6'%3E%3Cpath d='M1 3c3-3 5-3 8 0s5 3 8 0 5-3 8 0 5 3 8 0 5-3 6 0' fill='none' stroke='%23e58a2b' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat}
-.hb__ja{margin:0;font:700 13px/1 var(--ff-pop,var(--ff-mincho));letter-spacing:.24em;color:var(--c-fire-d,var(--c-ink-2))}
-.hb__en{margin:0;font:600 21px/1 "Caveat",cursive;color:var(--c-fire,var(--c-ink-2));transform:rotate(-5deg);transform-origin:left}
+.hb__ja{margin:0;font:700 var(--fs-xs)/1.6 var(--ff-pop);letter-spacing:var(--ls-tag);color:var(--c-ink)}
+.hb__en{margin:0;font:600 var(--fs-l)/1 "Caveat",cursive;color:var(--c-fire-d)}
 
 /* 05 トースター：写真を縁まで、写真の下端に大きな 5 が重なる */
 
@@ -223,28 +226,29 @@ img{max-width:100%;height:auto;display:block}
 .cat__photo img{width:100%;aspect-ratio:3/2;object-fit:cover;max-width:none}
 .cat--r .cat__photo{margin-left:40px}
 .cat--r .cat__photo img{aspect-ratio:4/3}
-.cat__h{position:relative;z-index:2;display:flex;align-items:baseline;gap:10px;margin:18px 0 10px 56px;font:900 20px/1 var(--ff-pop,var(--ff-mincho));letter-spacing:.12em}
-.cat__n{position:absolute;left:-56px;top:-40px;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--c-fire-d);color:#fff;font-size:20px;letter-spacing:0;box-shadow:0 0 0 3px var(--c-paper)}
-.cat__h small{font:700 12px/1 var(--ff-pop,var(--ff-mincho));letter-spacing:.1em;color:var(--c-ink-2)}
+.cat__h{position:relative;z-index:2;display:flex;align-items:baseline;gap:10px;margin:18px 0 10px 56px;font:900 var(--fs-l)/1 var(--ff-pop,var(--ff-mincho));letter-spacing:var(--ls-h)}
+.cat__n{position:absolute;left:-56px;top:-40px;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--c-fire-d);color:#fff;font-size:var(--fs-l);letter-spacing:0;box-shadow:0 0 0 3px var(--c-paper)}
+.cat__h small{font:700 var(--fs-xs)/1 var(--ff-pop,var(--ff-mincho));letter-spacing:var(--ls-h);color:var(--c-ink-2)}
 .list{margin:0}
 .list div{display:flex;align-items:baseline;gap:10px;padding:8px 0}
-.list dt{font:700 14px/1.4 var(--ff-pop,var(--ff-mincho))}
+.list dt{font:700 var(--fs-body)/1.4 var(--ff-pop,var(--ff-mincho))}
 .list dt{order:0}
 .list div::after{content:"";order:1;flex:1;align-self:center;margin-top:6px;border-bottom:1px dotted var(--c-ink-line)}
-.list dd{order:2;margin:0;font-size:12px;color:var(--c-ink-2);white-space:nowrap}
-.sticker--s{display:grid!important;position:absolute;left:-30px;top:-26px;z-index:3;width:76px;height:76px;place-items:center;align-content:center;border-radius:50%;background:var(--c-fire-d);color:#fff;transform:rotate(-10deg);box-shadow:0 0 0 3px var(--c-paper),0 0 0 4px var(--c-fire-d)}
-.sticker--s small{font:700 10px/1.2 var(--ff-pop,var(--ff-mincho))}
-.sticker--s b{font:900 24px/1 var(--ff-pop,var(--ff-mincho))}
+.list dd{order:2;margin:0;font-size:var(--fs-xs);color:var(--c-ink-2);white-space:nowrap}
+.sticker--s{display:grid!important;position:absolute;left:-30px;top:-26px;z-index:3;width:76px;height:76px;place-items:center;align-content:center;border-radius:50%;background:var(--c-fire-d);color:#fff;transform:rotate(-10deg);outline:1px solid var(--c-fire-d);outline-offset:3px}
+.sticker--s small{font:700 var(--fs-xs)/1.2 var(--ff-pop,var(--ff-mincho))}
+.sticker--s b{font:900 var(--fs-xl)/1 var(--ff-pop,var(--ff-mincho))}
 
 /* 09 届くまで：大きな番号を点線でつなぐ */
 .sec--flow{background:var(--c-paper-2) var(--grain)}
 .flow{list-style:none;margin:var(--space-4) 0 var(--space-4);padding:0;display:grid;gap:var(--space-2);position:relative}
-.flow::before{content:"";position:absolute;left:30px;top:30px;bottom:30px;border-left:2px dotted var(--c-fire)}
-.step{position:relative;display:grid;grid-template-columns:62px 72px 1fr;align-items:center;gap:12px}
-.step__n{position:relative;z-index:1;display:grid;place-items:center;width:62px;height:62px;border-radius:50%;background:var(--c-paper);border:2px solid var(--c-fire);font:900 30px/1 var(--ff-pop,var(--ff-mincho));color:var(--c-fire-d)}
-.step img{width:72px;height:64px;object-fit:contain;mix-blend-mode:multiply;filter:sepia(.6) saturate(1.6) hue-rotate(-8deg)}
-.step h3{margin:0;font:900 16px/1.4 var(--ff-pop,var(--ff-mincho));letter-spacing:.06em}
-.step p{grid-column:3;margin:-6px 0 0;font-size:12px;line-height:1.8;color:var(--c-ink-2)}
+.flow::before{content:"";position:absolute;left:31px;top:30px;bottom:30px;border-left:1px dotted var(--c-ink-line)}
+.step{position:relative;display:grid;grid-template-columns:62px 80px 1fr;align-items:center;gap:12px}
+.step__n{position:relative;z-index:1;display:grid;place-items:center;align-content:center;gap:2px;width:62px;height:62px;border-radius:50%;background:var(--c-paper-2);border:1px solid var(--c-ink-line);font:700 var(--fs-l)/1 var(--ff-pop);color:var(--c-ink)}
+.step__n small{font:600 var(--fs-xs)/1 "Caveat",cursive;letter-spacing:0;color:#9a4510}
+.step img{width:80px;height:72px;object-fit:contain}
+.step h3{margin:0;font:700 var(--fs-m)/1.4 var(--ff-pop,var(--ff-mincho));letter-spacing:var(--ls-body)}
+.step p{grid-column:3;margin:-6px 0 0;font-size:var(--fs-xs);line-height:1.8;color:var(--c-ink-2)}
 .step h3,.step p{grid-column:3}
 .step img{grid-row:1/3;grid-column:2}
 .step__n{grid-row:1/3}
@@ -252,13 +256,13 @@ img{max-width:100%;height:auto;display:block}
 /* 10 FAQ */
 .faq{margin-top:var(--space-4);border-top:1px dashed var(--c-ink-line)}
 .faq details{border-bottom:1px dashed var(--c-ink-line)}
-.faq summary{list-style:none;cursor:pointer;display:flex;gap:12px;align-items:baseline;padding:16px 28px 16px 0;position:relative;font:700 15px/1.6 var(--ff-pop,var(--ff-mincho))}
+.faq summary{list-style:none;cursor:pointer;display:flex;gap:12px;align-items:baseline;padding:16px 28px 16px 0;position:relative;font:700 var(--fs-body)/1.6 var(--ff-pop,var(--ff-mincho))}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::before{content:"Q";font:600 22px/1 "Caveat",cursive;color:var(--c-fire)}
+.faq summary::before{content:"Q";font:600 var(--fs-l)/1 "Caveat",cursive;color:var(--c-fire-d)}
 .faq summary::after{content:"";position:absolute;right:4px;top:50%;width:10px;height:10px;margin-top:-8px;border-right:2px solid var(--c-fire-d);border-bottom:2px solid var(--c-fire-d);transform:rotate(45deg);transition:transform .25s var(--ease)}
 .faq details[open] summary::after{transform:rotate(-135deg);margin-top:-2px}
 .faq summary:hover{color:var(--c-fire-d)}
-.faq details p{margin:0 0 16px 28px;font-size:13px;line-height:2;color:var(--c-ink-2)}
+.faq details p{margin:0 0 16px 28px;font-size:var(--fs-xs);line-height:2;color:var(--c-ink-2)}
 
 /* 11 終わりの入口：食卓の写真に見出しを重ね、バゲットが縁をまたぐ */
 .sec--end{padding-top:0;overflow:visible}
@@ -266,30 +270,29 @@ img{max-width:100%;height:auto;display:block}
 .end__photo img{width:100%;aspect-ratio:3/4;object-fit:cover;max-width:none}
 .end__photo::after{content:"";position:absolute;inset:0 0 auto;height:55%;background:linear-gradient(rgba(70,40,15,.5),rgba(70,40,15,0))}
 .end__head{position:absolute;left:var(--pad);right:var(--pad);top:var(--space-6);z-index:2;color:#fff}
-.end__head .hb__en{color:#ffd9a3}
-.end__h{margin:14px 0 0;font:900 28px/1.6 var(--ff-pop,var(--ff-mincho));letter-spacing:.08em;text-shadow:0 1px 12px rgba(50,25,8,.5)}
-.end__ink{position:relative;z-index:3;width:300px;margin:-40px 0 0 auto;transform:translateX(40px) rotate(-6deg);mix-blend-mode:multiply;filter:sepia(.6) saturate(1.6) hue-rotate(-8deg)}
+.end__head .hb__en{color:var(--c-paper-2)}
+.end__h{margin:14px 0 0;font:700 var(--fs-xl)/1.6 var(--ff-pop,var(--ff-mincho));letter-spacing:var(--ls-h);text-shadow:0 1px 12px rgba(50,25,8,.5)}
 .end__box{text-align:center;margin-top:var(--space-2)}
-.end__left{margin:0 0 var(--space-3);font:700 16px/1.6 var(--ff-pop,var(--ff-mincho));letter-spacing:.1em}
-.end__left b{font:900 48px/1 var(--ff-pop,var(--ff-mincho));color:var(--c-fire);margin:0 4px;vertical-align:-6px}
-.end__left span{display:block;font-size:12px;color:var(--c-ink-2)}
+.end__left{margin:0 0 var(--space-3);font:700 var(--fs-m)/1.6 var(--ff-pop,var(--ff-mincho));letter-spacing:var(--ls-h)}
+.end__left b{font:700 var(--fs-num)/1 var(--ff-pop);color:var(--c-ink);margin:0 4px;vertical-align:-6px}
+.end__left span{display:block;font-size:var(--fs-xs);color:var(--c-ink-2)}
 .link--s{margin-top:var(--space-3)}
 
 /* 12 降り口 */
 .sec--line{padding-top:var(--space-5);text-align:center;border-top:1px dashed var(--c-ink-line)}
-.line__ink{width:88px;margin:0 auto 8px;mix-blend-mode:multiply;filter:sepia(.6) saturate(1.6) hue-rotate(-8deg);opacity:.85}
-.line__h{margin:0 0 var(--space-2);font:900 18px/1.6 var(--ff-pop,var(--ff-mincho));letter-spacing:.12em}
-.sec--line .body{text-align:center;font-size:13px}
+.line__ink{width:96px;margin:0 auto 12px;transform:rotate(-5deg)}
+.line__h{margin:0 0 var(--space-2);font:700 var(--fs-m)/1.6 var(--ff-pop,var(--ff-mincho));letter-spacing:var(--ls-h)}
+.sec--line .body{text-align:center;font-size:var(--fs-xs)}
 
 /* 13 フッター */
 .foot{padding:var(--space-6) var(--pad) var(--space-5);text-align:center;background:var(--c-ink);color:var(--c-paper)}
 .foot__mark{width:72px;margin:0 auto 10px;filter:invert(1) sepia(.4) brightness(1.6)}
-.foot__name{margin:0;font:400 26px/1.1 var(--ff-en)}
-.foot__sub{margin:6px 0 var(--space-4);font:700 11px/1 var(--ff-pop,var(--ff-mincho));letter-spacing:.3em;opacity:.8}
-.foot__nav{list-style:none;margin:0 0 var(--space-4);padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 18px;font:700 12px/1.6 var(--ff-pop,var(--ff-mincho))}
+.foot__name{margin:0;font:400 var(--fs-xl)/1.1 var(--ff-en)}
+.foot__sub{margin:6px 0 var(--space-4);font:700 var(--fs-xs)/1 var(--ff-pop,var(--ff-mincho));letter-spacing:var(--ls-tag);opacity:.8}
+.foot__nav{list-style:none;margin:0 0 var(--space-4);padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 18px;font:700 var(--fs-xs)/1.6 var(--ff-pop,var(--ff-mincho))}
 .foot__nav a:hover{color:var(--c-band,#f2b75e)}
-.foot__addr{margin:0 0 var(--space-2);font-size:11px;line-height:1.9;opacity:.8}
-.foot small{font-size:11px;opacity:.7}
+.foot__addr{margin:0 0 var(--space-2);font-size:var(--fs-xs);line-height:1.9;opacity:.8}
+.foot small{font-size:var(--fs-xs);opacity:.7}
 
 /* 04 の下半分をポップに（2026-11-13 レビュー3回目「この部分まだ纏まってる感じ。全体と比べ浮かないくらいポップに」） */
 /* 中身：ペン画をクリームの丸い皿にのせ、×2 を焼き色の小さな丸で重ねる */
@@ -298,47 +301,16 @@ img{max-width:100%;height:auto;display:block}
 
 /* 窯はひとつ：白いカードにテープ、300 を大きく、残りはステッカー */
 
-.left__badge{display:inline-flex;align-items:baseline;gap:4px;padding:6px 12px;border-radius:999px;background:var(--c-fire-d);color:#fff;font:700 12px/1 var(--ff-pop)}
-.left__badge b{font:900 22px/1 var(--ff-pop)}
+.left__badge{display:block;margin-top:8px;font:700 var(--fs-xs)/1.6 var(--ff-pop);letter-spacing:var(--ls-h);color:var(--c-ink-2)}
+.left__badge b{font:700 var(--fs-l)/1 var(--ff-pop);color:var(--c-fire-d);margin:0 2px;vertical-align:-2px}
 
-/* 06・08〜12 をポップに（2026-11-13 レビュー4回目「ここも少しポップに」）。04 と同じ語彙：テープを貼った白いカード・焼き色の丸・手書きの英字・少しの傾き */
-
-/* 06 特長 */
-
-/* 08 12のパン：品書きを白いカードにして写真に重ねる */
-.cat__h{flex-wrap:wrap}
-.cat__en{flex-basis:100%;font:600 19px/1 "Caveat",cursive;color:var(--c-fire);letter-spacing:0;transform:rotate(-4deg);transform-origin:left;margin-top:2px}
-.cat .list{position:relative;z-index:2;background:#fffaf1;border-radius:14px;padding:6px 16px;margin-top:4px;box-shadow:0 2px 0 rgba(90,53,23,.12)}
-.cat--r .list{transform:rotate(-1deg)}
-.cat__n{box-shadow:0 0 0 3px var(--c-paper),0 0 0 4px var(--c-fire-d);transform:rotate(-8deg)}
-/* 09 届くまで：白いカードの段、番号は焼き色の丸 */
-.step{background:#fffaf1;border-radius:16px;padding:14px 14px 14px 12px;box-shadow:0 2px 0 rgba(90,53,23,.12)}
-.step:nth-child(2){transform:rotate(-1deg);margin-left:10px}
-.step__n{background:var(--c-fire-d)!important;color:#fff!important;border:0!important;display:grid;align-content:center;gap:2px;font-size:26px!important;transform:rotate(-6deg)}
-.step__n small{font:600 13px/1 "Caveat",cursive;letter-spacing:0}
-.flow::before{left:43px;border-left:3px dotted var(--c-fire)}
-/* 10 FAQ：1問ずつ白いカード、Q は焼き色の丸 */
-.faq{border-top:0;display:grid;gap:10px}
-.faq details{background:#fffaf1;border-radius:14px;border-bottom:0;padding:0 14px;box-shadow:0 2px 0 rgba(90,53,23,.12)}
-.faq summary::before{content:"Q";display:grid;place-items:center;flex:none;width:28px;height:28px;border-radius:50%;background:var(--c-fire-d);color:#fff;font:900 14px/1 var(--ff-pop)}
-.faq details p{position:relative;padding-left:38px;margin-left:0}
-.faq details p::before{content:"A";position:absolute;left:4px;top:-2px;font:600 24px/1 "Caveat",cursive;color:var(--c-fire)}
-/* 11 終わりの入口：白いカードを写真に重ねる、残りはステッカー */
-.end__box{position:relative;z-index:2;margin:-24px 0 0;background:#fffaf1;border-radius:18px;padding:var(--space-4) 20px 24px;box-shadow:0 2px 0 rgba(90,53,23,.12)}
-.end__box::before{content:"";position:absolute;left:50%;top:-8px;width:64px;height:16px;margin-left:-32px;background:rgba(242,183,94,.6);transform:rotate(-4deg)}
-.end__ink{margin-bottom:-30px}
-.end__en{margin:0 0 6px;font:600 21px/1 "Caveat",cursive;color:var(--c-fire);transform:rotate(-4deg)}
-.end__left .left__badge{display:inline-flex;margin-top:10px}
-/* 12 降り口：白いカード・手書きの英字 */
-.sec--line{border-top:0}
-.sec--line{padding-left:var(--pad);padding-right:var(--pad)}
-.sec--line>*{position:relative}
-.sec--line::after{content:"";position:absolute;left:var(--pad);right:var(--pad);top:var(--space-3);bottom:var(--space-6);background:#fffaf1;border-radius:18px;box-shadow:0 2px 0 rgba(90,53,23,.12);z-index:0}
-.line__en{margin:0;font:600 21px/1 "Caveat",cursive;color:var(--c-fire);transform:rotate(-4deg)}
-
-.sec--line .line__ink,.sec--line .line__h,.sec--line .body,.sec--line .btn,.sec--line .line__en{z-index:1}
-.end__left .left__badge{color:#fff;font-size:12px}
-.end__box{padding-top:56px}
+/* ===== C：02・09〜12 を 03〜08 の語彙に（2026-11-18 今岡さん「C の案でいきましょう。フォントはゴシックに」「そろえる」）
+   見出しは丸ゴシック 700・焦げ茶1色。波線・マーカー・影つきの白いカード・傾き・丸い札はなし（季節の札だけ残す）。手書きの英字は小さく・まっすぐ
+   12 は白の地（11 の生成り・足元の濃い地のどちらとも違う地。CRAFT 4） */
+.end__box{text-align:center;margin-top:var(--space-2)}
+.end__en{margin:0 0 6px;font:600 var(--fs-l)/1 "Caveat",cursive;color:var(--c-fire-d)}
+.sec--line{border-top:0;padding:var(--space-6) var(--pad);background:#fffdf7}
+.line__en{margin:0;font:600 var(--fs-l)/1 "Caveat",cursive;color:var(--c-fire-d)}
 
 /* ===== A/B：B「全体をそろえた」（2026-11-13 今岡さん「06〜12 の直しはとても良い。それにより全体の統一感がなくなったので、今変えたものを基準に全体をそろえたい。AB で」）
    基準＝06〜12 の語彙：見出しの塊は左寄せ（波線→小見出し→手書きの英字）／中身はテープを貼った白いカード（角丸 16）／番号は焼き色の丸 */
@@ -370,55 +342,55 @@ img{max-width:100%;height:auto;display:block}
    文字は焦げ茶1色・焼き色はボタンと「86」だけ／形はアーチ（窯の口）と丸（丸パン）の2つ／見出しは Klee One・波線とマーカーなし
    積まずに重ねる：丸写真は画面の端で切れて主写真にかぶる、窯のペン画は白い面の角にかぶる。1画面の大声は1つ、うしろの飾りは1つ */
 
-.sq-label{margin:0;font:700 13px/1.6 var(--ff-pop);letter-spacing:.3em;color:var(--c-ink)}
-.sq-h{margin:0;font:600 28px/1.6 "Klee One",cursive;letter-spacing:.06em;color:var(--c-ink)}
+.sq-label{margin:0;font:700 var(--fs-xs)/1.6 var(--ff-pop);letter-spacing:var(--ls-tag);color:var(--c-ink)}
+.sq-h{margin:0;font:700 var(--fs-xl)/1.7 var(--ff-pop);letter-spacing:var(--ls-h);color:var(--c-ink)}
 
 /* ===== 03 ===== */
 .sq3{padding:0 0 var(--space-7);overflow:hidden}
 .sq3__main{margin:0}
 .sq3__main img{width:100%;height:430px;object-fit:cover;object-position:50% 55%;border-radius:50% 50% 0 0/120px 120px 0 0}
-.sq3__row{position:relative;z-index:1;display:flex;align-items:flex-end;margin-top:-64px}
+.sq3__row{position:relative;z-index:1;display:flex;align-items:flex-end;margin-top:36px}
 .sq3__round{flex:none;width:176px;height:176px;margin:0 0 0 -40px;border:6px solid var(--c-paper);border-radius:50%;overflow:hidden}
 .sq3__round img{width:100%;height:100%;object-fit:cover}
-.sq3__who{padding:0 var(--pad) 10px 18px}
+.sq3__who{padding:0 var(--pad)}
 
-.sq3 .sq-h{margin:40px var(--pad) 0}
-.sq3__body{position:relative;z-index:1;margin:24px var(--pad) 0;font-size:14px;line-height:2.1}
-.sq3__line{display:block;margin-top:14px;font:600 16px/1.8 "Klee One",cursive;letter-spacing:.06em}
-.sq3__shop{position:relative;z-index:1;margin:32px var(--pad) 0;font-size:12px;line-height:1.8;letter-spacing:.08em;color:var(--c-ink-2)}
+.sq3 .sq-h{margin:14px var(--pad) 0}
+.sq3__body{position:relative;z-index:1;margin:24px var(--pad) 0;font-size:var(--fs-body);line-height:2.1}
+.sq3__line{display:block;margin-top:14px;font:700 var(--fs-body)/1.8 var(--ff-pop);letter-spacing:var(--ls-h)}
+.sq3__shop{position:relative;z-index:1;margin:32px var(--pad) 0;font-size:var(--fs-xs);line-height:1.8;letter-spacing:var(--ls-h);color:var(--c-ink-2)}
 .sq3__link{position:relative;z-index:1;margin:20px var(--pad) 0}
 .sq3__wheat{position:absolute;right:-60px;bottom:40px;width:220px;opacity:.12;pointer-events:none}
 
 /* ===== 04：上の端は 03 と同じアーチ ===== */
 .sq4{background:#f2e8d6;border-radius:50% 50% 0 0/120px 120px 0 0;padding:64px 0 var(--space-7);text-align:center;overflow:hidden}
 .sq4__date{font-weight:500}
-.sq4__d{margin-right:1em;font:600 14px/1.6 "Klee One",cursive;letter-spacing:.1em}
+.sq4__d{margin-right:1em;font:700 var(--fs-xs)/1.6 var(--ff-pop);letter-spacing:var(--ls-h)}
 .sq4__panel{position:relative;z-index:1;margin:28px 22px 0;background:#fffdf7;border-radius:50% 50% 28px 28px/110px 110px 28px 28px;overflow:hidden}
 .sq4__photo{margin:0}
 .sq4__photo img{width:100%;height:250px;object-fit:cover;object-position:50% 45%}
 .sq4__in{padding:28px 20px 30px}
-.sq4__k{margin:0;font:700 20px/1.5 var(--ff-pop);letter-spacing:.14em}
-.sq4__p{display:flex;align-items:center;justify-content:center;gap:10px;margin:6px 0 0;font:700 48px/1.1 var(--ff-pop);letter-spacing:0;color:var(--c-ink)}
-.sq4__p i{font-style:normal;font-size:18px;margin-left:-6px;align-self:flex-end;padding-bottom:6px}
-.sq4__p small{font:500 12px/1.5 var(--ff-pop);letter-spacing:.08em;text-align:left;color:var(--c-ink-2)}
-.sq4__off{margin:10px 0 0;font-size:13px;letter-spacing:.1em}
-.sq4__names{margin:20px 0 0;font-size:13px;line-height:1.9;letter-spacing:.04em;color:var(--c-ink-2)}
-.sq4__left{margin:22px 0 0;font-size:15px;letter-spacing:.08em}
-.sq4__left b{font:700 24px/1 var(--ff-pop);color:var(--c-fire-d);margin:0 2px}
-.sq4__left small{display:block;font-size:11px;letter-spacing:.1em;color:var(--c-ink-2)}
+.sq4__k{margin:0;font:700 var(--fs-l)/1.5 var(--ff-pop);letter-spacing:var(--ls-tag)}
+.sq4__p{display:flex;align-items:center;justify-content:center;gap:10px;margin:6px 0 0;font:700 var(--fs-num)/1.1 var(--ff-pop);letter-spacing:0;color:var(--c-ink)}
+.sq4__p i{font-style:normal;font-size:var(--fs-m);margin-left:-6px;align-self:flex-end;padding-bottom:6px}
+.sq4__p small{font:500 var(--fs-xs)/1.5 var(--ff-pop);letter-spacing:var(--ls-h);text-align:left;color:var(--c-ink-2)}
+.sq4__off{margin:10px 0 0;font-size:var(--fs-xs);letter-spacing:var(--ls-h)}
+.sq4__names{margin:20px 0 0;font-size:var(--fs-xs);line-height:1.9;letter-spacing:var(--ls-body);color:var(--c-ink-2)}
+.sq4__left{margin:22px 0 0;font-size:var(--fs-body);letter-spacing:var(--ls-h)}
+.sq4__left b{font:700 var(--fs-xl)/1 var(--ff-pop);color:var(--c-fire-d);margin:0 2px}
+.sq4__left small{display:block;font-size:var(--fs-xs);letter-spacing:var(--ls-h);color:var(--c-ink-2)}
 .sq4 .sq4__btn{width:100%;max-width:291px;height:56px;margin-top:16px}
 
 .sq4__rows{margin:26px 0 0;padding-top:16px;border-top:1px solid var(--c-ink-line);text-align:left}
 .sq4__rows div{display:grid;grid-template-columns:92px 1fr;gap:8px;padding:6px 0}
-.sq4__rows dt{font:700 13px/1.8 var(--ff-pop);letter-spacing:.06em}
-.sq4__rows dd{margin:0;font-size:13px;line-height:1.8;letter-spacing:.04em}
+.sq4__rows dt{font:700 var(--fs-xs)/1.8 var(--ff-pop);letter-spacing:var(--ls-body)}
+.sq4__rows dd{margin:0;font-size:var(--fs-xs);line-height:1.8;letter-spacing:var(--ls-body)}
 .sq4__kiln{position:relative;z-index:2;margin-top:-40px;padding:0 var(--pad) 0 140px;min-height:190px;text-align:left}
-.sq4__ink{position:absolute;left:-20px;top:0;width:150px}
-.sq4__kt{margin:0;padding-top:52px;font:600 19px/1.6 "Klee One",cursive;letter-spacing:.06em}
-.sq4__kb{margin:12px 0 0;font-size:13px;line-height:1.9;letter-spacing:.04em}
+.sq4__ink{position:absolute;left:-4px;top:40px;width:128px;transform:rotate(-4deg)}
+.sq4__kt{margin:0;padding-top:52px;font:700 var(--fs-m)/1.6 var(--ff-pop);letter-spacing:var(--ls-h)}
+.sq4__kb{margin:12px 0 0;font-size:var(--fs-xs);line-height:1.9;letter-spacing:var(--ls-body)}
 
 /* ===== ボタンの上の手書きの一言（2026-11-13 今岡さん。型 toraiz-sub-cta の「ボタンの上に一言」の組みだけ借りる。＼／は使わず Klee One、章ごとに言葉を変える） ===== */
-.cta-hand{margin:0 0 10px;text-align:center;font:600 15px/1.6 "Klee One",cursive;letter-spacing:.08em;color:var(--c-ink)}
+.cta-hand{margin:0 0 10px;text-align:center;font:700 var(--fs-body)/1.6 var(--ff-pop);letter-spacing:var(--ls-h);color:var(--c-ink)}
 .cta-hand+.btn,.cta-hand+.line-btn{margin-top:0}
 .sec .cta-hand{margin-top:var(--space-5)}
 .sq4 .cta-hand--in{margin-top:22px}
@@ -426,7 +398,7 @@ img{max-width:100%;height:auto;display:block}
 .sq4 .cta-hand--in+.sq4__btn{margin-top:0}
 
 /* ===== LINE のボタン（2026-11-13 今岡さん。型 rola-eyelash-line-button の「印と一言を淡い色の丸いボタンに」を、ひとつ窯の地と焦げ茶に直す。緑は LINE の印の中だけ） ===== */
-.line-btn{position:relative;z-index:1;display:flex;align-items:center;gap:14px;width:100%;max-width:300px;height:64px;margin:0 auto;padding:0 20px 0 10px;background:#f2e8d6;border:1.5px solid rgba(90,53,23,.22);border-radius:999px;color:var(--c-ink);font:700 14px/1 var(--ff-pop);letter-spacing:.1em;transition:background .25s,border-color .25s}
+.line-btn{position:relative;z-index:1;display:flex;align-items:center;gap:14px;width:100%;max-width:300px;height:64px;margin:0 auto;padding:0 20px 0 10px;background:#f2e8d6;border:1.5px solid rgba(90,53,23,.22);border-radius:999px;color:var(--c-ink);font:700 var(--fs-body)/1 var(--ff-pop);letter-spacing:var(--ls-h);transition:background .25s,border-color .25s}
 .line-btn__mark{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#06c755}
 .line-btn__mark svg{width:26px;height:26px}
 .line-btn__t{flex:1;text-align:left}
@@ -443,27 +415,27 @@ img{max-width:100%;height:auto;display:block}
 .sq5__photo{margin:0}
 .sq5__photo img{width:100%;height:300px;object-fit:cover;border-radius:0 0 50% 50%/0 0 90px 90px}
 .sq5__min{position:relative;z-index:1;display:flex;align-items:flex-end;justify-content:flex-end;gap:6px;margin:-58px var(--pad) 0 0;color:var(--c-ink)}
-.sq5__min b{font:700 96px/1 var(--ff-pop);letter-spacing:-.02em;padding:0 14px;background:var(--c-paper);border-radius:50% 50% 0 0/40px 40px 0 0}
-.sq5__min span{font:700 20px/1.2 var(--ff-pop);padding-bottom:10px}
-.sq5__min small{display:block;font:500 11px/1.6 var(--ff-pop);letter-spacing:.14em;color:var(--c-ink-2)}
+.sq5__min b{font:700 var(--fs-big)/1 var(--ff-pop);letter-spacing:-.02em;padding:0 14px;background:var(--c-paper);border-radius:50% 50% 0 0/40px 40px 0 0}
+.sq5__min span{font:700 var(--fs-l)/1.2 var(--ff-pop);padding-bottom:10px}
+.sq5__min small{display:block;font:500 var(--fs-xs)/1.6 var(--ff-pop);letter-spacing:var(--ls-tag);color:var(--c-ink-2)}
 .sq5__h{margin:20px var(--pad) 0}
-.sq5__body{position:relative;z-index:1;margin:20px var(--pad) 0;font-size:14px;line-height:2.1}
-.sq5__ink{position:absolute;right:-50px;bottom:24px;width:200px;opacity:.12;pointer-events:none}
+.sq5__body{position:relative;z-index:1;margin:20px var(--pad) 0;font-size:var(--fs-body);line-height:2.1}
+.sq5__ink{position:absolute;right:-8px;bottom:22px;width:124px;transform:rotate(-4deg);pointer-events:none}
 /* 06 */
 .sq6{padding:var(--space-7) 0;text-align:center;overflow:hidden}
 .sq6__label{margin:0 0 14px}
 .sq6__h{margin:0 var(--pad)}
 .sq6__big{position:relative;margin:56px 0 0;padding:0 var(--pad);text-align:left;min-height:220px}
-.sq6__ink{position:absolute;right:-56px;top:-10px;width:230px;opacity:.9;mix-blend-mode:multiply;pointer-events:none}
-.sq6__no{position:relative;margin:0;font:700 13px/1 var(--ff-pop);letter-spacing:.3em}
+.sq6__cut{position:absolute;right:-24px;top:-28px;width:180px;transform:rotate(4deg);pointer-events:none}
+.sq6__no{position:relative;margin:0;font:700 var(--fs-xs)/1 var(--ff-pop);letter-spacing:var(--ls-tag)}
 .sq6__no::after{content:"";display:inline-block;width:32px;height:1px;margin-left:10px;background:var(--c-ink);vertical-align:middle}
-.sq6__bh{position:relative;margin:14px 0 0;font:600 24px/1.6 "Klee One",cursive;letter-spacing:.06em}
-.sq6__t{position:relative;margin:16px 0 0;max-width:230px;font-size:14px;line-height:2.1}
+.sq6__bh{position:relative;margin:14px 0 0;font:700 var(--fs-l)/1.6 var(--ff-pop);letter-spacing:var(--ls-h)}
+.sq6__t{position:relative;margin:16px 0 0;max-width:230px;font-size:var(--fs-body);line-height:2.1}
 .sq6__rows{margin:48px var(--pad) 0;padding-top:20px;border-top:1px solid var(--c-ink-line);text-align:left}
 .sq6__rows div+div{margin-top:20px}
-.sq6__rows dt{font:600 17px/1.6 "Klee One",cursive;letter-spacing:.06em}
-.sq6__rows dt span{margin-right:12px;font:700 12px/1 var(--ff-pop);letter-spacing:.2em;vertical-align:2px}
-.sq6__rows dd{margin:4px 0 0 36px;font-size:13px;line-height:1.9;color:var(--c-ink-2)}
+.sq6__rows dt{font:700 var(--fs-body)/1.6 var(--ff-pop);letter-spacing:var(--ls-h)}
+.sq6__rows dt span{margin-right:12px;font:700 var(--fs-xs)/1 var(--ff-pop);letter-spacing:var(--ls-tag);vertical-align:2px}
+.sq6__rows dd{margin:4px 0 0 36px;font-size:var(--fs-xs);line-height:1.9;color:var(--c-ink-2)}
 /* 07 */
 .sq7{padding:var(--space-6) var(--pad) var(--space-7);overflow:hidden}
 .sq7__h{margin:0}
@@ -472,22 +444,22 @@ img{max-width:100%;height:auto;display:block}
 .sq7__v{position:relative;max-width:290px}
 .sq7__v+.sq7__v{margin-top:44px}
 .sq7__v--r{margin-left:auto;text-align:right}
-.sq7__q{position:relative;z-index:1;margin:0;font:600 17px/1.9 "Klee One",cursive;letter-spacing:.04em}
+.sq7__q{position:relative;z-index:1;margin:0;font:500 var(--fs-body)/2 var(--ff-pop);letter-spacing:var(--ls-body)}
 .sq7__q::before{content:"“";display:block;height:22px;font:700 36px/1 var(--ff-pop);color:var(--c-ink-line)}
-.sq7__who{position:relative;z-index:1;margin:8px 0 0;font-size:12px;letter-spacing:.12em;color:var(--c-ink-2)}
-.sq7__ink{position:absolute;left:-110px;top:-6px;width:150px;opacity:.85;mix-blend-mode:multiply;pointer-events:none}
+.sq7__who{position:relative;z-index:1;margin:8px 0 0;font-size:var(--fs-xs);letter-spacing:var(--ls-h);color:var(--c-ink-2)}
+.sq7__ink{position:absolute;left:-104px;top:-10px;width:120px;transform:rotate(-6deg);pointer-events:none}
 .sq7 .cta-hand{margin-top:56px}
 /* 05〜07 の調整（撮って確かめた後） */
-.sq5__h{font-size:24px}
+.sq5__h{font-size:var(--fs-xl)}
 .sq5__min{margin-top:-34px}
 .sq5__min b{background:none;padding:0;text-shadow:0 0 18px var(--c-paper),0 0 6px var(--c-paper)}
-.sq6__ink{right:-90px;opacity:.55}
+.sq6__cut{right:-34px;width:160px}
 .sq6__t{max-width:205px}
-.sq7__ink{left:-160px;opacity:.6}
+.sq7__ink{left:-52px;top:-40px;width:76px}
 .sq7{padding-top:var(--space-5)}
 /* 11 の残りの札：中の「今月の残り」と「86」を上下の真ん中にそろえる（2026-11-14 レビュー7回目「下にずれてるから真ん中に」）。.end__left b の下げ（-6px）が札の中の 86 にもかかっていた */
 .end__left .left__badge{align-items:center;padding:8px 16px}
-.end__left .left__badge b{font-size:22px;line-height:1;vertical-align:0;margin:0 0 0 4px}
+.end__left .left__badge b{font-size:var(--fs-l);line-height:1;vertical-align:0;margin:0 0 0 4px}
 
 /* ===== 動き（2026-11-14 手順10.5。DESIGN.md 8章）：印象の所（FV・03・05〜07 のペン画）に集め、比べる所（04 の値札・08 の品書き・09・10）は動かさない ===== */
 .js-motion{scroll-behavior:smooth}
@@ -503,7 +475,62 @@ img{max-width:100%;height:auto;display:block}
 .js-motion [data-reveal].is-in img{clip-path:inset(0 0 0 0)}
 /* うしろのペン画：ふっと出るだけ（位置は動かさない） */
 .js-motion [data-ink]{opacity:0!important;transition:opacity 1.2s var(--ease) .3s}
-.js-motion .sq3__wheat.is-in,.js-motion .sq5__ink.is-in{opacity:.12!important}
-.js-motion .sq6__ink.is-in{opacity:.55!important}
-.js-motion .sq7__ink.is-in{opacity:.6!important}
+.js-motion .sq3__wheat.is-in{opacity:.12!important}
 @media (prefers-reduced-motion:reduce){.js-motion .fv__photo img,.js-motion [data-reveal] img{transform:none;clip-path:none;transition:none}.js-motion .fv__copy,.js-motion .fv__under{opacity:1;transform:none}}
+
+/* ===== B：08 を 03〜07 の語彙で（explore/ab-vocab。2026-11-18） ===== */
+.m8{padding:var(--space-7) 0}
+.m8__label{margin:0 var(--pad) 14px}
+.m8__head{margin:0 var(--pad)}
+.m8__cat{margin-top:56px}
+.m8__cat+.m8__cat{margin-top:72px}
+.m8__photo{margin:0 40px 0 0}
+.m8__cat--r .m8__photo{margin:0 0 0 40px}
+.m8__photo img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.m8__txt{margin:22px var(--pad) 0}
+.m8__cat--r .m8__txt{margin-left:calc(var(--pad) + 40px)}
+.m8__no{margin:0;font:700 var(--fs-xs)/1 var(--ff-pop);letter-spacing:var(--ls-tag);color:var(--c-ink)}
+.m8__no::after{content:"";display:inline-block;width:32px;height:1px;margin-left:10px;background:var(--c-ink);vertical-align:middle}
+.m8__h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:12px 0 0;font:700 var(--fs-l)/1.6 var(--ff-pop);letter-spacing:var(--ls-h);color:var(--c-ink)}
+.m8__h small{font:500 var(--fs-xs)/1.6 var(--ff-pop);letter-spacing:var(--ls-tag);color:var(--c-ink-2)}
+.m8__list{margin:12px 0 0;border-top:1px solid var(--c-ink-line)}
+.m8__list div{display:flex;align-items:baseline;gap:10px;padding:10px 0;border-bottom:1px dotted var(--c-ink-line)}
+.m8__list dt{flex:1;font:500 var(--fs-body)/1.5 var(--ff-pop);letter-spacing:var(--ls-body)}
+.m8__list dd{margin:0;font-size:var(--fs-xs);letter-spacing:var(--ls-body);color:var(--c-ink-2);white-space:nowrap}
+.m8__list--season dd{color:var(--c-fire-d);font-weight:700}
+.m8 .cta-hand{margin-top:64px}
+.m8 .cta-hand,.m8 .btn--wide{margin-left:var(--pad);margin-right:var(--pad)}
+.m8 .btn--wide{width:calc(100% - var(--pad)*2)}
+.m8__photo img{aspect-ratio:3/2}
+.m8__cat+.m8__cat{margin-top:64px}
+/* C：B に季節の丸い札と手書きの英字を戻す（まっすぐ） */
+.m8__en{flex-basis:100%;font:600 var(--fs-l)/1 "Caveat",cursive;letter-spacing:0;color:var(--c-fire-d);margin-top:2px}
+.m8__photo{position:relative}
+.m8__tag{position:absolute;left:-14px;top:-26px;z-index:3;display:grid;place-items:center;align-content:center;width:76px;height:76px;border-radius:50%;background:var(--c-fire-d);color:#fff;outline:1px solid var(--c-fire-d);outline-offset:3px}
+.m8__tag small{font:700 var(--fs-xs)/1.2 var(--ff-pop)}
+.m8__tag b{font:900 var(--fs-xl)/1 var(--ff-pop)}
+
+/* ===== 組版の土台（2026-11-20 回0）：見出しに palt と折り返しの整え、本文は pretty・行頭の約物を詰める ===== */
+body{text-spacing-trim:trim-start}
+h1,h2,h3,h4,summary,.h2,.sq-h,.end__h,.line__h,.cta-hand{font-feature-settings:"palt";text-wrap:balance}
+p,dd,li{text-wrap:pretty}
+/* font の一括指定で palt が消える所にも（回0） */
+.fv__copy,.sq4__p{font-feature-settings:"palt"}
+.fv__copy{font-size:var(--fs-m)} /* FV の一言は回4（描いた見出し）まで元の大きさに近く */
+.line-btn{gap:10px;letter-spacing:var(--ls-body)} /* 回0：本文 15px で2行に折れたので字間を本文に */
+
+/* ===== 07 声の読みやすさ（2026-11-20 今岡さん「お客様の声の部分がちょっと可読性弱い」）
+   声は本文より一段大きく（17px）・行間を少し詰める／右の声も行頭をそろえる（箱の位置は右のまま、文字は左揃え）／
+   誰の声かは焦げ茶にして、短い線で声と分ける／引用符は焼き色 */
+.sq7__v{max-width:300px}
+.sq7__v--r{text-align:left}
+.sq7__q{font-size:var(--fs-m);line-height:1.9;letter-spacing:var(--ls-body)}
+.sq7__q::before{color:var(--c-fire-d);opacity:.55}
+.sq7__who{display:flex;align-items:center;gap:10px;margin-top:12px;color:var(--c-ink);letter-spacing:var(--ls-body)}
+.sq7__who::before{content:"";flex:none;width:20px;height:1px;background:var(--c-ink-line)}
+
+/* ===== FV の一言の読みやすさ（2026-11-20 回4。今岡さん「今のままが好き。今のままをもう少し可読性上げたい」）
+   書体・太さ・字間・真っ白は今のまま。大きさを回0 前の 18px に戻し、影を「字の縁の細い影＋やわらかい広い影」の2層にして、明るい木目の上でも字の形が立つように */
+.fv__copy{font-size:18px;text-shadow:0 1px 2px rgba(50,28,10,.5),0 0 12px rgba(50,28,10,.45),0 2px 24px rgba(50,28,10,.3)}
+/* 一言の後ろだけ、ごく薄い丸いかげり（写真全体の膜ではない。影の続き） */
+.fv__copy::before{content:"";position:absolute;z-index:-1;left:-40px;right:-60px;top:-30px;bottom:-30px;background:radial-gradient(closest-side,rgba(50,28,10,.26),rgba(50,28,10,.12) 60%,rgba(50,28,10,0));pointer-events:none}
